@@ -31,8 +31,8 @@ HOW TO USE
   </ItemGroup>
 ```
 
-- Or use convention folders (libs, tools, content, build), eg:
-
+- Or use convention folders (libs, tools, content, build), eg:  
+  
 ```
 project  
 |-'folder: nuspecname'  
@@ -41,9 +41,10 @@ project
 |--libs  
 |--tools  
 |-'file: nuspec'  
-
-- Open build.targets and add/replace with the following
-
+```
+    
+- Open build.targets and add/replace with the following  
+  
 ```XML
   <Import Project="$(MSBuildThisFileDirectory)\..\..\MSBNuget\nuget.targets" />
 
