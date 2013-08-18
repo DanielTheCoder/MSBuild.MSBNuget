@@ -1,12 +1,12 @@
 MSBuild.MSBNuget
-================
+=================
 
 Easily create NuGet packages with this collection of MSBuild targets.
 It uses the method described here: http://docs.nuget.org/docs/creating-packages/creating-and-publishing-a-package#From_a_convention_based_working_directory
   
 
 HOW TO USE
------------
+------------
 
 - Add a new project to your solution by using the MSBuild project template (http://visualstudiogallery.msdn.microsoft.com/4b75d0cc-b693-4c1c-8105-fbaeb0714b03)
 - Install nuget package MSBuild.MSBNuget
@@ -64,3 +64,15 @@ project
     <CallTarget Targets="NugetPublish"/>
   </Target>
 ```  
+
+
+Contributing
+------------
+
+If you are interested in contributing,  
+  
+1. Get a Github account  
+1. Fork the project  
+1. Make your feature addition or bugfix. Please also update the [[changelog|https://https://github.com/DanielTheCoder/MSBuild.MSBNuget/edit/master/changelog.txt]].  
+1. Send me a pull request via GitHub  
+  
