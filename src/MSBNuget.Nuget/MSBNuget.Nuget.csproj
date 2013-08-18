@@ -4,11 +4,11 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{EC40ACB0-A6B9-4776-9078-B1D72D244787}</ProjectGuid>
+    <ProjectGuid>{4455C566-5F12-40C5-8AA7-A86651E7738D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MSBNuget</RootNamespace>
-    <AssemblyName>MSBNuget</AssemblyName>
+    <RootNamespace>MSBNuget.Nuget</RootNamespace>
+    <AssemblyName>MSBNuget.Nuget</AssemblyName>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <ItemGroup>
@@ -16,7 +16,7 @@
     <Compile Include=".build\build.targets" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="nuget.targets" />
+    <None Include="MSBNuget.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildProjectDirectory)\.build\build.props" />
   <Import Project="$(MSBuildProjectDirectory)\.build\build.targets" />

@@ -6,5 +6,10 @@
   
   
   <Target Name="Publish"/>
+  <Target Name="GetNativeManifest" />
+  <Target Name="GetCopyToOutputDirectoryItems" />
+
+  
+  <Target Name="AfterBuild" AfterTargets="Build" />
 
 </Project>
