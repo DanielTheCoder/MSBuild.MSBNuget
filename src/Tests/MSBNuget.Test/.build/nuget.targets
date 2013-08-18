@@ -1,0 +1,150 @@
+﻿<!--
+  {one line to give the program's name and a brief idea of what it does.}
+  Copyright (C) 2013  Daniel Sack
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see [http://www.gnu.org/licenses/].
+  -->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+  <PropertyGroup>
+    <NugetStage>$(MSBuildProjectDirectory)\obj\nugetstage\</NugetStage>
+    <PublishToLocalNugetFeed Condition="'$(PublishToLocalNugetFeed)'==''">true</PublishToLocalNugetFeed>
+    
+    <NugkgPublishFolder Condition="'$(NugkgPublishFolder)'==''">$(MSBuildProjectDirectory)\bin\$(Configuration)\Publish\</NugkgPublishFolder>
+    <NugkgReleaseFolder Condition="'$(NugkgReleaseFolder)'==''">$(MSBuildProjectDirectory)\bin\$(Configuration)\</NugkgReleaseFolder>
+    
+    <!-- Convention based for Nuget Package Restore -->
+    <BuildDependsOn/>
+    
+    <BuildTargets>
+      $(BuildDependsOn);
+      NugetCleanupFolderStructure;
+      NugetCreateFolderStructure;
+      NugetCopyAdditionalFiles;
+      NugetCopyNuspec;
+      NugetCreatePackage;
+    </BuildTargets>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <nuspec Include="$(MSBuildProjectDirectory)\**\*.nuspec"/>
+  </ItemGroup>
+
+  
+  
+  
+  <Target Name="NugetBuild">
+    <CallTarget Targets="NugetCreatePackages" />
+  </Target>
+
+  <Target Name="NugetClean">
+    <CallTarget Targets="NugetCleanupFolderStructure" />
+  </Target>
+
+  <Target Name="NugetRebuild">
+    <CallTarget Targets="Build" />
+  </Target>
+
+  <Target Name="NugetPublish">
+    <CallTarget Targets="Build"/>
+    <CallTarget Condition="'$(PublishToLocalNugetFeed)' == 'true'" Targets="NugetPublishToLocalFeed" />
+  </Target>
+  
+  
+  
+
+  <Target Name="NugetCreatePackages">
+    <CallTarget Targets="$(BuildTargets)" />
+  </Target>
+  
+  <Target Name="NugetCreateFolderStructure">
+    <!-- Ensure nuget Folder structure exists -->
+    <MakeDir Directories="$(NugetStage)\%(nuspec.Filename)\lib" />
+    <MakeDir Directories="$(NugetStage)\%(nuspec.Filename)\tools" />
+    <MakeDir Directories="$(NugetStage)\%(nuspec.Filename)\content" />
+    <MakeDir Directories="$(NugetStage)\%(nuspec.Filename)\build" />
+  </Target>
+
+  <Target Name="NugetCopyAdditionalFiles">
+    <ItemGroup>
+      <additionalFiles Include="$(MSBuildProjectDirectory)\%(nuspec.Filename)\tools\**\*.*">
+        <targetFolder>%(nuspec.Filename)\tools</targetFolder>
+      </additionalFiles>
+      <additionalFiles Include="$(MSBuildProjectDirectory)\%(nuspec.Filename)\content\**\*.*">
+        <targetFolder>%(nuspec.Filename)\content</targetFolder>
+      </additionalFiles>
+      <additionalFiles Include="$(MSBuildProjectDirectory)\%(nuspec.Filename)\build\**\*.*">
+        <targetFolder>%(nuspec.Filename)\build</targetFolder>
+      </additionalFiles>
+      <additionalFiles Include="$(MSBuildProjectDirectory)\%(nuspec.Filename)\lib\**\*.*">
+        <targetFolder>%(nuspec.Filename)\lib</targetFolder>
+      </additionalFiles>
+    </ItemGroup>
+
+    <!-- additional includes -->
+    <Copy SourceFiles="@(additionalFiles)"
+          DestinationFolder="$(NugetStage)\%(additionalFiles.targetFolder)\%(additionalFiles.RecursiveDir)"
+          OverwriteReadOnlyFiles="true" ContinueOnError="true"/>
+  </Target>
+
+  <Target Name="NugetCleanupFolderStructure">
+
+    <ItemGroup>
+      <files Include="$(NugetStage)"/>
+      <!--<files Include="$(NugetStage)\tools\**\*.*"/>
+      <files Include="$(NugetStage)\lib\**\*.*"/>
+      <files Include="$(NugetStage)\content\**\*.*"/>
+      <files Include="$(NugetStage)\build\**\*.*"/>-->
+      <folders Include="%(files.RelativeDir)" />
+    </ItemGroup>
+
+    <Message Text="@(files)" />
+    <Message Text="@(folders)" />
+
+    <Delete Files="@(files)" />
+    <RemoveDir Directories="@(folders)" ContinueOnError="true" />
+  </Target>
+
+  <Target Name="NugetCopyNuspec">
+    <Copy SourceFiles="@(nuspec)"
+          DestinationFolder="$(NugetStage)\%(nuspec.Filename)"
+          OverwriteReadOnlyFiles="true" ContinueOnError="true"/>
+  </Target>
+  
+  <Target Name="NugetCreatePackage" >
+    <ItemGroup>
+      <nuspecStaged Include="$(NugetStage)\%(nuspec.Filename)\*.nuspec"/>
+    </ItemGroup>
+
+    <MakeDir Directories="$(NugkgReleaseFolder)" />
+    
+    <Message Text="nuspec: @(nuspecStaged)" Importance="normal"/>
+    <Message Text="  %(nuspecStaged.Identity)  Count: @(nuspecStaged->Count())" Importance="normal" />
+    <Message Text="nuget pack %(nuspecStaged.Identity) -OutputDirectory $(NugkgReleaseFolder) -NoDefaultExcludes" Importance="normal" />
+    <Exec Command="nuget pack %(nuspecStaged.Identity) -OutputDirectory $(NugkgReleaseFolder) -NoDefaultExcludes" />
+  </Target>
+
+  <Target Name="NugetPublishToLocalFeed">
+    <ItemGroup>
+      <nupkg Include="$(NugkgReleaseFolder)**\*.nupkg"/>
+    </ItemGroup>
+
+    <MakeDir Directories="$(NugkgPublishFolder)" />
+    
+    <Copy SourceFiles="@(nupkg)"
+          DestinationFolder="$(NugkgPublishFolder)%(nupkg.RecursiveDir)"
+          OverwriteReadOnlyFiles="true" ContinueOnError="true"/>
+  </Target>
+  
+</Project>
