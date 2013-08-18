@@ -15,6 +15,11 @@
     <Compile Include=".build\build.props" />
     <Compile Include=".build\build.targets" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include=".build\nuget.targets" />
+    <None Include="sample.nuspec" />
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildProjectDirectory)\.build\build.props" />
   <Import Project="$(MSBuildProjectDirectory)\.build\build.targets" />
 </Project>

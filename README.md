@@ -9,6 +9,7 @@ HOW TO USE
 -----------
 
 - Add a new project to your solution by using the MSBuild project template (http://visualstudiogallery.msdn.microsoft.com/4b75d0cc-b693-4c1c-8105-fbaeb0714b03)
+- Install nuget package MSBuild.MSBNuget
 - Open build.props and configure common settings, eg:
   
 ```XML
@@ -34,9 +35,31 @@ HOW TO USE
 
 ```
 project  
-|-'nuspecname'  
+|-'folder: nuspecname'  
 |--build  
 |--content  
 |--libs  
 |--tools  
-|-'nuspecfile'  
+|-'file: nuspec'  
+
+- Open build.targets and add/replace with the following
+
+```XML
+  <Import Project="$(MSBuildThisFileDirectory)\..\..\MSBNuget\nuget.targets" />
+
+  <Target Name="Build">
+    <CallTarget Targets="NugetBuild" />
+  </Target>
+
+  <Target Name="Clean">
+    <CallTarget Targets="NugetClean" />
+  </Target>
+
+  <Target Name="Rebuild">
+    <CallTarget Targets="NugetRebuild" />
+  </Target>
+
+  <Target Name="Publish">
+    <CallTarget Targets="NugetPublish"/>
+  </Target>
+```  
