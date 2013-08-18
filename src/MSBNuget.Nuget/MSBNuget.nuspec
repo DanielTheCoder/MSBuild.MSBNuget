@@ -2,13 +2,13 @@
 <package >
   <metadata>
     <id>MSBuild.MSBNuget</id>
-    <version>0.0.1-pre</version>
+    <version>0.0.2-pre</version>
     <title>Nuget convention based MSBuild Packager</title>
     <authors>Daniel Sack</authors>
     <owners>Daniel Sack</owners>
-    <!--<licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
-    <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
-    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
+    <licenseUrl>https://raw.github.com/DanielTheCoder/MSBuild.MSBNuget/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/DanielTheCoder/MSBuild.MSBNuget</projectUrl>
+    <iconUrl>https://raw.github.com/DanielTheCoder/MSBuild.MSBNuget/master/media/MSBNuget.ico</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Convention based nuget package creator build as msbuild script</description>
     <releaseNotes>Initial version</releaseNotes>
