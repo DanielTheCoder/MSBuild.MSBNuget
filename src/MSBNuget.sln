@@ -11,6 +11,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{55846E57
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSBNuget.Test", "Tests\MSBNuget.Test\MSBNuget.Test.csproj", "{A50915EA-E1EF-4A15-9046-08976A383F75}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "media", "media", "{C7C1F1E8-1F52-4B1E-A839-3F79DC5EF5A1}"
+	ProjectSection(SolutionItems) = preProject
+		..\media\MSBNuget.ico = ..\media\MSBNuget.ico
+		..\media\MSBNuget.pdn = ..\media\MSBNuget.pdn
+		..\media\MSBuild.ico = ..\media\MSBuild.ico
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
