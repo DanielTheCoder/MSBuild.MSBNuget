@@ -33,14 +33,14 @@
     <!-- Convention based for Nuget Package Restore -->
     <BuildDependsOn/>
     
-    <BuildTargets>
+    <NugetBuildTargets>
       $(BuildDependsOn);
       NugetCleanupFolderStructure;
       NugetCreateFolderStructure;
       NugetCopyAdditionalFiles;
       NugetCopyNuspec;
       NugetCreatePackage;
-    </BuildTargets>
+    </NugetBuildTargets>
   </PropertyGroup>
 
   <ItemGroup>
@@ -71,7 +71,7 @@
   
 
   <Target Name="NugetCreatePackages">
-    <CallTarget Targets="$(BuildTargets)" />
+    <CallTarget Targets="$(NugetBuildTargets)" />
   </Target>
   
   <Target Name="NugetCreateFolderStructure">
