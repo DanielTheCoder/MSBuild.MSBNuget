@@ -11,9 +11,9 @@
     <iconUrl>https://raw.github.com/DanielTheCoder/MSBuild.MSBNuget/master/media/MSBNuget.ico</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Convention based nuget package creator build as msbuild script</description>
-    <releaseNotes>Initial version</releaseNotes>
     <copyright>Copyright 2013</copyright>
     <tags>NuGet MSBuild Package</tags>
+    <releaseNotes>https://raw.github.com/DanielTheCoder/MSBuild.MSBNuget/master/changelog.txt</releaseNotes>
   </metadata>
 
 </package>

@@ -1,3 +1,16 @@
+1.0.1 -pre 2013/08/19
+
+Changes:
+ + NugkgReleaseFolder renamed to -> NugkgPublishReleaseFolder
+ + NugkgPublishFolder renamed to -> NugkgPublishLocalNugetFeedFolder
+
+New Features:
+ + Disable all publish mechanism with: <PublishDisabled>true</PublishDisabled>
+ + PublishToReleaseFolder with <PublishToLocalNugetFeed>true</PublishToLocalNugetFeed>
+ + PublishToLocalNugetFeed with <PublishToLocalNugetFeed>true</PublishToLocalNugetFeed>
+ + PublishToOfficialNugetFeed with <PublishToOfficialNugetFeed>true</PublishToOfficialNugetFeed>
+
 1.0.0 - 2013/08/18 (Initial publish )
 Fixed issues:
 New Features:
+Changes:
