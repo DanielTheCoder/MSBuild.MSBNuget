@@ -1,8 +1,9 @@
 ﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
 
   <PropertyGroup>
-    <PublishToLocalNugetFeed>true</PublishToLocalNugetFeed>
-    <NugkgPublishFolder>C:\Dev\_galleries\nuget\</NugkgPublishFolder>
+    <PublishToLocalNugetFeed Condition="'(PublishToLocalNugetFeed)'==''">true</PublishToLocalNugetFeed>
+    
+    <NugkgPublishFolder Condition="'$(NugkgPublishFolder)'==''">C:\Dev\_galleries\nuget\</NugkgPublishFolder>
     <NugkgPublishFolder Condition="'$(NugkgPublishFolder)'==''">$(MSBuildProjectDirectory)\..\..\Publish\</NugkgPublishFolder>
     <NugkgReleaseFolder Condition="'$(NugkgReleaseFolder)'==''">$(MSBuildProjectDirectory)\..\..\Releases\</NugkgReleaseFolder>
   </PropertyGroup>
