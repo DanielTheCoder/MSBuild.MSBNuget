@@ -33,14 +33,13 @@
     <!-- Convention based for Nuget Package Restore -->
     <BuildDependsOn/>
     
-    <BuildTargets>
-      $(BuildDependsOn);
+    <NugetBuildTargets>
       NugetCleanupFolderStructure;
       NugetCreateFolderStructure;
       NugetCopyAdditionalFiles;
       NugetCopyNuspec;
       NugetCreatePackage;
-    </BuildTargets>
+    </NugetBuildTargets>
   </PropertyGroup>
 
   <ItemGroup>
@@ -71,15 +70,15 @@
   
 
   <Target Name="NugetCreatePackages">
-    <CallTarget Targets="$(BuildTargets)" />
+    <CallTarget Targets="$(NugetBuildTargets)" />
   </Target>
   
   <Target Name="NugetCreateFolderStructure">
     <!-- Ensure nuget Folder structure exists -->
-    <MakeDir Directories="$(NugetStage)\%(nuspec.Filename)\lib" />
-    <MakeDir Directories="$(NugetStage)\%(nuspec.Filename)\tools" />
-    <MakeDir Directories="$(NugetStage)\%(nuspec.Filename)\content" />
-    <MakeDir Directories="$(NugetStage)\%(nuspec.Filename)\build" />
+    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\lib" />
+    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\tools" />
+    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\content" />
+    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\build" />
   </Target>
 
   <Target Name="NugetCopyAdditionalFiles">
@@ -100,7 +99,7 @@
 
     <!-- additional includes -->
     <Copy SourceFiles="@(additionalFiles)"
-          DestinationFolder="$(NugetStage)\%(additionalFiles.targetFolder)\%(additionalFiles.RecursiveDir)"
+          DestinationFolder="$(NugetStage)%(additionalFiles.targetFolder)\%(additionalFiles.RecursiveDir)"
           OverwriteReadOnlyFiles="true" ContinueOnError="true"/>
   </Target>
 
@@ -128,13 +127,13 @@
 
   <Target Name="NugetCopyNuspec">
     <Copy SourceFiles="@(nuspec)"
-          DestinationFolder="$(NugetStage)\%(nuspec.Filename)"
+          DestinationFolder="$(NugetStage)%(nuspec.Filename)"
           OverwriteReadOnlyFiles="true" ContinueOnError="true"/>
   </Target>
   
   <Target Name="NugetCreatePackage" >
     <ItemGroup>
-      <nuspecStaged Include="$(NugetStage)\%(nuspec.Filename)\*.nuspec"/>
+      <nuspecStaged Include="$(NugetStage)%(nuspec.Filename)\*.nuspec"/>
     </ItemGroup>
 
     <MakeDir Directories="$(NugetIntermediatePath)" />
