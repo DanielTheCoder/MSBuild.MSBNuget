@@ -2,20 +2,27 @@
 
   <Import Project="nuget.targets" />
   
+  <PropertyGroup>
+    <BuildTargets>$(BuildDependsOn);</BuildTargets>
+    <CleanTargets/>
+    <RebuildTargets/>
+    <PublishTargets/>
+  </PropertyGroup>
+  
   <Target Name="Build">
-    <CallTarget Targets="NugetBuild" />
+    <CallTarget Targets="$(BuildTargets)" />
   </Target>
 
   <Target Name="Clean">
-    <CallTarget Targets="NugetClean" />
+    <CallTarget Targets="$(CleanTargets)" />
   </Target>
 
   <Target Name="Rebuild">
-    <CallTarget Targets="NugetRebuild" />
+    <CallTarget Targets="$(RebuildTargets)" />
   </Target>
 
   <Target Name="Publish">
-    <CallTarget Targets="NugetPublish"/>
+    <CallTarget Targets="$(PublishTargets)"/>
   </Target>
 
 </Project>

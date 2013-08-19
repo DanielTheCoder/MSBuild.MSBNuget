@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0"?>
 <package >
   <metadata>
-    <id>MSBuild.MSBNuget</id>
-    <version>1.0.1</version>
+    <id>MSBuild.MSBNuget.Legacy</id>
+    <version>1.0.2-pre</version>
     <title>Nuget convention based MSBuild Packager</title>
     <authors>Daniel Sack</authors>
     <owners>Daniel Sack</owners>
