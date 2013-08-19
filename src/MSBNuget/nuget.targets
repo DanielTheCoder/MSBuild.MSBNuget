@@ -19,6 +19,8 @@
 
   <PropertyGroup>
     <NugetStage>$(MSBuildProjectDirectory)\obj\nugetstage\</NugetStage>
+
+    <PublishDisabled Condition="'$(PublishDisabled)' == ''">false</PublishDisabled>
     <PublishToLocalNugetFeed Condition="'$(PublishToLocalNugetFeed)'==''">true</PublishToLocalNugetFeed>
     
     <NugkgPublishFolder Condition="'$(NugkgPublishFolder)'==''">$(MSBuildProjectDirectory)\bin\$(Configuration)\Publish\</NugkgPublishFolder>
@@ -58,7 +60,7 @@
 
   <Target Name="NugetPublish">
     <CallTarget Targets="Build"/>
-    <CallTarget Condition="'$(PublishToLocalNugetFeed)' == 'true'" Targets="NugetPublishToLocalFeed" />
+    <CallTarget Condition="'$(PublishDisabled)'=='false'" Targets="NugetPublishToFeeds"/>
   </Target>
   
   
@@ -135,6 +137,11 @@
     <Exec Command="nuget pack %(nuspecStaged.Identity) -OutputDirectory $(NugkgReleaseFolder) -NoDefaultExcludes" />
   </Target>
 
+  <Target Name="NugetPublishToFeeds">
+    <CallTarget Condition="'$(PublishToLocalNugetFeed)' == 'true'" Targets="NugetPublishToLocalFeed" />
+  </Target>
+  
+  
   <Target Name="NugetPublishToLocalFeed">
     <ItemGroup>
       <nupkg Include="$(NugkgReleaseFolder)**\*.nupkg"/>
