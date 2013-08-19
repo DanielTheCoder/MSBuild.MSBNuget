@@ -3,8 +3,9 @@
   <PropertyGroup>
     <PublishToLocalNugetFeed Condition="'(PublishToLocalNugetFeed)'==''">true</PublishToLocalNugetFeed>
 
-    <NugkgPublishLocalNugetFeedFolder Condition="'$(NugkgPublishLocalNugetFeedFolder)'==''">C:\Dev\_galleries\nuget\</NugkgPublishLocalNugetFeedFolder>
     <NugkgPublishReleaseFolder Condition="'$(NugkgPublishReleaseFolder)'==''">$(MSBuildProjectDirectory)\..\..\Releases\</NugkgPublishReleaseFolder>
+    <NugkgPublishLocalNugetFeedFolder Condition="'$(NugkgPublishLocalNugetFeedFolder)'==''">C:\Dev\_galleries\nuget\</NugkgPublishLocalNugetFeedFolder>
+    
   </PropertyGroup>
 
   <ItemGroup>

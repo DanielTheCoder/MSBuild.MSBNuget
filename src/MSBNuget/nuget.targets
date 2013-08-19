@@ -22,10 +22,12 @@
     <NugetIntermediatePath Condition="'$(NugetIntermediatePath)' == ''">$(MSBuildProjectDirectory)\bin\$(Configuration)\</NugetIntermediatePath>
     
     <PublishDisabled Condition="'$(PublishDisabled)' == ''">false</PublishDisabled>
+
+    <PublishToReleaseFolder Condition="'$(PublishToReleaseFolder)'==''">true</PublishToReleaseFolder>
     <PublishToLocalNugetFeed Condition="'$(PublishToLocalNugetFeed)'==''">true</PublishToLocalNugetFeed>
 
+    <NugkgPublishReleaseFolder Condition="'$(NugkgPublishReleaseFolder)'==''">$(MSBuildProjectDirectory)\bin\$(Configuration)\Release\</NugkgPublishReleaseFolder>
     <NugkgPublishLocalNugetFeedFolder Condition="'$(NugkgPublishLocalNugetFeedFolder)'==''">$(MSBuildProjectDirectory)\bin\$(Configuration)\Publish\</NugkgPublishLocalNugetFeedFolder>
-
 
     <!-- Convention based for Nuget Package Restore -->
     <BuildDependsOn/>
@@ -143,9 +145,21 @@
   </Target>
 
   <Target Name="NugetPublishToFeeds">
+    <CallTarget Condition="'$(PublishToReleaseFolder)' == 'true'" Targets="NugetPublishToReleaseFolder" />
     <CallTarget Condition="'$(PublishToLocalNugetFeed)' == 'true'" Targets="NugetPublishToLocalFeed" />
   </Target>
-  
+
+  <Target Name="NugetPublishToReleaseFolder">
+    <ItemGroup>
+      <nupkg Include="$(NugetIntermediatePath)**\*.nupkg"/>
+    </ItemGroup>
+
+    <MakeDir Directories="$(NugkgPublishReleaseFolder)" />
+
+    <Copy SourceFiles="@(nupkg)"
+          DestinationFolder="$(NugkgPublishReleaseFolder)%(nupkg.RecursiveDir)"
+          OverwriteReadOnlyFiles="true" ContinueOnError="true"/>
+  </Target>
   
   <Target Name="NugetPublishToLocalFeed">
     <ItemGroup>
