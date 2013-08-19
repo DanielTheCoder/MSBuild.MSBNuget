@@ -19,6 +19,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MSBNuget\build\MSBuild.MSBNuget.targets" />
+    <Compile Include="MSBBuildConvention\content\.build\build.targets" />
+    <None Include="MSBBuildConvention\MSBBuildConvention.nuspec" />
     <None Include="MSBNuget\MSBNuget.nuspec" />
     <None Include="MSBNuget.Legacy\MSBNuget.Legacy.nuspec" />
   </ItemGroup>
