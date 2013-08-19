@@ -17,8 +17,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".build\nuget.targets" />
-    <None Include="sample.nuspec" />
     <None Include="packages.config" />
+    <None Include="sample.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildProjectDirectory)\.build\build.props" />
   <Import Project="$(MSBuildProjectDirectory)\.build\build.targets" />
