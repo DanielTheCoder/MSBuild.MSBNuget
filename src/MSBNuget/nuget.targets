@@ -19,13 +19,14 @@
 
   <PropertyGroup>
     <NugetStage>$(MSBuildProjectDirectory)\obj\nugetstage\</NugetStage>
-
+    <NugetIntermediatePath Condition="'$(NugetIntermediatePath)' == ''">$(MSBuildProjectDirectory)\bin\$(Configuration)\</NugetIntermediatePath>
+    
     <PublishDisabled Condition="'$(PublishDisabled)' == ''">false</PublishDisabled>
     <PublishToLocalNugetFeed Condition="'$(PublishToLocalNugetFeed)'==''">true</PublishToLocalNugetFeed>
-    
-    <NugkgPublishFolder Condition="'$(NugkgPublishFolder)'==''">$(MSBuildProjectDirectory)\bin\$(Configuration)\Publish\</NugkgPublishFolder>
-    <NugkgReleaseFolder Condition="'$(NugkgReleaseFolder)'==''">$(MSBuildProjectDirectory)\bin\$(Configuration)\</NugkgReleaseFolder>
-    
+
+    <NugkgPublishLocalNugetFeedFolder Condition="'$(NugkgPublishLocalNugetFeedFolder)'==''">$(MSBuildProjectDirectory)\bin\$(Configuration)\Publish\</NugkgPublishLocalNugetFeedFolder>
+
+
     <!-- Convention based for Nuget Package Restore -->
     <BuildDependsOn/>
     
@@ -103,11 +104,15 @@
   <Target Name="NugetCleanupFolderStructure">
 
     <ItemGroup>
+      <!-- staged files-->
       <files Include="$(NugetStage)"/>
       <!--<files Include="$(NugetStage)\tools\**\*.*"/>
       <files Include="$(NugetStage)\lib\**\*.*"/>
       <files Include="$(NugetStage)\content\**\*.*"/>
       <files Include="$(NugetStage)\build\**\*.*"/>-->
+      <!-- intermediate files -->
+      <files Include="$(NugetIntermediatePath)" />
+      
       <folders Include="%(files.RelativeDir)" />
     </ItemGroup>
 
@@ -129,12 +134,12 @@
       <nuspecStaged Include="$(NugetStage)\%(nuspec.Filename)\*.nuspec"/>
     </ItemGroup>
 
-    <MakeDir Directories="$(NugkgReleaseFolder)" />
+    <MakeDir Directories="$(NugetIntermediatePath)" />
     
     <Message Text="nuspec: @(nuspecStaged)" Importance="normal"/>
     <Message Text="  %(nuspecStaged.Identity)  Count: @(nuspecStaged->Count())" Importance="normal" />
-    <Message Text="nuget pack %(nuspecStaged.Identity) -OutputDirectory $(NugkgReleaseFolder) -NoDefaultExcludes" Importance="normal" />
-    <Exec Command="nuget pack %(nuspecStaged.Identity) -OutputDirectory $(NugkgReleaseFolder) -NoDefaultExcludes" />
+    <Message Text="nuget pack %(nuspecStaged.Identity) -OutputDirectory $(NugetIntermediatePath) -NoDefaultExcludes" Importance="normal" />
+    <Exec Command="nuget pack %(nuspecStaged.Identity) -OutputDirectory $(NugetIntermediatePath) -NoDefaultExcludes" />
   </Target>
 
   <Target Name="NugetPublishToFeeds">
@@ -144,13 +149,13 @@
   
   <Target Name="NugetPublishToLocalFeed">
     <ItemGroup>
-      <nupkg Include="$(NugkgReleaseFolder)**\*.nupkg"/>
+      <nupkg Include="$(NugetIntermediatePath)**\*.nupkg"/>
     </ItemGroup>
 
-    <MakeDir Directories="$(NugkgPublishFolder)" />
+    <MakeDir Directories="$(NugkgPublishLocalNugetFeedFolder)" />
     
     <Copy SourceFiles="@(nupkg)"
-          DestinationFolder="$(NugkgPublishFolder)%(nupkg.RecursiveDir)"
+          DestinationFolder="$(NugkgPublishLocalNugetFeedFolder)%(nupkg.RecursiveDir)"
           OverwriteReadOnlyFiles="true" ContinueOnError="true"/>
   </Target>
   
