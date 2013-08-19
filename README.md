@@ -46,7 +46,7 @@ project
 - Open build.targets and add/replace with the following  
   
 ```XML
-  <Import Project="$(MSBuildThisFileDirectory)\..\..\MSBNuget\nuget.targets" />
+  <Import Project="nuget.targets" />
 
   <Target Name="Build">
     <CallTarget Targets="NugetBuild" />
