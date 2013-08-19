@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>MSBuild.MSBNuget</id>
-    <version>1.0.1-pre</version>
+    <version>1.0.1</version>
     <title>Nuget convention based MSBuild Packager</title>
     <authors>Daniel Sack</authors>
     <owners>Daniel Sack</owners>
