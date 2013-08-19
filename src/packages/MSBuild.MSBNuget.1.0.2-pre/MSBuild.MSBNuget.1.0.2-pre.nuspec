@@ -14,5 +14,8 @@
     <releaseNotes>https://raw.github.com/DanielTheCoder/MSBuild.MSBNuget/master/changelog.txt</releaseNotes>
     <copyright>Copyright 2013</copyright>
     <tags>NuGet MSBuild Package</tags>
+    <dependencies>
+      <dependency id="MSBuild.MSBBuildConvention" />
+    </dependencies>
   </metadata>
 </package>
