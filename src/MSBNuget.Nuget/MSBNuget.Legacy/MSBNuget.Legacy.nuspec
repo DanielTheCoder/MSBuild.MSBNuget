@@ -3,7 +3,7 @@
   <metadata>
     <id>MSBuild.MSBNuget.Legacy</id>
     <version>1.0.2-pre</version>
-    <title>Nuget convention based MSBuild Packager</title>
+    <title>Nuget convention based MSBuild Packager (Legacy)</title>
     <authors>Daniel Sack</authors>
     <owners>Daniel Sack</owners>
     <licenseUrl>https://raw.github.com/DanielTheCoder/MSBuild.MSBNuget/master/LICENSE</licenseUrl>
