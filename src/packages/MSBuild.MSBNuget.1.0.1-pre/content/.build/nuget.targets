@@ -1,5 +1,5 @@
 ﻿<!--
-  {one line to give the program's name and a brief idea of what it does.}
+  MSBNuget is a collection of MSBuild scripts to support convention based Nuget package creation.
   Copyright (C) 2013  Daniel Sack
 
   This program is free software: you can redistribute it and/or modify
@@ -19,11 +19,16 @@
 
   <PropertyGroup>
     <NugetStage>$(MSBuildProjectDirectory)\obj\nugetstage\</NugetStage>
+    <NugetIntermediatePath Condition="'$(NugetIntermediatePath)' == ''">$(MSBuildProjectDirectory)\bin\$(Configuration)\</NugetIntermediatePath>
+    
+    <PublishDisabled Condition="'$(PublishDisabled)' == ''">false</PublishDisabled>
+
+    <PublishToReleaseFolder Condition="'$(PublishToReleaseFolder)'==''">true</PublishToReleaseFolder>
     <PublishToLocalNugetFeed Condition="'$(PublishToLocalNugetFeed)'==''">true</PublishToLocalNugetFeed>
-    
-    <NugkgPublishFolder Condition="'$(NugkgPublishFolder)'==''">$(MSBuildProjectDirectory)\bin\$(Configuration)\Publish\</NugkgPublishFolder>
-    <NugkgReleaseFolder Condition="'$(NugkgReleaseFolder)'==''">$(MSBuildProjectDirectory)\bin\$(Configuration)\</NugkgReleaseFolder>
-    
+
+    <NugkgPublishReleaseFolder Condition="'$(NugkgPublishReleaseFolder)'==''">$(MSBuildProjectDirectory)\bin\$(Configuration)\Release\</NugkgPublishReleaseFolder>
+    <NugkgPublishLocalNugetFeedFolder Condition="'$(NugkgPublishLocalNugetFeedFolder)'==''">$(MSBuildProjectDirectory)\bin\$(Configuration)\Publish\</NugkgPublishLocalNugetFeedFolder>
+
     <!-- Convention based for Nuget Package Restore -->
     <BuildDependsOn/>
     
@@ -58,7 +63,7 @@
 
   <Target Name="NugetPublish">
     <CallTarget Targets="Build"/>
-    <CallTarget Condition="'$(PublishToLocalNugetFeed)' == 'true'" Targets="NugetPublishToLocalFeed" />
+    <CallTarget Condition="'$(PublishDisabled)'=='false'" Targets="NugetPublishToFeeds"/>
   </Target>
   
   
@@ -101,11 +106,15 @@
   <Target Name="NugetCleanupFolderStructure">
 
     <ItemGroup>
+      <!-- staged files-->
       <files Include="$(NugetStage)"/>
       <!--<files Include="$(NugetStage)\tools\**\*.*"/>
       <files Include="$(NugetStage)\lib\**\*.*"/>
       <files Include="$(NugetStage)\content\**\*.*"/>
       <files Include="$(NugetStage)\build\**\*.*"/>-->
+      <!-- intermediate files -->
+      <files Include="$(NugetIntermediatePath)" />
+      
       <folders Include="%(files.RelativeDir)" />
     </ItemGroup>
 
@@ -127,23 +136,40 @@
       <nuspecStaged Include="$(NugetStage)\%(nuspec.Filename)\*.nuspec"/>
     </ItemGroup>
 
-    <MakeDir Directories="$(NugkgReleaseFolder)" />
+    <MakeDir Directories="$(NugetIntermediatePath)" />
     
     <Message Text="nuspec: @(nuspecStaged)" Importance="normal"/>
     <Message Text="  %(nuspecStaged.Identity)  Count: @(nuspecStaged->Count())" Importance="normal" />
-    <Message Text="nuget pack %(nuspecStaged.Identity) -OutputDirectory $(NugkgReleaseFolder) -NoDefaultExcludes" Importance="normal" />
-    <Exec Command="nuget pack %(nuspecStaged.Identity) -OutputDirectory $(NugkgReleaseFolder) -NoDefaultExcludes" />
+    <Message Text="nuget pack %(nuspecStaged.Identity) -OutputDirectory $(NugetIntermediatePath) -NoDefaultExcludes" Importance="normal" />
+    <Exec Command="nuget pack %(nuspecStaged.Identity) -OutputDirectory $(NugetIntermediatePath) -NoDefaultExcludes" />
   </Target>
 
-  <Target Name="NugetPublishToLocalFeed">
+  <Target Name="NugetPublishToFeeds">
+    <CallTarget Condition="'$(PublishToReleaseFolder)' == 'true'" Targets="NugetPublishToReleaseFolder" />
+    <CallTarget Condition="'$(PublishToLocalNugetFeed)' == 'true'" Targets="NugetPublishToLocalFeed" />
+  </Target>
+
+  <Target Name="NugetPublishToReleaseFolder">
     <ItemGroup>
-      <nupkg Include="$(NugkgReleaseFolder)**\*.nupkg"/>
+      <nupkg Include="$(NugetIntermediatePath)**\*.nupkg"/>
     </ItemGroup>
 
-    <MakeDir Directories="$(NugkgPublishFolder)" />
+    <MakeDir Directories="$(NugkgPublishReleaseFolder)" />
+
+    <Copy SourceFiles="@(nupkg)"
+          DestinationFolder="$(NugkgPublishReleaseFolder)%(nupkg.RecursiveDir)"
+          OverwriteReadOnlyFiles="true" ContinueOnError="true"/>
+  </Target>
+  
+  <Target Name="NugetPublishToLocalFeed">
+    <ItemGroup>
+      <nupkg Include="$(NugetIntermediatePath)**\*.nupkg"/>
+    </ItemGroup>
+
+    <MakeDir Directories="$(NugkgPublishLocalNugetFeedFolder)" />
     
     <Copy SourceFiles="@(nupkg)"
-          DestinationFolder="$(NugkgPublishFolder)%(nupkg.RecursiveDir)"
+          DestinationFolder="$(NugkgPublishLocalNugetFeedFolder)%(nupkg.RecursiveDir)"
           OverwriteReadOnlyFiles="true" ContinueOnError="true"/>
   </Target>
   
