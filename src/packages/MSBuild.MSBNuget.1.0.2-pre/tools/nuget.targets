@@ -21,11 +21,10 @@
     <NugetStage>$(MSBuildProjectDirectory)\obj\nugetstage\</NugetStage>
     <NugetIntermediatePath Condition="'$(NugetIntermediatePath)' == ''">$(MSBuildProjectDirectory)\bin\$(Configuration)\</NugetIntermediatePath>
     
-    <PublishDisabled Condition="'$(PublishDisabled)' == ''">false</PublishDisabled>
-
-    <PublishToReleaseFolder Condition="'$(PublishToReleaseFolder)'==''">true</PublishToReleaseFolder>
-    <PublishToLocalNugetFeed Condition="'$(PublishToLocalNugetFeed)'==''">true</PublishToLocalNugetFeed>
-    <PublishToOfficialNugetFeed Condition="'$(PublishToOfficialNugetFeed)' == ''">false</PublishToOfficialNugetFeed>
+    <NugetPublishDisabled Condition="'$(NugetPublishDisabled)' == ''">false</NugetPublishDisabled>
+    <NugetPublishToReleaseFolder Condition="'$(NugetPublishToReleaseFolder)'==''">true</NugetPublishToReleaseFolder>
+    <NugetPublishToLocalNugetFeed Condition="'$(NugetPublishToLocalNugetFeed)'==''">true</NugetPublishToLocalNugetFeed>
+    <NugetPublishToOfficialNugetFeed Condition="'$(NugetPublishToOfficialNugetFeed)' == ''">false</NugetPublishToOfficialNugetFeed>
 
     <NugkgPublishReleaseFolder Condition="'$(NugkgPublishReleaseFolder)'==''">$(MSBuildProjectDirectory)\bin\$(Configuration)\Release\</NugkgPublishReleaseFolder>
     <NugkgPublishLocalNugetFeedFolder Condition="'$(NugkgPublishLocalNugetFeedFolder)'==''">$(MSBuildProjectDirectory)\bin\$(Configuration)\Publish\</NugkgPublishLocalNugetFeedFolder>
@@ -33,14 +32,13 @@
     <!-- Convention based for Nuget Package Restore -->
     <BuildDependsOn/>
     
-    <BuildTargets>
-      $(BuildDependsOn);
+    <NugetBuildTargets>
       NugetCleanupFolderStructure;
       NugetCreateFolderStructure;
       NugetCopyAdditionalFiles;
       NugetCopyNuspec;
       NugetCreatePackage;
-    </BuildTargets>
+    </NugetBuildTargets>
   </PropertyGroup>
 
   <ItemGroup>
@@ -64,22 +62,22 @@
 
   <Target Name="NugetPublish">
     <CallTarget Targets="Build"/>
-    <CallTarget Condition="'$(PublishDisabled)'=='false'" Targets="NugetPublishToFeeds"/>
+    <CallTarget Condition="'$(NugetPublishDisabled)'=='false'" Targets="NugetPublishToFeeds"/>
   </Target>
   
   
   
 
   <Target Name="NugetCreatePackages">
-    <CallTarget Targets="$(BuildTargets)" />
+    <CallTarget Targets="$(NugetBuildTargets)" />
   </Target>
   
   <Target Name="NugetCreateFolderStructure">
     <!-- Ensure nuget Folder structure exists -->
-    <MakeDir Directories="$(NugetStage)\%(nuspec.Filename)\lib" />
-    <MakeDir Directories="$(NugetStage)\%(nuspec.Filename)\tools" />
-    <MakeDir Directories="$(NugetStage)\%(nuspec.Filename)\content" />
-    <MakeDir Directories="$(NugetStage)\%(nuspec.Filename)\build" />
+    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\lib" />
+    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\tools" />
+    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\content" />
+    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\build" />
   </Target>
 
   <Target Name="NugetCopyAdditionalFiles">
@@ -100,7 +98,7 @@
 
     <!-- additional includes -->
     <Copy SourceFiles="@(additionalFiles)"
-          DestinationFolder="$(NugetStage)\%(additionalFiles.targetFolder)\%(additionalFiles.RecursiveDir)"
+          DestinationFolder="$(NugetStage)%(additionalFiles.targetFolder)\%(additionalFiles.RecursiveDir)"
           OverwriteReadOnlyFiles="true" ContinueOnError="true"/>
   </Target>
 
@@ -128,13 +126,13 @@
 
   <Target Name="NugetCopyNuspec">
     <Copy SourceFiles="@(nuspec)"
-          DestinationFolder="$(NugetStage)\%(nuspec.Filename)"
+          DestinationFolder="$(NugetStage)%(nuspec.Filename)"
           OverwriteReadOnlyFiles="true" ContinueOnError="true"/>
   </Target>
   
   <Target Name="NugetCreatePackage" >
     <ItemGroup>
-      <nuspecStaged Include="$(NugetStage)\%(nuspec.Filename)\*.nuspec"/>
+      <nuspecStaged Include="$(NugetStage)%(nuspec.Filename)\*.nuspec"/>
     </ItemGroup>
 
     <MakeDir Directories="$(NugetIntermediatePath)" />
@@ -146,9 +144,9 @@
   </Target>
 
   <Target Name="NugetPublishToFeeds">
-    <CallTarget Condition="'$(PublishToReleaseFolder)' == 'true'" Targets="NugetPublishToReleaseFolder" />
-    <CallTarget Condition="'$(PublishToLocalNugetFeed)' == 'true'" Targets="NugetPublishToLocalFeed" />
-    <CallTarget Condition="'$(PublishToOfficialNugetFeed)' == 'true'" Targets="NugetPublishToOfficialNugetFeed" />
+    <CallTarget Condition="'$(NugetPublishToReleaseFolder)' == 'true'" Targets="NugetPublishToReleaseFolder" />
+    <CallTarget Condition="'$(NugetPublishToLocalNugetFeed)' == 'true'" Targets="NugetPublishToLocalFeed" />
+    <CallTarget Condition="'$(NugetPublishToOfficialNugetFeed)' == 'true'" Targets="NugetPublishToOfficialNugetFeed" />
   </Target>
 
   <Target Name="NugetPublishToReleaseFolder">

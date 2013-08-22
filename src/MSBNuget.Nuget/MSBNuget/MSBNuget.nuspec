@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>MSBuild.MSBNuget</id>
-    <version>1.0.1</version>
+    <version>1.0.2-pre</version>
     <title>Nuget convention based MSBuild Packager</title>
     <authors>Daniel Sack</authors>
     <owners>Daniel Sack</owners>
@@ -14,6 +14,9 @@
     <copyright>Copyright 2013</copyright>
     <tags>NuGet MSBuild Package</tags>
     <releaseNotes>https://raw.github.com/DanielTheCoder/MSBuild.MSBNuget/master/changelog.txt</releaseNotes>
+    <dependencies>
+      <dependency id="MSBuild.MSBBuildConvention" />
+    </dependencies>
   </metadata>
 
 </package>

@@ -1,1 +1,1 @@
-msbuild /t:publish /p:PublishToOfficialNugetFeed=true
+msbuild /t:publish /p:NugetPublishToOfficialNugetFeed=true
