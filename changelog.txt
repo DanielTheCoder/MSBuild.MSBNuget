@@ -1,3 +1,7 @@
+1.0.3 -pre 2013/08/22
+Fixed issues:
+ + pack: invalid arguments. -> Escaped command
+
 1.0.2 -pre 2013/08/19
 Changes:
  + PublishDisabled renamed to -> NugetPublishDisabled
@@ -10,6 +14,7 @@ New Features:
  + PublishToReleaseFolder with <PublishToLocalNugetFeed>true</PublishToLocalNugetFeed>
  + PublishToLocalNugetFeed with <PublishToLocalNugetFeed>true</PublishToLocalNugetFeed>
  + PublishToOfficialNugetFeed with <PublishToOfficialNugetFeed>true</PublishToOfficialNugetFeed>
+  
 
 1.0.1 -pre 2013/08/19
 
