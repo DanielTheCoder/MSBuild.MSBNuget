@@ -139,8 +139,8 @@
     
     <Message Text="nuspec: @(nuspecStaged)" Importance="normal"/>
     <Message Text="  %(nuspecStaged.Identity)  Count: @(nuspecStaged->Count())" Importance="normal" />
-    <Message Text="nuget pack %(nuspecStaged.Identity) -OutputDirectory $(NugetIntermediatePath) -NoDefaultExcludes" Importance="normal" />
-    <Exec Command="nuget pack %(nuspecStaged.Identity) -OutputDirectory $(NugetIntermediatePath) -NoDefaultExcludes" />
+    <!--<Message Text="nuget pack &quot;%(nuspecStaged.Identity)&quot; -OutputDirectory &quot;$(NugetIntermediatePath)&quot; -NoDefaultExcludes" Importance="normal" />-->
+    <Exec Command="nuget pack &quot;%(nuspecStaged.Identity)&quot; -OutputDirectory &quot;$(NugetIntermediatePath.TrimEnd('\'))&quot; -NoDefaultExcludes" />
   </Target>
 
   <Target Name="NugetPublishToFeeds">
@@ -178,7 +178,7 @@
       <nupkg Include="$(NugetIntermediatePath)**\*.nupkg"/>
     </ItemGroup>
 
-    <Exec Command="nuget push %(nupkg.Identity)" />
+    <Exec Command="nuget push %(nupkg.Identity)" ContinueOnError="true" />
   </Target>
 
 </Project>
