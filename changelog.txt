@@ -1,4 +1,4 @@
-1.0.3 -pre4 2013/10/23
+1.0.3 -pre5 2013/10/23
 Fixed issues:
  + pack: invalid arguments. -> Escaped command
 
@@ -11,6 +11,7 @@ New Features:
  + Global override of nuget pack arguments for all nuspec files (NugetVersion, NugetMinClientVersion, NugetCommandPackArguments)
  + Logging publishing paths after publish
  + Nuget.exe not needed anymore in path var, dependency of package
+ + OutDir Support, should work with Team Foundation Server 2010/2012/2013
 
 1.0.2 -pre 2013/08/19
 Changes:
