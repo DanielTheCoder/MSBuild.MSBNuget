@@ -1,6 +1,8 @@
 ﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
 
   <PropertyGroup>
+    <!-- overwrite nuget.exe path because we are not acting in scope of packages folder -->
+    <NuGetToolsPath>$(MSBuildProjectDirectory)\..\packages\NuGet.CommandLine.*\tools\</NuGetToolsPath>
     
     <NugetPackagesCustomConfiguration Condition="'$(NugetPackagesCustomConfiguration)'==''">$(COMPUTERNAME)</NugetPackagesCustomConfiguration>
 
