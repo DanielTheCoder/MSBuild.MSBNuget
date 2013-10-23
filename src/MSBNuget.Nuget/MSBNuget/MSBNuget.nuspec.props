@@ -1,0 +1,12 @@
+﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+  <ItemGroup Label="MSBNuget">
+    <additionalFiles Include="$(MSBuildThisFileDirectory)\..\..\MSBNuget\nuget.targets">
+      <targetFolder>MSBNuget/tools</targetFolder>
+    </additionalFiles>
+    <!--<additionalFiles Include="$(MSBuildThisFileDirectory)\..\..\MSBNuget\build.targets">
+      <targetFolder>MSBNuget/build</targetFolder>
+    </additionalFiles>-->
+  </ItemGroup>
+  
+</Project>

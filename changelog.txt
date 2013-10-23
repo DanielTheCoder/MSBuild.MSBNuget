@@ -1,6 +1,16 @@
-1.0.3 -pre 2013/08/22
+1.0.3 -pre4 2013/10/23
 Fixed issues:
  + pack: invalid arguments. -> Escaped command
+
+Changes:
+ + Use OutputPath instead hardcoded path bin/$(Configuration)
+ + internal - strucutring of property groups and documentation
+ + internal - convention based for nuget package creation (MSBNuget.Nuget/.build/Configuration)
+
+New Features:
+ + Global override of nuget pack arguments for all nuspec files (NugetVersion, NugetMinClientVersion, NugetCommandPackArguments)
+ + Logging publishing paths after publish
+ + Nuget.exe not needed anymore in path var, dependency of package
 
 1.0.2 -pre 2013/08/19
 Changes:
