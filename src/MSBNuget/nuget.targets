@@ -17,21 +17,15 @@
   -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
 
-  <PropertyGroup>
+  <!-- Internal working properties, they are not intended to be changed direclty from caller -->
+  <PropertyGroup Label="Internal default property values">
+    <OutputPath Condition="'$(OutputPath)' == ''">bin\</OutputPath>
     <NugetStage>$(MSBuildProjectDirectory)\obj\nugetstage\</NugetStage>
-    <NugetIntermediatePath Condition="'$(NugetIntermediatePath)' == ''">$(MSBuildProjectDirectory)\bin\$(Configuration)\</NugetIntermediatePath>
-    
-    <NugetPublishDisabled Condition="'$(NugetPublishDisabled)' == ''">false</NugetPublishDisabled>
-    <NugetPublishToReleaseFolder Condition="'$(NugetPublishToReleaseFolder)'==''">true</NugetPublishToReleaseFolder>
-    <NugetPublishToLocalNugetFeed Condition="'$(NugetPublishToLocalNugetFeed)'==''">true</NugetPublishToLocalNugetFeed>
-    <NugetPublishToOfficialNugetFeed Condition="'$(NugetPublishToOfficialNugetFeed)' == ''">false</NugetPublishToOfficialNugetFeed>
-
-    <NugkgPublishReleaseFolder Condition="'$(NugkgPublishReleaseFolder)'==''">$(MSBuildProjectDirectory)\bin\$(Configuration)\Release\</NugkgPublishReleaseFolder>
-    <NugkgPublishLocalNugetFeedFolder Condition="'$(NugkgPublishLocalNugetFeedFolder)'==''">$(MSBuildProjectDirectory)\bin\$(Configuration)\Publish\</NugkgPublishLocalNugetFeedFolder>
+    <NugetIntermediatePath Condition="'$(NugetIntermediatePath)' == ''">$(OutputPath)$(Configuration)\</NugetIntermediatePath>
 
     <!-- Convention based for Nuget Package Restore -->
     <BuildDependsOn/>
-    
+
     <NugetBuildTargets>
       NugetCleanupFolderStructure;
       NugetCreateFolderStructure;
@@ -39,15 +33,34 @@
       NugetCopyNuspec;
       NugetCreatePackage;
     </NugetBuildTargets>
+
+  </PropertyGroup>
+
+
+  <!-- Public properties which should be adapted for project specific settings -->
+  <PropertyGroup>
+    <!-- Global override to disable all publish mechanism-->
+    <NugetPublishDisabled Condition="'$(NugetPublishDisabled)' == ''">false</NugetPublishDisabled>
+    <NugetPublishToReleaseFolder Condition="'$(NugetPublishToReleaseFolder)'==''">true</NugetPublishToReleaseFolder>
+    <NugetPublishToLocalNugetFeed Condition="'$(NugetPublishToLocalNugetFeed)'==''">true</NugetPublishToLocalNugetFeed>
+    <NugetPublishToOfficialNugetFeed Condition="'$(NugetPublishToOfficialNugetFeed)' == ''">false</NugetPublishToOfficialNugetFeed>
+
+    <NugkgPublishReleaseFolder Condition="'$(NugkgPublishReleaseFolder)'==''">$(NugetIntermediatePath)Release\</NugkgPublishReleaseFolder>
+    <NugkgPublishLocalNugetFeedFolder Condition="'$(NugkgPublishLocalNugetFeedFolder)'==''">$(NugetIntermediatePath)Publish\</NugkgPublishLocalNugetFeedFolder>
+
+    <!-- Global overrides for nuget package creation -->
+    <NugetVersion Condition="'$(NugetVersion)' == ''"></NugetVersion>
+    <NugetMinClientVersion Condition="'$(NugetMinClientVersion)' == ''"></NugetMinClientVersion>
+    <NugetCommandPackArguments Condition="'$(NugetCommandPackArguments)' == ''"></NugetCommandPackArguments>
+    
   </PropertyGroup>
 
   <ItemGroup>
     <nuspec Include="$(MSBuildProjectDirectory)\**\*.nuspec"/>
   </ItemGroup>
 
-  
-  
-  
+
+
   <Target Name="NugetBuild">
     <CallTarget Targets="NugetCreatePackages" />
   </Target>
@@ -64,14 +77,14 @@
     <CallTarget Targets="Build"/>
     <CallTarget Condition="'$(NugetPublishDisabled)'=='false'" Targets="NugetPublishToFeeds"/>
   </Target>
-  
-  
-  
+
+
+
 
   <Target Name="NugetCreatePackages">
     <CallTarget Targets="$(NugetBuildTargets)" />
   </Target>
-  
+
   <Target Name="NugetCreateFolderStructure">
     <!-- Ensure nuget Folder structure exists -->
     <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\lib" />
@@ -113,7 +126,7 @@
       <files Include="$(NugetStage)\build\**\*.*"/>-->
       <!-- intermediate files -->
       <files Include="$(NugetIntermediatePath)" />
-      
+
       <folders Include="%(files.RelativeDir)" />
     </ItemGroup>
 
@@ -129,18 +142,31 @@
           DestinationFolder="$(NugetStage)%(nuspec.Filename)"
           OverwriteReadOnlyFiles="true" ContinueOnError="true"/>
   </Target>
-  
+
   <Target Name="NugetCreatePackage" >
     <ItemGroup>
       <nuspecStaged Include="$(NugetStage)%(nuspec.Filename)\*.nuspec"/>
     </ItemGroup>
 
+    <PropertyGroup>
+      <_nugetCommandPack>nuget pack -OutputDirectory &quot;$(NugetIntermediatePath.TrimEnd('\'))&quot; -NoDefaultExcludes</_nugetCommandPack>
+      <_nugetCommandPack Condition="'$(NugetVersion)' != ''">$(_nugetCommandPack) -Version &quot;$(NugetVersion)&quot;</_nugetCommandPack>
+      <_nugetCommandPack Condition="'$(NugetMinClientVersion)' != ''">$(_nugetCommandPack) -MinClientVersion &quot;$(NugetMinClientVersion)&quot;</_nugetCommandPack>
+      <_nugetCommandPack Condition="'$(NugetCommandPackArguments)' != ''">$(_nugetCommandPack) $(NugetCommandPackArguments) </_nugetCommandPack>
+    </PropertyGroup>
+
     <MakeDir Directories="$(NugetIntermediatePath)" />
-    
-    <Message Text="nuspec: @(nuspecStaged)" Importance="normal"/>
-    <Message Text="  %(nuspecStaged.Identity)  Count: @(nuspecStaged->Count())" Importance="normal" />
-    <!--<Message Text="nuget pack &quot;%(nuspecStaged.Identity)&quot; -OutputDirectory &quot;$(NugetIntermediatePath)&quot; -NoDefaultExcludes" Importance="normal" />-->
-    <Exec Command="nuget pack &quot;%(nuspecStaged.Identity)&quot; -OutputDirectory &quot;$(NugetIntermediatePath.TrimEnd('\'))&quot; -NoDefaultExcludes" />
+
+    <Message Text="Nuget Global Override" Importance="normal"/>
+    <Message Text="--> NugetVersion: $(NugetVersion)" Importance="normal"/>
+    <Message Text="--> NugetMinClientVersion: $(NugetMinClientVersion)" Importance="normal"/>
+    <Message Text="--> NugetCommandPackArguments: $(NugetCommandPackArguments)" Importance="normal"/>
+
+    <Message Text="nuspecs-Count: @(nuspecStaged->Count())" Importance="normal"/>
+    <Message Text="nuspecs: @(nuspecStaged)" Importance="normal"/>
+    <Message Text="  %(nuspecStaged.Identity)" Importance="normal" />
+
+    <Exec Command="$(_nugetCommandPack) &quot;%(nuspecStaged.Identity)&quot;" Condition="'%(nuspecStaged.Identity)' != ''"/>
   </Target>
 
   <Target Name="NugetPublishToFeeds">
@@ -159,18 +185,22 @@
     <Copy SourceFiles="@(nupkg)"
           DestinationFolder="$(NugkgPublishReleaseFolder)%(nupkg.RecursiveDir)"
           OverwriteReadOnlyFiles="true" ContinueOnError="true"/>
+
+    <Message Text="PublishedTo: $(NugkgPublishReleaseFolder)" Importance="high" />
   </Target>
-  
+
   <Target Name="NugetPublishToLocalFeed">
     <ItemGroup>
       <nupkg Include="$(NugetIntermediatePath)**\*.nupkg"/>
     </ItemGroup>
 
     <MakeDir Directories="$(NugkgPublishLocalNugetFeedFolder)" />
-    
+
     <Copy SourceFiles="@(nupkg)"
           DestinationFolder="$(NugkgPublishLocalNugetFeedFolder)%(nupkg.RecursiveDir)"
           OverwriteReadOnlyFiles="true" ContinueOnError="true"/>
+    
+    <Message Text="PublishedTo: $(NugkgPublishLocalNugetFeedFolder)" Importance="high" />
   </Target>
 
   <Target Name="NugetPublishToOfficialNugetFeed">
@@ -179,6 +209,8 @@
     </ItemGroup>
 
     <Exec Command="nuget push %(nupkg.Identity)" ContinueOnError="true" />
+
+    <Message Text="PublishedTo: http://www.nuget.org/packages/%(nupkg.Identity)/" Importance="high" />
   </Target>
 
 </Project>
