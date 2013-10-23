@@ -14,19 +14,20 @@ HOW TO USE
   
 ```XML
   <PropertyGroup>
-    <PublishToLocalNugetFeed>true</PublishToLocalNugetFeed>
-    <NugkgPublishFolder>C:\Dev\_galleries\nuget\</NugkgPublishFolder>
-    <NugkgPublishFolder Condition="'$(NugkgPublishFolder)'==''">$(MSBuildProjectDirectory)\..\..\Publish\</NugkgPublishFolder>
-    <NugkgReleaseFolder Condition="'$(NugkgReleaseFolder)'==''">$(MSBuildProjectDirectory)\..\..\Releases\</NugkgReleaseFolder>
+    <NugetPublishToReleaseFolder Condition="'$(NugetPublishToReleaseFolder)'==''">false</NugetPublishToReleaseFolder>
+    <NugetPublishToLocalNugetFeed Condition="'$(NugetPublishToLocalNugetFeed)'==''">false</NugetPublishToLocalNugetFeed>
+
+    <NugkgPublishLocalNugetFeedFolder Condition="'$(NugkgPublishLocalNugetFeedFolder)'==''">$(MSBuildProjectDirectory)\..\..\Publish\</NugkgPublishLocalNugetFeedFolder>
+    <NugkgPublishReleaseFolder Condition="'$(NugkgPublishReleaseFolder)'==''">$(MSBuildProjectDirectory)\..\..\Releases\</NugkgPublishReleaseFolder>
   </PropertyGroup>
  ```
 
-- Use item groups to add additional files, eg:
+- Use item groups to add additional files, eg: add file 'my.dll' to convention based folder
 
 ```XML
   <ItemGroup>
-    <additionalFiles Include="$(MSBuildThisFileDirectory)\..\..\MSBNuget\nuget.targets">
-      <targetFolder>MSBNuget/content/.build</targetFolder>
+    <additionalFiles Include="$(MSBuildThisFileDirectory)\..\..\MSBNuget\my.dll">
+      <targetFolder>MSBNuget/content/libs/net45</targetFolder>
     </additionalFiles>
   </ItemGroup>
 ```
@@ -43,28 +44,7 @@ project
 |-'file: nuspec'  
 ```
     
-- Open build.targets and add/replace with the following  
-  
-```XML
-  <Import Project="nuget.targets" />
-
-  <Target Name="Build">
-    <CallTarget Targets="NugetBuild" />
-  </Target>
-
-  <Target Name="Clean">
-    <CallTarget Targets="NugetClean" />
-  </Target>
-
-  <Target Name="Rebuild">
-    <CallTarget Targets="NugetRebuild" />
-  </Target>
-
-  <Target Name="Publish">
-    <CallTarget Targets="NugetPublish"/>
-  </Target>
-```  
-
+- build.targets will be replaced during install with nuget package 'MSBuild.MSBBuildConvention'
 
 Contributing
 ------------
