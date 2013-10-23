@@ -4,7 +4,8 @@ Fixed issues:
 
 Changes:
  + Use OutputPath instead hardcoded path bin/$(Configuration)
- + internal strucutring of property groups and documentation
+ + internal - strucutring of property groups and documentation
+ + internal - convention based for nuget package creation (MSBNuget.Nuget/.build/Configuration)
 
 New Features:
  + Global override of nuget pack arguments for all nuspec files (NugetVersion, NugetMinClientVersion, NugetCommandPackArguments)

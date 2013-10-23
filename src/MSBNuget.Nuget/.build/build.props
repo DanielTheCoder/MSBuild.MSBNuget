@@ -1,27 +1,15 @@
 ﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
 
   <PropertyGroup>
-    <PublishToLocalNugetFeed Condition="'(PublishToLocalNugetFeed)'==''">true</PublishToLocalNugetFeed>
-
-    <NugkgPublishReleaseFolder Condition="'$(NugkgPublishReleaseFolder)'==''">$(MSBuildProjectDirectory)\..\..\Releases\</NugkgPublishReleaseFolder>
-    <NugkgPublishLocalNugetFeedFolder Condition="'$(NugkgPublishLocalNugetFeedFolder)'==''">C:\Dev\_galleries\nuget\</NugkgPublishLocalNugetFeedFolder>
     
+    <NugetPackagesCustomConfiguration Condition="'$(NugetPackagesCustomConfiguration)'==''">$(COMPUTERNAME)</NugetPackagesCustomConfiguration>
+
+    <_nugetPackagesCustomConfigurationImportPath>$(MSBuildThisFileDirectory)\Configurations\$(NugetPackagesCustomConfiguration).props</_nugetPackagesCustomConfigurationImportPath>
+    <_nugetPackagesCustomConfigurationImportPath Condition="Exists('$(_nugetPackagesCustomConfigurationImportPath)')=='false'">$(MSBuildThisFileDirectory)\Configurations\default.props</_nugetPackagesCustomConfigurationImportPath>
   </PropertyGroup>
 
-  <ItemGroup Label="MSBNuget">
-    <additionalFiles Include="$(MSBuildThisFileDirectory)\..\..\MSBNuget\nuget.targets">
-      <targetFolder>MSBNuget/tools</targetFolder>
-    </additionalFiles>
-    <!--<additionalFiles Include="$(MSBuildThisFileDirectory)\..\..\MSBNuget\build.targets">
-      <targetFolder>MSBNuget/build</targetFolder>
-    </additionalFiles>-->
-  </ItemGroup>
-  
-  <ItemGroup Label="MSBNuget.Legacy">
-    <additionalFiles Include="$(MSBuildThisFileDirectory)\..\..\MSBNuget\nuget.targets">
-      <targetFolder>MSBNuget.Legacy/content/.build</targetFolder>
-    </additionalFiles>
-  </ItemGroup>
- 
+  <!-- Conventional import of custom settings -->
+  <Import Project="$(_nugetPackagesCustomConfigurationImportPath)" Condition="Exists('$(_nugetPackagesCustomConfigurationImportPath)')=='true'"/>
+  <Import Project="$(MSBuildProjectDirectory)\*\*.nuspec.props"/>
   
 </Project>
