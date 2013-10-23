@@ -73,6 +73,6 @@ If you are interested in contributing,
   
 1. Get a Github account  
 1. Fork the project  
-1. Make your feature addition or bugfix. Please also update the [changelog](https://github.com/DanielTheCoder/MSBuild.MSBNuget/edit/master/changelog.txt).  
+1. Make your feature addition or bugfix. Please also update the [changelog](https://github.com/DanielTheCoder/MSBuild.MSBNuget/blob/master/changelog.txt).  
 1. Send me a pull request via GitHub  
   
