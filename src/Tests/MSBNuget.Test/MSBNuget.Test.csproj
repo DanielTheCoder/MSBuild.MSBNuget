@@ -21,5 +21,5 @@
   </ItemGroup>
   <Import Project="$(MSBuildProjectDirectory)\.build\build.props" />
   <Import Project="$(MSBuildProjectDirectory)\.build\build.targets" />
-  <Import Project="..\..\packages\MSBuild.MSBNuget.1.0.2-pre\build\MSBuild.MSBNuget.targets" Condition="Exists('..\..\packages\MSBuild.MSBNuget.1.0.2-pre\build\MSBuild.MSBNuget.targets')" />
+  <Import Project="..\..\packages\MSBuild.MSBNuget.1.0.3-pre5\build\MSBuild.MSBNuget.targets" Condition="Exists('..\..\packages\MSBuild.MSBNuget.1.0.3-pre5\build\MSBuild.MSBNuget.targets')" />
 </Project>
