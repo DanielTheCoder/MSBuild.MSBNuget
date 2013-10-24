@@ -19,14 +19,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MSBNuget\build\MSBuild.MSBNuget.targets" />
-    <Compile Include="MSBBuildConvention\content\.build\build.targets" />
     <None Include=".build\Configurations\default.props" />
     <None Include=".build\Configurations\TTV-DS06.props" />
     <None Include=".build\Configurations\TTV-DS07.props" />
-    <None Include="MSBBuildConvention\MSBBuildConvention.nuspec.props">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="MSBBuildConvention\MSBBuildConvention.nuspec" />
     <None Include="MSBNuget\MSBNuget.nuspec.props">
       <SubType>Designer</SubType>
     </None>
