@@ -57,6 +57,7 @@
 
   </PropertyGroup>
 
+  <!-- List of *.nuspec files which should be transformed -->
   <ItemGroup>
     <nuspec Include="$(MSBuildProjectDirectory)\**\*.nuspec"/>
   </ItemGroup>
