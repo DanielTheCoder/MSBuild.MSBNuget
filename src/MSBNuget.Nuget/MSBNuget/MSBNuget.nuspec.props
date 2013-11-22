@@ -2,7 +2,7 @@
 
   <ItemGroup Label="MSBNuget">
     <additionalFiles Include="$(MSBuildThisFileDirectory)\..\..\MSBNuget\nuget.targets">
-      <targetFolder>MSBNuget/tools</targetFolder>
+      <targetFolder>MSBNuget/build</targetFolder>
     </additionalFiles>
     <!--<additionalFiles Include="$(MSBuildThisFileDirectory)\..\..\MSBNuget\build.targets">
       <targetFolder>MSBNuget/build</targetFolder>

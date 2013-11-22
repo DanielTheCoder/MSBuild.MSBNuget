@@ -1,3 +1,7 @@
+1.0.3 -pre7 2013/11/22
+Changes:
+ + *.targets no longer placed in tools folder -> .gitignore compatibility
+
 1.0.3 -pre6 2013/10/23
 Fixed issues:
  + pack: invalid arguments. -> Escaped command
