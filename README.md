@@ -9,7 +9,7 @@ HOW TO USE
 ------------
 
 - Add a new project to your solution by using the MSBuild project template (http://visualstudiogallery.msdn.microsoft.com/4b75d0cc-b693-4c1c-8105-fbaeb0714b03)
-- Install nuget package MSBuild.MSBNuget
+- Install nuget package [MSBuild.MSBNuget](sdfsf)
 - Open build.props and configure common settings, eg:
   
 ```XML
