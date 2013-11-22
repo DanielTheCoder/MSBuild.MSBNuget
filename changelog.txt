@@ -1,6 +1,9 @@
 1.0.3 -pre7 2013/11/22
 Changes:
  + *.targets no longer placed in tools folder -> .gitignore compatibility
+ + NugetStage default changed honoring $(Configuration)
+	from: <NugetStage>$(MSBuildProjectDirectory)\objnugetstage\</NugetStage>
+	to: <NugetStage>$(MSBuildProjectDirectory)\obj\$(Configuration)\nugetstage\</NugetStage>
 
 1.0.3 -pre6 2013/10/23
 Fixed issues:

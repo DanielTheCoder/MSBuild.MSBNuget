@@ -20,7 +20,7 @@
   <!-- Internal working properties, they are not intended to be changed direclty from caller -->
   <PropertyGroup Label="Internal default property values">
     <OutputPath Condition="'$(OutputPath)' == ''">bin\</OutputPath>
-    <NugetStage>$(MSBuildProjectDirectory)\obj\nugetstage\</NugetStage>
+    <NugetStage>$(MSBuildProjectDirectory)\obj\$(Configuration)\nugetstage\</NugetStage>
     <NugetIntermediatePath Condition="'$(NugetIntermediatePath)' == ''">$(OutputPath)$(Configuration)\</NugetIntermediatePath>
     <!-- TFS 2010/2012 support of OutDir overwrite -->
     <NugetIntermediatePath Condition="'$(OutDir)' != ''">$(OutDir)\NugetPackages\$(Configuration)\</NugetIntermediatePath>
