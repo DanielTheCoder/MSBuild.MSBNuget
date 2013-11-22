@@ -29,7 +29,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="MSBNuget\MSBNuget.nuspec" />
-    <None Include="MSBNuget.Legacy\MSBNuget.Legacy.nuspec" />
+    <None Include="MSBNuget.Legacy\MSBNuget.Legacy.nuspec">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildProjectDirectory)\.build\build.props" />
