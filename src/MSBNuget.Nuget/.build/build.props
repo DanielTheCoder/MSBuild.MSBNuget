@@ -8,6 +8,8 @@
 
     <_nugetPackagesCustomConfigurationImportPath>$(MSBuildThisFileDirectory)Configurations\$(NugetPackagesCustomConfiguration).props</_nugetPackagesCustomConfigurationImportPath>
     <_nugetPackagesCustomConfigurationImportPath Condition="Exists('$(_nugetPackagesCustomConfigurationImportPath)')=='false'">$(MSBuildThisFileDirectory)Configurations\default.props</_nugetPackagesCustomConfigurationImportPath>
+
+    <NugetFilterOnlyConventionWellKnownFolders>false</NugetFilterOnlyConventionWellKnownFolders>
   </PropertyGroup>
 
   <!-- Conventional import of custom settings -->

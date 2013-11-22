@@ -24,7 +24,9 @@
     <NugetIntermediatePath Condition="'$(NugetIntermediatePath)' == ''">$(OutputPath)$(Configuration)\</NugetIntermediatePath>
     <!-- TFS 2010/2012 support of OutDir overwrite -->
     <NugetIntermediatePath Condition="'$(OutDir)' != ''">$(OutDir)\NugetPackages\$(Configuration)\</NugetIntermediatePath>
-
+    <!-- Filter out all folders which are not known by convention -->
+    <NugetFilterOnlyConventionWellKnownFolders Condition="'$(NugetFilterOnlyConventionWellKnownFolders)' == ''">true</NugetFilterOnlyConventionWellKnownFolders>
+    
     <!-- Convention based for Nuget Package Restore -->
     <BuildDependsOn/>
 
@@ -118,15 +120,15 @@
 
   <Target Name="NugetCreateFolderStructure">
     <!-- Ensure nuget Folder structure exists -->
-    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\lib" />
-    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\tools" />
-    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\content" />
-    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\build" />
+    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\lib" Condition="'$(NugetFilterOnlyConventionWellKnownFolders)' == 'true'" />
+    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\tools" Condition="'$(NugetFilterOnlyConventionWellKnownFolders)' == 'true'"/>
+    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\content" Condition="'$(NugetFilterOnlyConventionWellKnownFolders)' == 'true'"/>
+    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\build" Condition="'$(NugetFilterOnlyConventionWellKnownFolders)' == 'true'"/>
   </Target>
 
   <Target Name="NugetCopyAdditionalFiles">
     <!-- nuget convention based folder structure includes -->
-    <ItemGroup>
+    <ItemGroup Condition="'$(NugetFilterOnlyConventionWellKnownFolders)' == 'true'">
       <additionalFiles Include="$(MSBuildProjectDirectory)\%(nuspec.Filename)\tools\**\*.*">
         <targetFolder>%(nuspec.Filename)\tools</targetFolder>
       </additionalFiles>
@@ -138,6 +140,12 @@
       </additionalFiles>
       <additionalFiles Include="$(MSBuildProjectDirectory)\%(nuspec.Filename)\lib\**\*.*">
         <targetFolder>%(nuspec.Filename)\lib</targetFolder>
+      </additionalFiles>
+    </ItemGroup>
+    
+    <ItemGroup Condition="'$(NugetFilterOnlyConventionWellKnownFolders)' == 'false'">
+      <additionalFiles Include="$(MSBuildProjectDirectory)\%(nuspec.Filename)\**\*.*">
+        <targetFolder>%(nuspec.Filename)</targetFolder>
       </additionalFiles>
     </ItemGroup>
 

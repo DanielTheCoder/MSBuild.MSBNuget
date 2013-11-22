@@ -33,7 +33,6 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildProjectDirectory)\.build\build.props" />
   <Import Project="$(MSBuildProjectDirectory)\.build\build.targets" />
 </Project>
