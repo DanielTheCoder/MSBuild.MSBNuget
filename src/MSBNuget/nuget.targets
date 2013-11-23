@@ -144,7 +144,7 @@
     </ItemGroup>
     
     <ItemGroup Condition="'$(NugetFilterOnlyConventionWellKnownFolders)' == 'false'">
-      <additionalFiles Include="$(MSBuildProjectDirectory)\%(nuspec.Filename)\**\*.*">
+      <additionalFiles Include="$(MSBuildProjectDirectory)\%(nuspec.Filename)\**\*.*" Exclude="$(MSBuildProjectDirectory)\%(nuspec.Filename)\%(nuspec.Filename).props">
         <targetFolder>%(nuspec.Filename)</targetFolder>
       </additionalFiles>
     </ItemGroup>

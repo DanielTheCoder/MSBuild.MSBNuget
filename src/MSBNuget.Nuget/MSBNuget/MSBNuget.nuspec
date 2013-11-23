@@ -18,7 +18,7 @@
 
     <dependencies>
       <dependency id="MSBuild.MSBBuildConvention" />
-      <dependency id="NuGet.CommandLine" version="2.7.1" />
+      <dependency id="NuGet.CommandLine" version="2.7.3" />
     </dependencies>
 
   </metadata>
