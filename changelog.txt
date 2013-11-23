@@ -37,12 +37,6 @@ Changes:
  + PublishToReleaseFolder renamed to -> NugetPublishToReleaseFolder
  + PublishToLocalNugetFeed renamed to -> NugetPublishToLocalNugetFeed
  + PublishToOfficialNugetFeed renamed to -> NugetPublishToOfficialNugetFeed
-
-New Features:
- + Disable all publish mechanism with: <PublishDisabled>true</PublishDisabled>
- + PublishToReleaseFolder with <PublishToLocalNugetFeed>true</PublishToLocalNugetFeed>
- + PublishToLocalNugetFeed with <PublishToLocalNugetFeed>true</PublishToLocalNugetFeed>
- + PublishToOfficialNugetFeed with <PublishToOfficialNugetFeed>true</PublishToOfficialNugetFeed>
   
 
 1.0.1 -pre 2013/08/19
