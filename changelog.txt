@@ -1,6 +1,25 @@
-1.0.3 -pre4 2013/10/23
+1.0.3 -pre8 2013/11/22
+Changes:
+ + NugetStage default changed honoring $(Configuration)
+	from: <NugetStage>$(MSBuildProjectDirectory)\objnugetstage\</NugetStage>
+	to: <NugetStage>$(MSBuildProjectDirectory)\obj\$(Configuration)\nugetstage\</NugetStage>
+ + nuget minClientVersion="2.7.2"
+ + NugkgPublishLocalNugetFeedFolder renamed to -> NugetPublishLocalNugetFeedFolder
+ + NugkgPublishReleaseFolder renamed to -> NugetPublishReleaseFolder
+
+ New Features:
+ + NugetFilterOnlyConventionWellKnownFolders: default is true, used to disable conventionbased folder filtering -> usage: resharper extension packages
+
+1.0.3 -pre7 2013/11/22
+Changes:
+ + *.targets no longer placed in tools folder -> .gitignore compatibility
+
+
+1.0.3 -pre6 2013/10/23
 Fixed issues:
  + pack: invalid arguments. -> Escaped command
+ + pack: invalid path -> nuget.exe from dependency package
+ + push: invalid path -> nuget.exe from dependency package
 
 Changes:
  + Use OutputPath instead hardcoded path bin/$(Configuration)
@@ -11,6 +30,8 @@ New Features:
  + Global override of nuget pack arguments for all nuspec files (NugetVersion, NugetMinClientVersion, NugetCommandPackArguments)
  + Logging publishing paths after publish
  + Nuget.exe not needed anymore in path var, dependency of package
+ + OutDir Support, should work with Team Foundation Server 2010/2012/2013
+
 
 1.0.2 -pre 2013/08/19
 Changes:
@@ -18,16 +39,9 @@ Changes:
  + PublishToReleaseFolder renamed to -> NugetPublishToReleaseFolder
  + PublishToLocalNugetFeed renamed to -> NugetPublishToLocalNugetFeed
  + PublishToOfficialNugetFeed renamed to -> NugetPublishToOfficialNugetFeed
-
-New Features:
- + Disable all publish mechanism with: <PublishDisabled>true</PublishDisabled>
- + PublishToReleaseFolder with <PublishToLocalNugetFeed>true</PublishToLocalNugetFeed>
- + PublishToLocalNugetFeed with <PublishToLocalNugetFeed>true</PublishToLocalNugetFeed>
- + PublishToOfficialNugetFeed with <PublishToOfficialNugetFeed>true</PublishToOfficialNugetFeed>
   
 
 1.0.1 -pre 2013/08/19
-
 Changes:
  + NugkgReleaseFolder renamed to -> NugkgPublishReleaseFolder
  + NugkgPublishFolder renamed to -> NugkgPublishLocalNugetFeedFolder

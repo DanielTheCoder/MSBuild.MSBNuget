@@ -20,13 +20,18 @@
   <!-- Internal working properties, they are not intended to be changed direclty from caller -->
   <PropertyGroup Label="Internal default property values">
     <OutputPath Condition="'$(OutputPath)' == ''">bin\</OutputPath>
-    <NugetStage>$(MSBuildProjectDirectory)\obj\nugetstage\</NugetStage>
+    <NugetStage>$(MSBuildProjectDirectory)\obj\$(Configuration)\nugetstage\</NugetStage>
     <NugetIntermediatePath Condition="'$(NugetIntermediatePath)' == ''">$(OutputPath)$(Configuration)\</NugetIntermediatePath>
-
+    <!-- TFS 2010/2012 support of OutDir overwrite -->
+    <NugetIntermediatePath Condition="'$(OutDir)' != ''">$(OutDir)\NugetPackages\$(Configuration)\</NugetIntermediatePath>
+    <!-- Filter out all folders which are not known by convention -->
+    <NugetFilterOnlyConventionWellKnownFolders Condition="'$(NugetFilterOnlyConventionWellKnownFolders)' == ''">true</NugetFilterOnlyConventionWellKnownFolders>
+    
     <!-- Convention based for Nuget Package Restore -->
     <BuildDependsOn/>
 
     <NugetBuildTargets>
+      NugetCommandLineEval;
       NugetCleanupFolderStructure;
       NugetCreateFolderStructure;
       NugetCopyAdditionalFiles;
@@ -45,20 +50,39 @@
     <NugetPublishToLocalNugetFeed Condition="'$(NugetPublishToLocalNugetFeed)'==''">true</NugetPublishToLocalNugetFeed>
     <NugetPublishToOfficialNugetFeed Condition="'$(NugetPublishToOfficialNugetFeed)' == ''">false</NugetPublishToOfficialNugetFeed>
 
-    <NugkgPublishReleaseFolder Condition="'$(NugkgPublishReleaseFolder)'==''">$(NugetIntermediatePath)Release\</NugkgPublishReleaseFolder>
-    <NugkgPublishLocalNugetFeedFolder Condition="'$(NugkgPublishLocalNugetFeedFolder)'==''">$(NugetIntermediatePath)Publish\</NugkgPublishLocalNugetFeedFolder>
+    <NugetPublishReleaseFolder Condition="'$(NugetPublishReleaseFolder)'==''">$(NugetIntermediatePath)Release\</NugetPublishReleaseFolder>
+    <NugetPublishLocalNugetFeedFolder Condition="'$(NugetPublishLocalNugetFeedFolder)'==''">$(NugetIntermediatePath)Publish\</NugetPublishLocalNugetFeedFolder>
 
     <!-- Global overrides for nuget package creation -->
     <NugetVersion Condition="'$(NugetVersion)' == ''"></NugetVersion>
     <NugetMinClientVersion Condition="'$(NugetMinClientVersion)' == ''"></NugetMinClientVersion>
     <NugetCommandPackArguments Condition="'$(NugetCommandPackArguments)' == ''"></NugetCommandPackArguments>
-    
+
   </PropertyGroup>
 
+  <!-- List of *.nuspec files which should be transformed -->
   <ItemGroup>
     <nuspec Include="$(MSBuildProjectDirectory)\**\*.nuspec"/>
   </ItemGroup>
 
+  <!-- Evaluate nuget.exe from NugetPackage dependency -->
+  <!-- TODO: Bug, we maybe get more than one nuget.exe back, we need to handle this better -->
+  <PropertyGroup>
+    <NuGetToolsPath Condition="'$(NuGetToolsPath)' == ''">$(MSBuildThisFileDirectory)..\..\NuGet.CommandLine.*\tools\</NuGetToolsPath>
+    <NugetCommandLinePath Condition="'$(NugetCommandLinePath)' == ''">$(NuGetToolsPath)Nuget.exe</NugetCommandLinePath>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <nugetExe Include="$(NugetCommandLinePath)"/>
+  </ItemGroup>
+  
+  <PropertyGroup>
+    <_nugetCommandPack>"@(nugetExe)" pack -OutputDirectory &quot;$(NugetIntermediatePath.TrimEnd('\'))&quot; -NoDefaultExcludes</_nugetCommandPack>
+    <_nugetCommandPack Condition="'$(NugetVersion)' != ''">$(_nugetCommandPack) -Version &quot;$(NugetVersion)&quot;</_nugetCommandPack>
+    <_nugetCommandPack Condition="'$(NugetMinClientVersion)' != ''">$(_nugetCommandPack) -MinClientVersion &quot;$(NugetMinClientVersion)&quot;</_nugetCommandPack>
+    <_nugetCommandPack Condition="'$(NugetCommandPackArguments)' != ''">$(_nugetCommandPack) $(NugetCommandPackArguments) </_nugetCommandPack>
+  </PropertyGroup>
+  
 
 
   <Target Name="NugetBuild">
@@ -79,6 +103,15 @@
   </Target>
 
 
+  <Target Name="NugetCommandLineEval">
+    <Message Text="Nuget Exe" Importance="normal"/>
+    <Message Text="--> NuGetToolsPath: $(NuGetToolsPath)" Importance="normal"/>
+    <Message Text="--> NugetCommandLinePath: $(NugetCommandLinePath)" Importance="normal"/>
+    <Message Text="--> nugetExe: @(nugetExe)" Importance="normal"/>
+
+    <Error Text="nuget.exe not found! @(nugetExe)" Condition="'@(nugetExe->Count())' == '0'" />
+    <Error Text="More than one nuget.exe found, we support only one. @(nugetExe)" Condition="'@(nugetExe->Count())' != '1'" />
+  </Target>
 
 
   <Target Name="NugetCreatePackages">
@@ -87,14 +120,15 @@
 
   <Target Name="NugetCreateFolderStructure">
     <!-- Ensure nuget Folder structure exists -->
-    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\lib" />
-    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\tools" />
-    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\content" />
-    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\build" />
+    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\lib" Condition="'$(NugetFilterOnlyConventionWellKnownFolders)' == 'true'" />
+    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\tools" Condition="'$(NugetFilterOnlyConventionWellKnownFolders)' == 'true'"/>
+    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\content" Condition="'$(NugetFilterOnlyConventionWellKnownFolders)' == 'true'"/>
+    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\build" Condition="'$(NugetFilterOnlyConventionWellKnownFolders)' == 'true'"/>
   </Target>
 
   <Target Name="NugetCopyAdditionalFiles">
-    <ItemGroup>
+    <!-- nuget convention based folder structure includes -->
+    <ItemGroup Condition="'$(NugetFilterOnlyConventionWellKnownFolders)' == 'true'">
       <additionalFiles Include="$(MSBuildProjectDirectory)\%(nuspec.Filename)\tools\**\*.*">
         <targetFolder>%(nuspec.Filename)\tools</targetFolder>
       </additionalFiles>
@@ -108,11 +142,32 @@
         <targetFolder>%(nuspec.Filename)\lib</targetFolder>
       </additionalFiles>
     </ItemGroup>
+    
+    <ItemGroup Condition="'$(NugetFilterOnlyConventionWellKnownFolders)' == 'false'">
+      <additionalFiles Include="$(MSBuildProjectDirectory)\%(nuspec.Filename)\**\*.*" Exclude="$(MSBuildProjectDirectory)\%(nuspec.Filename)\%(nuspec.Filename)%(nuspec.Extension).props">
+        <targetFolder>%(nuspec.Filename)</targetFolder>
+      </additionalFiles>
+    </ItemGroup>
 
-    <!-- additional includes -->
-    <Copy SourceFiles="@(additionalFiles)"
-          DestinationFolder="$(NugetStage)%(additionalFiles.targetFolder)\%(additionalFiles.RecursiveDir)"
-          OverwriteReadOnlyFiles="true" ContinueOnError="true"/>
+    <!-- try to evaluate 'physical path' if OutDir is present -->
+    <ItemGroup>
+      <!-- TFS 2010/2012 workaround for OutDir -->
+      <_filesToCopy Include="@(additionalFiles)" Condition="Exists('%(additionalFiles.Identity)') == 'true'">
+        <sourceFolder>%(additionalFiles.FullPath)</sourceFolder>
+        <destinationFolder>$(NugetStage)%(additionalFiles.targetFolder)\%(additionalFiles.RecursiveDir)</destinationFolder>
+      </_filesToCopy>
+
+      <_filesToCopy Include="@(additionalFiles)" Condition="'$(OutDir)' != '' AND Exists('%(additionalFiles.Identity)') == 'false'">
+        <sourceFolder>$(OutDir)%(additionalFiles.Filename)%(additionalFiles.Extension)</sourceFolder>
+        <destinationFolder>$(NugetStage)%(additionalFiles.targetFolder)\%(additionalFiles.RecursiveDir)</destinationFolder>
+      </_filesToCopy>
+    </ItemGroup>
+
+    <Message Importance="normal" Text="File: %(_filesToCopy.Filename)%(_filesToCopy.Extension)%0D%0A identity: %(_filesToCopy.Identity)%0D%0A source: %(_filesToCopy.sourceFolder)%0D%0A destination: %(_filesToCopy.destinationFolder)" />
+
+    <Copy SourceFiles="%(_filesToCopy.sourceFolder)"
+          DestinationFolder="%(_filesToCopy.destinationFolder)"
+          OverwriteReadOnlyFiles="true" ContinueOnError="true" />
   </Target>
 
   <Target Name="NugetCleanupFolderStructure">
@@ -144,31 +199,10 @@
   </Target>
 
   <Target Name="NugetCreatePackage" >
-    <!-- Evaluate nuget.exe from NugetPackage dependency -->
-    <PropertyGroup>
-      <NuGetToolsPath Condition="'$(NuGetToolsPath)' == ''">$(MSBuildThisFileDirectory)..\..\NuGet.CommandLine.*\tools\</NuGetToolsPath>
-      <NugetCommandLinePath Condition="'$(NugetCommandLinePath)' == ''">$(NuGetToolsPath)Nuget.exe</NugetCommandLinePath>
-    </PropertyGroup>
-
     <ItemGroup>
       <nuspecStaged Include="$(NugetStage)%(nuspec.Filename)\*.nuspec"/>
-      <!-- Evaluate nuget.exe from NugetPackage dependency -->
-      <!-- TODO: Bug, we maybe get more than one nuget.exe back, we need to handle this better -->
-      <nugetExe Include="$(NugetCommandLinePath)"/>
     </ItemGroup>
-    
-    <PropertyGroup>
-      <_nugetCommandPack>"@(nugetExe)" pack -OutputDirectory &quot;$(NugetIntermediatePath.TrimEnd('\'))&quot; -NoDefaultExcludes</_nugetCommandPack>
-      <_nugetCommandPack Condition="'$(NugetVersion)' != ''">$(_nugetCommandPack) -Version &quot;$(NugetVersion)&quot;</_nugetCommandPack>
-      <_nugetCommandPack Condition="'$(NugetMinClientVersion)' != ''">$(_nugetCommandPack) -MinClientVersion &quot;$(NugetMinClientVersion)&quot;</_nugetCommandPack>
-      <_nugetCommandPack Condition="'$(NugetCommandPackArguments)' != ''">$(_nugetCommandPack) $(NugetCommandPackArguments) </_nugetCommandPack>
-    </PropertyGroup>
 
-    <Message Text="Nuget Exe" Importance="normal"/>
-    <Message Text="--> NuGetToolsPath: $(NuGetToolsPath)" Importance="normal"/>
-    <Message Text="--> NugetCommandLinePath: $(NugetCommandLinePath)" Importance="normal"/>
-    <Message Text="--> nugetExe: @(nugetExe)" Importance="normal"/>
-    
     <Message Text="Nuget Global Override" Importance="normal"/>
     <Message Text="--> NugetVersion: $(NugetVersion)" Importance="normal"/>
     <Message Text="--> NugetMinClientVersion: $(NugetMinClientVersion)" Importance="normal"/>
@@ -178,11 +212,8 @@
     <Message Text="nuspecs: @(nuspecStaged)" Importance="normal"/>
     <Message Text="  %(nuspecStaged.Identity)" Importance="normal" />
 
-    <Error Text="nuget.exe not found! @(nugetExe)" Condition="'@(nugetExe->Count())' == '0'" />
-    <Error Text="More than one nuget.exe found, we support only one. @(nugetExe)" Condition="'@(nugetExe->Count())' != '1'" />
-
     <MakeDir Directories="$(NugetIntermediatePath)" />
-    
+
     <Exec Command="$(_nugetCommandPack) &quot;%(nuspecStaged.Identity)&quot;" Condition="'%(nuspecStaged.Identity)' != ''"/>
   </Target>
 
@@ -197,13 +228,13 @@
       <nupkg Include="$(NugetIntermediatePath)**\*.nupkg"/>
     </ItemGroup>
 
-    <MakeDir Directories="$(NugkgPublishReleaseFolder)" />
+    <MakeDir Directories="$(NugetPublishReleaseFolder)" />
 
     <Copy SourceFiles="@(nupkg)"
-          DestinationFolder="$(NugkgPublishReleaseFolder)%(nupkg.RecursiveDir)"
+          DestinationFolder="$(NugetPublishReleaseFolder)%(nupkg.RecursiveDir)"
           OverwriteReadOnlyFiles="true" ContinueOnError="true"/>
 
-    <Message Text="PublishedTo: $(NugkgPublishReleaseFolder)" Importance="high" />
+    <Message Text="PublishedTo: $(NugetPublishReleaseFolder)" Importance="high" />
   </Target>
 
   <Target Name="NugetPublishToLocalFeed">
@@ -211,13 +242,13 @@
       <nupkg Include="$(NugetIntermediatePath)**\*.nupkg"/>
     </ItemGroup>
 
-    <MakeDir Directories="$(NugkgPublishLocalNugetFeedFolder)" />
+    <MakeDir Directories="$(NugetPublishLocalNugetFeedFolder)" />
 
     <Copy SourceFiles="@(nupkg)"
-          DestinationFolder="$(NugkgPublishLocalNugetFeedFolder)%(nupkg.RecursiveDir)"
+          DestinationFolder="$(NugetPublishLocalNugetFeedFolder)%(nupkg.RecursiveDir)"
           OverwriteReadOnlyFiles="true" ContinueOnError="true"/>
-    
-    <Message Text="PublishedTo: $(NugkgPublishLocalNugetFeedFolder)" Importance="high" />
+
+    <Message Text="PublishedTo: $(NugetPublishLocalNugetFeedFolder)" Importance="high" />
   </Target>
 
   <Target Name="NugetPublishToOfficialNugetFeed">
@@ -225,7 +256,7 @@
       <nupkg Include="$(NugetIntermediatePath)**\*.nupkg"/>
     </ItemGroup>
 
-    <Exec Command="nuget push %(nupkg.Identity)" ContinueOnError="true" />
+    <Exec Command="&quot;@(nugetExe)&quot; push %(nupkg.Identity)" ContinueOnError="true" />
 
     <Message Text="PublishedTo: http://www.nuget.org/packages/%(nupkg.Identity)/" Importance="high" />
   </Target>

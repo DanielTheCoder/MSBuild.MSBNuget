@@ -8,25 +8,26 @@ It uses the method described here: http://docs.nuget.org/docs/creating-packages/
 HOW TO USE
 ------------
 
-- Add a new project to your solution by using the MSBuild project template (http://visualstudiogallery.msdn.microsoft.com/4b75d0cc-b693-4c1c-8105-fbaeb0714b03)
-- Install nuget package MSBuild.MSBNuget
+- Add a new project to your solution by using the [MSBuild-project-template](http://visualstudiogallery.msdn.microsoft.com/4b75d0cc-b693-4c1c-8105-fbaeb0714b03)
+- Install nuget package [MSBuild.MSBNuget](sdfsf)
 - Open build.props and configure common settings, eg:
   
 ```XML
   <PropertyGroup>
-    <PublishToLocalNugetFeed>true</PublishToLocalNugetFeed>
-    <NugkgPublishFolder>C:\Dev\_galleries\nuget\</NugkgPublishFolder>
-    <NugkgPublishFolder Condition="'$(NugkgPublishFolder)'==''">$(MSBuildProjectDirectory)\..\..\Publish\</NugkgPublishFolder>
-    <NugkgReleaseFolder Condition="'$(NugkgReleaseFolder)'==''">$(MSBuildProjectDirectory)\..\..\Releases\</NugkgReleaseFolder>
+    <NugetPublishToReleaseFolder Condition="'$(NugetPublishToReleaseFolder)'==''">false</NugetPublishToReleaseFolder>
+    <NugetPublishToLocalNugetFeed Condition="'$(NugetPublishToLocalNugetFeed)'==''">false</NugetPublishToLocalNugetFeed>
+
+    <NugetPublishLocalNugetFeedFolder Condition="'$(NugetPublishLocalNugetFeedFolder)'==''">$(MSBuildProjectDirectory)\..\..\Publish\</NugetPublishLocalNugetFeedFolder
+    <NugetPublishReleaseFolder Condition="'$(NugetPublishReleaseFolder)'==''">$(MSBuildProjectDirectory)\..\..\Releases\</NugetPublishReleaseFolder>
   </PropertyGroup>
  ```
 
-- Use item groups to add additional files, eg:
+- Use item groups to add additional files, eg: add file 'my.dll' to convention based folder
 
 ```XML
   <ItemGroup>
-    <additionalFiles Include="$(MSBuildThisFileDirectory)\..\..\MSBNuget\nuget.targets">
-      <targetFolder>MSBNuget/content/.build</targetFolder>
+    <additionalFiles Include="$(MSBuildThisFileDirectory)\..\..\MSBNuget\my.dll">
+      <targetFolder>MSBNuget/content/libs/net45</targetFolder>
     </additionalFiles>
   </ItemGroup>
 ```
@@ -36,43 +37,21 @@ HOW TO USE
 ```
 project  
 |-'folder: nuspecname'  
-|--build  
-|--content  
-|--libs  
-|--tools  
-|-'file: nuspec'  
+|-|-build  
+|-|-content  
+|-|-libs  
+|-|-tools  
+|-|-'file: nuspec'  
 ```
     
-- Open build.targets and add/replace with the following  
-  
-```XML
-  <Import Project="nuget.targets" />
-
-  <Target Name="Build">
-    <CallTarget Targets="NugetBuild" />
-  </Target>
-
-  <Target Name="Clean">
-    <CallTarget Targets="NugetClean" />
-  </Target>
-
-  <Target Name="Rebuild">
-    <CallTarget Targets="NugetRebuild" />
-  </Target>
-
-  <Target Name="Publish">
-    <CallTarget Targets="NugetPublish"/>
-  </Target>
-```  
-
+- build.targets will be replaced during install with nuget package [MSBuild.MSBBuildConvention](https://www.nuget.org/packages/MSBuild.MSBBuildConvention)
 
 Contributing
 ------------
-
 If you are interested in contributing,  
   
 1. Get a Github account  
 1. Fork the project  
-1. Make your feature addition or bugfix. Please also update the [changelog](https://github.com/DanielTheCoder/MSBuild.MSBNuget/edit/master/changelog.txt).  
+1. Make your feature addition or bugfix. Please also update the [changelog](https://github.com/DanielTheCoder/MSBuild.MSBNuget/blob/master/changelog.txt).  
 1. Send me a pull request via GitHub  
-  
+ 
