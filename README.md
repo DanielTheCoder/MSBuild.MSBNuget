@@ -9,7 +9,7 @@ HOW TO USE
 ------------
 
 - Add a new project to your solution by using the [MSBuild-project-template](http://visualstudiogallery.msdn.microsoft.com/4b75d0cc-b693-4c1c-8105-fbaeb0714b03)
-- Install nuget package [MSBuild.MSBNuget](sdfsf)
+- Install nuget package [MSBuild.MSBNuget](https://www.nuget.org/packages/MSBuild.MSBNuget)
 - Open build.props and configure common settings, eg:
   
 ```XML
@@ -41,7 +41,8 @@ project
 |-|-content  
 |-|-libs  
 |-|-tools  
-|-|-'file: nuspec'  
+|-|-'file: nuspecname.nuspec'  
+|-|-'file: nuspecname.nuspec.props'  
 ```
     
 - build.targets will be replaced during install with nuget package [MSBuild.MSBBuildConvention](https://www.nuget.org/packages/MSBuild.MSBBuildConvention)
