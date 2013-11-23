@@ -46,6 +46,11 @@ project
 ```
     
 - build.targets will be replaced during install with nuget package [MSBuild.MSBBuildConvention](https://www.nuget.org/packages/MSBuild.MSBBuildConvention)
+  
+Sample
+------------
+https://github.com/DanielTheCoder/MSBuild.MSBNuget/tree/master/src/MSBNuget.Nuget  
+  
 
 Contributing
 ------------
