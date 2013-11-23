@@ -50,8 +50,8 @@
     <NugetPublishToLocalNugetFeed Condition="'$(NugetPublishToLocalNugetFeed)'==''">true</NugetPublishToLocalNugetFeed>
     <NugetPublishToOfficialNugetFeed Condition="'$(NugetPublishToOfficialNugetFeed)' == ''">false</NugetPublishToOfficialNugetFeed>
 
-    <NugkgPublishReleaseFolder Condition="'$(NugkgPublishReleaseFolder)'==''">$(NugetIntermediatePath)Release\</NugkgPublishReleaseFolder>
-    <NugkgPublishLocalNugetFeedFolder Condition="'$(NugkgPublishLocalNugetFeedFolder)'==''">$(NugetIntermediatePath)Publish\</NugkgPublishLocalNugetFeedFolder>
+    <NugetPublishReleaseFolder Condition="'$(NugetPublishReleaseFolder)'==''">$(NugetIntermediatePath)Release\</NugetPublishReleaseFolder>
+    <NugetPublishLocalNugetFeedFolder Condition="'$(NugetPublishLocalNugetFeedFolder)'==''">$(NugetIntermediatePath)Publish\</NugetPublishLocalNugetFeedFolder>
 
     <!-- Global overrides for nuget package creation -->
     <NugetVersion Condition="'$(NugetVersion)' == ''"></NugetVersion>
@@ -228,13 +228,13 @@
       <nupkg Include="$(NugetIntermediatePath)**\*.nupkg"/>
     </ItemGroup>
 
-    <MakeDir Directories="$(NugkgPublishReleaseFolder)" />
+    <MakeDir Directories="$(NugetPublishReleaseFolder)" />
 
     <Copy SourceFiles="@(nupkg)"
-          DestinationFolder="$(NugkgPublishReleaseFolder)%(nupkg.RecursiveDir)"
+          DestinationFolder="$(NugetPublishReleaseFolder)%(nupkg.RecursiveDir)"
           OverwriteReadOnlyFiles="true" ContinueOnError="true"/>
 
-    <Message Text="PublishedTo: $(NugkgPublishReleaseFolder)" Importance="high" />
+    <Message Text="PublishedTo: $(NugetPublishReleaseFolder)" Importance="high" />
   </Target>
 
   <Target Name="NugetPublishToLocalFeed">
@@ -242,13 +242,13 @@
       <nupkg Include="$(NugetIntermediatePath)**\*.nupkg"/>
     </ItemGroup>
 
-    <MakeDir Directories="$(NugkgPublishLocalNugetFeedFolder)" />
+    <MakeDir Directories="$(NugetPublishLocalNugetFeedFolder)" />
 
     <Copy SourceFiles="@(nupkg)"
-          DestinationFolder="$(NugkgPublishLocalNugetFeedFolder)%(nupkg.RecursiveDir)"
+          DestinationFolder="$(NugetPublishLocalNugetFeedFolder)%(nupkg.RecursiveDir)"
           OverwriteReadOnlyFiles="true" ContinueOnError="true"/>
 
-    <Message Text="PublishedTo: $(NugkgPublishLocalNugetFeedFolder)" Importance="high" />
+    <Message Text="PublishedTo: $(NugetPublishLocalNugetFeedFolder)" Importance="high" />
   </Target>
 
   <Target Name="NugetPublishToOfficialNugetFeed">

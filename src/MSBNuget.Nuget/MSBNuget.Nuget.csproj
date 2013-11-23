@@ -22,6 +22,7 @@
     <None Include=".build\Configurations\default.props" />
     <None Include=".build\Configurations\TTV-DS06.props" />
     <None Include=".build\Configurations\TTV-DS07.props" />
+    <None Include="MSBNuget\build\Legacy.100.targets" />
     <None Include="MSBNuget\MSBNuget.nuspec.props">
       <SubType>Designer</SubType>
     </None>

@@ -8,7 +8,7 @@ It uses the method described here: http://docs.nuget.org/docs/creating-packages/
 HOW TO USE
 ------------
 
-- Add a new project to your solution by using the MSBuild project template (http://visualstudiogallery.msdn.microsoft.com/4b75d0cc-b693-4c1c-8105-fbaeb0714b03)
+- Add a new project to your solution by using the [MSBuild-project-template](http://visualstudiogallery.msdn.microsoft.com/4b75d0cc-b693-4c1c-8105-fbaeb0714b03)
 - Install nuget package [MSBuild.MSBNuget](sdfsf)
 - Open build.props and configure common settings, eg:
   
@@ -17,8 +17,8 @@ HOW TO USE
     <NugetPublishToReleaseFolder Condition="'$(NugetPublishToReleaseFolder)'==''">false</NugetPublishToReleaseFolder>
     <NugetPublishToLocalNugetFeed Condition="'$(NugetPublishToLocalNugetFeed)'==''">false</NugetPublishToLocalNugetFeed>
 
-    <NugkgPublishLocalNugetFeedFolder Condition="'$(NugkgPublishLocalNugetFeedFolder)'==''">$(MSBuildProjectDirectory)\..\..\Publish\</NugkgPublishLocalNugetFeedFolder>
-    <NugkgPublishReleaseFolder Condition="'$(NugkgPublishReleaseFolder)'==''">$(MSBuildProjectDirectory)\..\..\Releases\</NugkgPublishReleaseFolder>
+    <NugetPublishLocalNugetFeedFolder Condition="'$(NugetPublishLocalNugetFeedFolder)'==''">$(MSBuildProjectDirectory)\..\..\Publish\</NugetPublishLocalNugetFeedFolder
+    <NugetPublishReleaseFolder Condition="'$(NugetPublishReleaseFolder)'==''">$(MSBuildProjectDirectory)\..\..\Releases\</NugetPublishReleaseFolder>
   </PropertyGroup>
  ```
 
@@ -37,22 +37,21 @@ HOW TO USE
 ```
 project  
 |-'folder: nuspecname'  
-|--build  
-|--content  
-|--libs  
-|--tools  
-|-'file: nuspec'  
+|-|-build  
+|-|-content  
+|-|-libs  
+|-|-tools  
+|-|-'file: nuspec'  
 ```
     
-- build.targets will be replaced during install with nuget package 'MSBuild.MSBBuildConvention'
+- build.targets will be replaced during install with nuget package [MSBuild.MSBBuildConvention](https://www.nuget.org/packages/MSBuild.MSBBuildConvention)
 
 Contributing
 ------------
-
 If you are interested in contributing,  
   
 1. Get a Github account  
 1. Fork the project  
 1. Make your feature addition or bugfix. Please also update the [changelog](https://github.com/DanielTheCoder/MSBuild.MSBNuget/blob/master/changelog.txt).  
 1. Send me a pull request via GitHub  
-  
+ 
