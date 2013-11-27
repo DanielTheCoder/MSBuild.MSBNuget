@@ -3,7 +3,7 @@
   
   <metadata minClientVersion="2.7.2">
     <id>MSBuild.MSBNuget</id>
-    <version>1.1.0</version>
+    <version>1.1.1-pre1</version>
     <title>Nuget convention based MSBuild Packager</title>
     <authors>Daniel Sack</authors>
     <owners>Daniel Sack</owners>

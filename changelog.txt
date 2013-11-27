@@ -1,3 +1,7 @@
+1.1.1 -pre1 2013/11/27
+Fixed issues:
+ + don't import *.nuspec files from obj/, bin/ and packages/
+
 1.1.0 2013/11/22
  + incl. changes and features from 1.0.1 -pre to 1.0.3 -pre8
 

@@ -26,7 +26,8 @@
     <NugetIntermediatePath Condition="'$(OutDir)' != ''">$(OutDir)\NugetPackages\$(Configuration)\</NugetIntermediatePath>
     <!-- Filter out all folders which are not known by convention -->
     <NugetFilterOnlyConventionWellKnownFolders Condition="'$(NugetFilterOnlyConventionWellKnownFolders)' == ''">true</NugetFilterOnlyConventionWellKnownFolders>
-    
+    <!-- Filter to not include *.nuspec files from packages/; obj/; bin/-->
+    <NugetNuspecExcludePattern Condition="'$(NugetNuspecExcludePattern)' == ''">$(MSBuildProjectDirectory)\packages\**;$(MSBuildProjectDirectory)\bin\**;$(MSBuildProjectDirectory)\obj\**;</NugetNuspecExcludePattern>
     <!-- Convention based for Nuget Package Restore -->
     <BuildDependsOn/>
 
@@ -73,7 +74,8 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <nugetExe Include="$(NugetCommandLinePath)"/>
+    <nugetExe Include="$(NugetCommandLinePath)"
+              Exclude="$(NugetNuspecExcludePattern)"/>
   </ItemGroup>
   
   <PropertyGroup>
