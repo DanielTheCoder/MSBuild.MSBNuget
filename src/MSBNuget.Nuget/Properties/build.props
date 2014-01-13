@@ -3,7 +3,7 @@
   <PropertyGroup>
     <!-- overwrite nuget.exe path because we are not acting in scope of packages folder -->
     <NuGetToolsPath>$(MSBuildProjectDirectory)\..\packages\NuGet.CommandLine.*\tools\</NuGetToolsPath>
-    
+
     <NugetPackagesCustomConfiguration Condition="'$(NugetPackagesCustomConfiguration)'==''">$(COMPUTERNAME)</NugetPackagesCustomConfiguration>
 
     <_nugetPackagesCustomConfigurationImportPath>$(MSBuildThisFileDirectory)Configurations\$(NugetPackagesCustomConfiguration).props</_nugetPackagesCustomConfigurationImportPath>
@@ -15,5 +15,8 @@
   <!-- Conventional import of custom settings -->
   <Import Project="$(_nugetPackagesCustomConfigurationImportPath)" Condition="Exists('$(_nugetPackagesCustomConfigurationImportPath)')=='true'"/>
   <Import Project="$(MSBuildProjectDirectory)\*\*.nuspec.props"/>
+
+  <Import Project="$(MSBuildProjectDirectory)\..\MSBNuget\nuget.targets" />
+  <Import Project="$(MSBuildProjectDirectory)\MSBNuget\build\Legacy.100.targets" />
   
 </Project>

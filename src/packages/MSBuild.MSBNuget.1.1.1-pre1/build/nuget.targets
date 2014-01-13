@@ -20,11 +20,14 @@
   <!-- Internal working properties, they are not intended to be changed direclty from caller -->
   <PropertyGroup Label="Internal default property values">
     <OutputPath Condition="'$(OutputPath)' == ''">bin\</OutputPath>
-    <NugetStage>$(MSBuildProjectDirectory)\obj\nugetstage\</NugetStage>
+    <NugetStage>$(MSBuildProjectDirectory)\obj\$(Configuration)\nugetstage\</NugetStage>
     <NugetIntermediatePath Condition="'$(NugetIntermediatePath)' == ''">$(OutputPath)$(Configuration)\</NugetIntermediatePath>
     <!-- TFS 2010/2012 support of OutDir overwrite -->
     <NugetIntermediatePath Condition="'$(OutDir)' != ''">$(OutDir)\NugetPackages\$(Configuration)\</NugetIntermediatePath>
-
+    <!-- Filter out all folders which are not known by convention -->
+    <NugetFilterOnlyConventionWellKnownFolders Condition="'$(NugetFilterOnlyConventionWellKnownFolders)' == ''">true</NugetFilterOnlyConventionWellKnownFolders>
+    <!-- Filter to not include *.nuspec files from packages/; obj/; bin/-->
+    <NugetNuspecExcludePattern Condition="'$(NugetNuspecExcludePattern)' == ''">$(MSBuildProjectDirectory)\packages\**;$(MSBuildProjectDirectory)\bin\**;$(MSBuildProjectDirectory)\obj\**;</NugetNuspecExcludePattern>
     <!-- Convention based for Nuget Package Restore -->
     <BuildDependsOn/>
 
@@ -48,8 +51,8 @@
     <NugetPublishToLocalNugetFeed Condition="'$(NugetPublishToLocalNugetFeed)'==''">true</NugetPublishToLocalNugetFeed>
     <NugetPublishToOfficialNugetFeed Condition="'$(NugetPublishToOfficialNugetFeed)' == ''">false</NugetPublishToOfficialNugetFeed>
 
-    <NugkgPublishReleaseFolder Condition="'$(NugkgPublishReleaseFolder)'==''">$(NugetIntermediatePath)Release\</NugkgPublishReleaseFolder>
-    <NugkgPublishLocalNugetFeedFolder Condition="'$(NugkgPublishLocalNugetFeedFolder)'==''">$(NugetIntermediatePath)Publish\</NugkgPublishLocalNugetFeedFolder>
+    <NugetPublishReleaseFolder Condition="'$(NugetPublishReleaseFolder)'==''">$(NugetIntermediatePath)Release\</NugetPublishReleaseFolder>
+    <NugetPublishLocalNugetFeedFolder Condition="'$(NugetPublishLocalNugetFeedFolder)'==''">$(NugetIntermediatePath)Publish\</NugetPublishLocalNugetFeedFolder>
 
     <!-- Global overrides for nuget package creation -->
     <NugetVersion Condition="'$(NugetVersion)' == ''"></NugetVersion>
@@ -71,7 +74,8 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <nugetExe Include="$(NugetCommandLinePath)"/>
+    <nugetExe Include="$(NugetCommandLinePath)"
+              Exclude="$(NugetNuspecExcludePattern)"/>
   </ItemGroup>
   
   <PropertyGroup>
@@ -118,15 +122,15 @@
 
   <Target Name="NugetCreateFolderStructure">
     <!-- Ensure nuget Folder structure exists -->
-    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\lib" />
-    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\tools" />
-    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\content" />
-    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\build" />
+    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\lib" Condition="'$(NugetFilterOnlyConventionWellKnownFolders)' == 'true'" />
+    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\tools" Condition="'$(NugetFilterOnlyConventionWellKnownFolders)' == 'true'"/>
+    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\content" Condition="'$(NugetFilterOnlyConventionWellKnownFolders)' == 'true'"/>
+    <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\build" Condition="'$(NugetFilterOnlyConventionWellKnownFolders)' == 'true'"/>
   </Target>
 
   <Target Name="NugetCopyAdditionalFiles">
     <!-- nuget convention based folder structure includes -->
-    <ItemGroup>
+    <ItemGroup Condition="'$(NugetFilterOnlyConventionWellKnownFolders)' == 'true'">
       <additionalFiles Include="$(MSBuildProjectDirectory)\%(nuspec.Filename)\tools\**\*.*">
         <targetFolder>%(nuspec.Filename)\tools</targetFolder>
       </additionalFiles>
@@ -138,6 +142,12 @@
       </additionalFiles>
       <additionalFiles Include="$(MSBuildProjectDirectory)\%(nuspec.Filename)\lib\**\*.*">
         <targetFolder>%(nuspec.Filename)\lib</targetFolder>
+      </additionalFiles>
+    </ItemGroup>
+    
+    <ItemGroup Condition="'$(NugetFilterOnlyConventionWellKnownFolders)' == 'false'">
+      <additionalFiles Include="$(MSBuildProjectDirectory)\%(nuspec.Filename)\**\*.*" Exclude="$(MSBuildProjectDirectory)\%(nuspec.Filename)\%(nuspec.Filename)%(nuspec.Extension).props">
+        <targetFolder>%(nuspec.Filename)</targetFolder>
       </additionalFiles>
     </ItemGroup>
 
@@ -220,13 +230,13 @@
       <nupkg Include="$(NugetIntermediatePath)**\*.nupkg"/>
     </ItemGroup>
 
-    <MakeDir Directories="$(NugkgPublishReleaseFolder)" />
+    <MakeDir Directories="$(NugetPublishReleaseFolder)" />
 
     <Copy SourceFiles="@(nupkg)"
-          DestinationFolder="$(NugkgPublishReleaseFolder)%(nupkg.RecursiveDir)"
+          DestinationFolder="$(NugetPublishReleaseFolder)%(nupkg.RecursiveDir)"
           OverwriteReadOnlyFiles="true" ContinueOnError="true"/>
 
-    <Message Text="PublishedTo: $(NugkgPublishReleaseFolder)" Importance="high" />
+    <Message Text="PublishedTo: $(NugetPublishReleaseFolder)" Importance="high" />
   </Target>
 
   <Target Name="NugetPublishToLocalFeed">
@@ -234,13 +244,13 @@
       <nupkg Include="$(NugetIntermediatePath)**\*.nupkg"/>
     </ItemGroup>
 
-    <MakeDir Directories="$(NugkgPublishLocalNugetFeedFolder)" />
+    <MakeDir Directories="$(NugetPublishLocalNugetFeedFolder)" />
 
     <Copy SourceFiles="@(nupkg)"
-          DestinationFolder="$(NugkgPublishLocalNugetFeedFolder)%(nupkg.RecursiveDir)"
+          DestinationFolder="$(NugetPublishLocalNugetFeedFolder)%(nupkg.RecursiveDir)"
           OverwriteReadOnlyFiles="true" ContinueOnError="true"/>
 
-    <Message Text="PublishedTo: $(NugkgPublishLocalNugetFeedFolder)" Importance="high" />
+    <Message Text="PublishedTo: $(NugetPublishLocalNugetFeedFolder)" Importance="high" />
   </Target>
 
   <Target Name="NugetPublishToOfficialNugetFeed">

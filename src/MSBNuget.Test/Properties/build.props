@@ -3,12 +3,11 @@
   <PropertyGroup>
     <NugetPublishDisabled>true</NugetPublishDisabled>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <additionalFiles Include="$(MSBuildThisFileDirectory)\..\packages.config">
       <targetFolder>sample/content/.build</targetFolder>
     </additionalFiles>
   </ItemGroup>
-  
   
 </Project>
