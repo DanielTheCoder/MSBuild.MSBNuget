@@ -12,11 +12,9 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="MSBNuget\build\MSBuild.MSBNuget.targets" />
     <None Include="Properties\Configurations\default.props" />
     <None Include="Properties\Configurations\TTV-DS06.props" />
     <None Include="Properties\Configurations\TTV-DS07.props" />
-    <None Include="MSBNuget\build\Legacy.100.targets" />
     <None Include="MSBNuget\MSBNuget.nuspec.props">
       <SubType>Designer</SubType>
     </None>
@@ -29,6 +27,9 @@
     </None>
     <None Include="packages.config" />
     <None Include="Properties\build.props" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MSBNuget\build\" />
   </ItemGroup>
   <Import Project="..\packages\MSBuild.MSBBuildConvention.2.0.0\build\MSBuild.MSBBuildConvention.targets" Condition="Exists('..\packages\MSBuild.MSBBuildConvention.2.0.0\build\MSBuild.MSBBuildConvention.targets')" />
 </Project>

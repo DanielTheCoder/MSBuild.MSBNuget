@@ -1,0 +1,17 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+  <Import Project="$(TestsRoot)test.import"/>
+
+  
+  <Target Name="Test">
+    <MSBuild Projects="project/sample.proj" Targets="Build" />
+  </Target>
+  
+  <Target Name="Assert">
+    <PropertyGroup>
+      <expectedPackage Condition="'$(expectedPackage)'==''">project/bin/Debug/sample.0.0.2-pre.nupkg</expectedPackage>
+    </PropertyGroup>
+    <Error Text="Expected package not created '$(expectedPackage)' !" Condition="Exists('$(expectedPackage)') == 'false'"/>
+  </Target>
+  
+</Project>

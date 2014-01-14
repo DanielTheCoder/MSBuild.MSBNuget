@@ -16,7 +16,6 @@
   <Import Project="$(_nugetPackagesCustomConfigurationImportPath)" Condition="Exists('$(_nugetPackagesCustomConfigurationImportPath)')=='true'"/>
   <Import Project="$(MSBuildProjectDirectory)\*\*.nuspec.props"/>
 
-  <Import Project="$(MSBuildProjectDirectory)\..\MSBNuget\nuget.targets" />
-  <Import Project="$(MSBuildProjectDirectory)\MSBNuget\build\Legacy.100.targets" />
+  <Import Project="$(MSBuildProjectDirectory)\..\MSBNuget\MSBuild.MSBNuget.targets" />
   
 </Project>

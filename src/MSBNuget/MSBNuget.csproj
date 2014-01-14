@@ -12,6 +12,8 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="Legacy.100.targets" />
+    <Compile Include="MSBuild.MSBNuget.targets" />
     <None Include="nuget.targets" />
     <None Include="packages.config" />
     <None Include="Properties\build.props" />

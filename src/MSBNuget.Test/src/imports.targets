@@ -1,0 +1,10 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+  <PropertyGroup>
+    <NuGetToolsPath>$(MSBuildThisFileDirectory)..\..\packages\NuGet.CommandLine.*\tools\</NuGetToolsPath>
+  </PropertyGroup>
+  
+  <Import Project="$(MSBuildThisFileDirectory)..\..\packages\MSBuild.MSBBuildConvention.*\build\MSBuild.MSBBuildConvention.targets" />
+  <Import Project="$(MSBuildThisFileDirectory)..\..\MSBNuget\MSBuild.MSBNuget.targets"/>
+
+</Project>

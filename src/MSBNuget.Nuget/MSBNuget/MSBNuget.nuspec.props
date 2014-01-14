@@ -4,9 +4,12 @@
     <additionalFiles Include="$(MSBuildThisFileDirectory)\..\..\MSBNuget\nuget.targets">
       <targetFolder>MSBNuget/build</targetFolder>
     </additionalFiles>
-    <!--<additionalFiles Include="$(MSBuildThisFileDirectory)\..\..\MSBNuget\build.targets">
+    <additionalFiles Include="$(MSBuildThisFileDirectory)\..\..\MSBNuget\Legacy.100.targets">
       <targetFolder>MSBNuget/build</targetFolder>
-    </additionalFiles>-->
+    </additionalFiles>
+      <additionalFiles Include="$(MSBuildThisFileDirectory)\..\..\MSBNuget\MSBuild.MSBNuget.targets">
+      <targetFolder>MSBNuget/build</targetFolder>
+    </additionalFiles>
   </ItemGroup>
   
 </Project>

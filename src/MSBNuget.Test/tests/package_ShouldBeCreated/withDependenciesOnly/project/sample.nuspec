@@ -14,6 +14,12 @@
     <releaseNotes>Initial version</releaseNotes>
     <copyright>Copyright 2013</copyright>
     <tags>NuGet MSBuild Package</tags>
+
+    <dependencies>
+      <dependency id="MSBuild.MSBBuildConvention" />
+      <dependency id="NuGet.CommandLine" version="2.7.3" />
+    </dependencies>
+    
   </metadata>
 
 </package>

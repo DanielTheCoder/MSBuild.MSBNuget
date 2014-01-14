@@ -1,0 +1,27 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0"  >
+
+  <!-- This simple inline task does nothing. -->
+  <UsingTask TaskName="HelloWorld"
+             TaskFactory="CodeTaskFactory"
+             AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" >
+    <ParameterGroup />
+    <Task>
+      <!--<Reference Include="System.Xml.dll"/>-->
+      <Using Namespace="System"/>
+      <Using Namespace="System.IO"/>
+
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+// Display "Hello, world!"
+Log.LogError("Hello, world!");
+]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+  <!--
+  MSBuild Inline Tasks: http://msdn.microsoft.com/en-us/library/dd722601(v=vs.120).aspx
+
+
+  -->
+</Project>

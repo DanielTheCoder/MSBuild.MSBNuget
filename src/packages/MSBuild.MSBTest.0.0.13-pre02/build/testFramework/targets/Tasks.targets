@@ -1,0 +1,11 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0"  >
+
+  <PropertyGroup>
+    <_ExtensionsRoot>$(TestFrameworkRoot)\tasks\</_ExtensionsRoot>
+  </PropertyGroup>
+  
+  <!-- Sample -->
+  <Import Project="$(_ExtensionsRoot)HelloWorld.targets" />
+  <Import Project="$(_ExtensionsRoot)FileAssert.targets" />
+  
+</Project>

@@ -14,9 +14,21 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Properties\build.props" />
-    <None Include="sample.nuspec" />
+    <None Include="Properties\MSBTest.props" />
+    <None Include="src\imports.targets">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="tests\package_ShouldBeCreated\withDependenciesOnly\project\Properties\build.props" />
+    <None Include="tests\package_ShouldBeCreated\withDependenciesOnly\project\sample.proj" />
+    <None Include="tests\package_ShouldBeCreated\withDependenciesOnly\project\sample.nuspec" />
+    <None Include="tests\package_ShouldBeCreated\withDependenciesOnly\Test.targets">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="tests\test.import" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="readme\MSBTest.readme.txt" />
   </ItemGroup>
   <Import Project="..\packages\MSBuild.MSBBuildConvention.2.0.0\build\MSBuild.MSBBuildConvention.targets" Condition="Exists('..\packages\MSBuild.MSBBuildConvention.2.0.0\build\MSBuild.MSBBuildConvention.targets')" />
-  <Import Project="..\packages\MSBuild.MSBNuget.1.1.1-pre1\build\MSBuild.MSBNuget.targets" Condition="Exists('..\packages\MSBuild.MSBNuget.1.1.1-pre1\build\MSBuild.MSBNuget.targets')" />
-  
+  <Import Project="..\packages\MSBuild.MSBTest.0.0.13-pre02\build\MSBuild.MSBTest.targets" Condition="Exists('..\packages\MSBuild.MSBTest.0.0.13-pre02\build\MSBuild.MSBTest.targets')" />
 </Project>
