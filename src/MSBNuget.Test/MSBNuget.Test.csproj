@@ -12,10 +12,20 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="extensions\tasks.unzip.targets">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="extensions\imports.targets" />
     <None Include="packages.config" />
     <None Include="Properties\build.props" />
     <None Include="Properties\MSBTest.props" />
     <None Include="src\imports.targets">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="tests\package_ShouldBeCreated\withAdditionalFilesOnly\project\Properties\build.props" />
+    <None Include="tests\package_ShouldBeCreated\withAdditionalFilesOnly\project\sample.nuspec" />
+    <None Include="tests\package_ShouldBeCreated\withAdditionalFilesOnly\project\sample.proj" />
+    <None Include="tests\package_ShouldBeCreated\withAdditionalFilesOnly\Test.targets">
       <SubType>Designer</SubType>
     </None>
     <None Include="tests\package_ShouldBeCreated\withDependenciesOnly\project\Properties\build.props" />
@@ -28,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="readme\MSBTest.readme.txt" />
+    <Content Include="tests\package_ShouldBeCreated\withAdditionalFilesOnly\project\additionalFile.txt" />
   </ItemGroup>
   <Import Project="..\packages\MSBuild.MSBBuildConvention.2.0.0\build\MSBuild.MSBBuildConvention.targets" Condition="Exists('..\packages\MSBuild.MSBBuildConvention.2.0.0\build\MSBuild.MSBBuildConvention.targets')" />
   <Import Project="..\packages\MSBuild.MSBTest.0.0.13-pre02\build\MSBuild.MSBTest.targets" Condition="Exists('..\packages\MSBuild.MSBTest.0.0.13-pre02\build\MSBuild.MSBTest.targets')" />

@@ -2,7 +2,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   
   <PropertyGroup>
-    <TraceTestVars>false</TraceTestVars>
+    <TraceTestVars>true</TraceTestVars>
     <TestIgnored>false</TestIgnored>
   </PropertyGroup>
 
@@ -17,12 +17,14 @@
 
   <PropertyGroup>
     <expectedPackage Condition="'$(expectedPackage)'==''">project/bin/Debug/sample.0.0.2-pre.nupkg</expectedPackage>
-
+    <expectedPackageExtractedPath Condition="'$(expectedPackageExtractedPath)'==''">project/bin/Debug/sample.0.0.2-pre</expectedPackageExtractedPath>
+    
     <projectToRun>project/sample.proj</projectToRun>
     <targetToRun>Build</targetToRun>
   </PropertyGroup>
   
   <Target Name="Test">
+    <!--<Error Text="$(ExtensionsImports)"/>-->
     <MSBuild Projects="$(projectToRun)" Targets="$(targetToRun)" />
   </Target>
 
