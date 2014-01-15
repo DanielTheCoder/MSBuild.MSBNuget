@@ -35,25 +35,40 @@
     <None Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles\Test.targets">
       <SubType>Designer</SubType>
     </None>
-    <None Include="tests\Nuget\SinglePackePerProject\withNuspecFilesOnly\project\Properties\build.props" />
-    <None Include="tests\Nuget\SinglePackePerProject\withNuspecFilesOnly\project\sample.nuspec" />
-    <None Include="tests\Nuget\SinglePackePerProject\withNuspecFilesOnly\project\sample.proj" />
-    <None Include="tests\Nuget\SinglePackePerProject\withNuspecFilesOnly\Test.targets">
+    <None Include="tests\Nuget\MultiplePackagesPerProject\withNuspecDependency\project\Properties\build.props" />
+    <None Include="tests\Nuget\MultiplePackagesPerProject\withNuspecDependency\project\SamplePackage2\SamplePackage2.nuspec" />
+    <None Include="tests\Nuget\MultiplePackagesPerProject\withNuspecDependency\project\SamplePackage1\SamplePackage1.nuspec" />
+    <None Include="tests\Nuget\MultiplePackagesPerProject\withNuspecDependency\project\sample.proj" />
+    <None Include="tests\Nuget\MultiplePackagesPerProject\withNuspecDependency\Test.targets">
       <SubType>Designer</SubType>
     </None>
-    <None Include="tests\Nuget\SinglePackePerProject\withNuspecDependenciesOnly\project\Properties\build.props" />
-    <None Include="tests\Nuget\SinglePackePerProject\withNuspecDependenciesOnly\project\sample.proj" />
-    <None Include="tests\Nuget\SinglePackePerProject\withNuspecDependenciesOnly\project\sample.nuspec" />
-    <None Include="tests\Nuget\SinglePackePerProject\withNuspecDependenciesOnly\Test.targets">
+    <None Include="tests\Nuget\MultiplePackagesPerProject\withNuspecFile\project\Properties\build.props" />
+    <None Include="tests\Nuget\MultiplePackagesPerProject\withNuspecFile\project\sample.nuspec" />
+    <None Include="tests\Nuget\MultiplePackagesPerProject\withNuspecFile\project\sample.proj" />
+    <None Include="tests\Nuget\MultiplePackagesPerProject\withNuspecFile\Test.targets">
       <SubType>Designer</SubType>
     </None>
+    <None Include="tests\Nuget\SinglePackagePerProject\withNuspecFilesOnly\project\Properties\build.props" />
+    <None Include="tests\Nuget\SinglePackagePerProject\withNuspecFilesOnly\project\sample.nuspec" />
+    <None Include="tests\Nuget\SinglePackagePerProject\withNuspecFilesOnly\project\sample.proj" />
+    <None Include="tests\Nuget\SinglePackagePerProject\withNuspecFilesOnly\Test.targets">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="tests\Nuget\SinglePackagePerProject\withNuspecDependenciesOnly\project\Properties\build.props" />
+    <None Include="tests\Nuget\SinglePackagePerProject\withNuspecDependenciesOnly\project\sample.proj" />
+    <None Include="tests\Nuget\SinglePackagePerProject\withNuspecDependenciesOnly\project\sample.nuspec" />
+    <None Include="tests\Nuget\SinglePackagePerProject\withNuspecDependenciesOnly\Test.targets">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="tests\test.MultiplePackages.import" />
     <None Include="tests\test.import" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="readme\MSBTest.readme.txt" />
     <Content Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles_NuspecProps\project\additionalFile.txt" />
     <Content Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles\project\additionalFile.txt" />
-    <Content Include="tests\Nuget\SinglePackePerProject\withNuspecFilesOnly\project\additionalFile.txt" />
+    <Content Include="tests\Nuget\MultiplePackagesPerProject\withNuspecFile\project\additionalFile.txt" />
+    <Content Include="tests\Nuget\SinglePackagePerProject\withNuspecFilesOnly\project\additionalFile.txt" />
   </ItemGroup>
   <Import Project="..\packages\MSBuild.MSBBuildConvention.2.0.0\build\MSBuild.MSBBuildConvention.targets" Condition="Exists('..\packages\MSBuild.MSBBuildConvention.2.0.0\build\MSBuild.MSBBuildConvention.targets')" />
   <Import Project="..\packages\MSBuild.MSBTest.0.0.13-pre02\build\MSBuild.MSBTest.targets" Condition="Exists('..\packages\MSBuild.MSBTest.0.0.13-pre02\build\MSBuild.MSBTest.targets')" />

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  
+  <PropertyGroup>
+    <TraceTestVars>false</TraceTestVars>
+    <TestIgnored>false</TestIgnored>
+  </PropertyGroup>
+
+  <!-- Import Test Framework References-->
+  <Import Project="$(TestFrameworkImports)"/>
+  <Import Project="$(ExtensionsImports)" Condition="Exists('$(ExtensionsImports)')" />
+  <!--<Import Project="$(SourceImports)" Condition="Exists('$(SourceImports)')"/>-->
+
+  <!-- ********************************************************** -->
+  <!-- from here on: project specific test properties and targets -->
+  <!-- ********************************************************** -->
+
+  <PropertyGroup>
+    <expectedPackage1 Condition="'$(expectedPackage1)'==''">project/bin/Debug/SamplePackage1.0.0.2-pre.nupkg</expectedPackage1>
+    <expectedPackage2 Condition="'$(expectedPackage2)'==''">project/bin/Debug/SamplePackage1.0.0.2-pre.nupkg</expectedPackage2>
+    <expectedPackage1ExtractedPath Condition="'$(expectedPackage1ExtractedPath)'==''">project/bin/Debug/SamplePackage1.0.0.2-pre</expectedPackage1ExtractedPath>
+    <expectedPackage2ExtractedPath Condition="'$(expectedPackage2ExtractedPath)'==''">project/bin/Debug/SamplePackage2.0.0.2-pre</expectedPackage2ExtractedPath>
+    
+    <projectToRun>project/sample.proj</projectToRun>
+    <targetToRun>Build</targetToRun>
+  </PropertyGroup>
+  
+  <Target Name="Test">
+    <!--<Error Text="$(ExtensionsImports)"/>-->
+    <MSBuild Projects="$(projectToRun)" Targets="$(targetToRun)" />
+  </Target>
+
+  <Target Name="Assert_PackageExists" BeforeTargets="Assert">
+    <Error Text="> Assert: Expected package was not created '$(expectedPackage1)' !" Condition="Exists('$(expectedPackage1)') == 'false'"/>
+    <Message Text="> Assert: Expected package1 was created '$(expectedPackage1)'." Importance="high" />
+
+    <Error Text="> Assert: Expected package1 was not created '$(expectedPackage2)' !" Condition="Exists('$(expectedPackage2)') == 'false'"/>
+    <Message Text="> Assert: Expected package1 was created '$(expectedPackage2)'." Importance="high" />
+  </Target>
+  
+</Project>
