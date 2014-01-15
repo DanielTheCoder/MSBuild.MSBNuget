@@ -28,10 +28,16 @@
     <None Include="tests\package_ShouldBeCreated\MSBNuget_Conventions\withAdditionalFilesOnly\Test.targets">
       <SubType>Designer</SubType>
     </None>
-    <None Include="tests\package_ShouldBeCreated\Nuget_Conventions\withDependenciesOnly\project\Properties\build.props" />
-    <None Include="tests\package_ShouldBeCreated\Nuget_Conventions\withDependenciesOnly\project\sample.proj" />
-    <None Include="tests\package_ShouldBeCreated\Nuget_Conventions\withDependenciesOnly\project\sample.nuspec" />
-    <None Include="tests\package_ShouldBeCreated\Nuget_Conventions\withDependenciesOnly\Test.targets">
+    <None Include="tests\package_ShouldBeCreated\Nuget_Conventions\withNuspecFilesOnly\project\Properties\build.props" />
+    <None Include="tests\package_ShouldBeCreated\Nuget_Conventions\withNuspecFilesOnly\project\sample.nuspec" />
+    <None Include="tests\package_ShouldBeCreated\Nuget_Conventions\withNuspecFilesOnly\project\sample.proj" />
+    <None Include="tests\package_ShouldBeCreated\Nuget_Conventions\withNuspecFilesOnly\Test.targets">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="tests\package_ShouldBeCreated\Nuget_Conventions\withNuspecDependenciesOnly\project\Properties\build.props" />
+    <None Include="tests\package_ShouldBeCreated\Nuget_Conventions\withNuspecDependenciesOnly\project\sample.proj" />
+    <None Include="tests\package_ShouldBeCreated\Nuget_Conventions\withNuspecDependenciesOnly\project\sample.nuspec" />
+    <None Include="tests\package_ShouldBeCreated\Nuget_Conventions\withNuspecDependenciesOnly\Test.targets">
       <SubType>Designer</SubType>
     </None>
     <None Include="tests\test.import" />
@@ -39,6 +45,7 @@
   <ItemGroup>
     <Content Include="readme\MSBTest.readme.txt" />
     <Content Include="tests\package_ShouldBeCreated\MSBNuget_Conventions\withAdditionalFilesOnly\project\additionalFile.txt" />
+    <Content Include="tests\package_ShouldBeCreated\Nuget_Conventions\withNuspecFilesOnly\project\additionalFile.txt" />
   </ItemGroup>
   <Import Project="..\packages\MSBuild.MSBBuildConvention.2.0.0\build\MSBuild.MSBBuildConvention.targets" Condition="Exists('..\packages\MSBuild.MSBBuildConvention.2.0.0\build\MSBuild.MSBBuildConvention.targets')" />
   <Import Project="..\packages\MSBuild.MSBTest.0.0.13-pre02\build\MSBuild.MSBTest.targets" Condition="Exists('..\packages\MSBuild.MSBTest.0.0.13-pre02\build\MSBuild.MSBTest.targets')" />
