@@ -22,30 +22,38 @@
     <None Include="src\imports.targets">
       <SubType>Designer</SubType>
     </None>
-    <None Include="tests\package_ShouldBeCreated\MSBNuget_Conventions\withAdditionalFilesOnly\project\Properties\build.props" />
-    <None Include="tests\package_ShouldBeCreated\MSBNuget_Conventions\withAdditionalFilesOnly\project\sample.nuspec" />
-    <None Include="tests\package_ShouldBeCreated\MSBNuget_Conventions\withAdditionalFilesOnly\project\sample.proj" />
-    <None Include="tests\package_ShouldBeCreated\MSBNuget_Conventions\withAdditionalFilesOnly\Test.targets">
+    <None Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles_NuspecProps\project\Properties\build.props" />
+    <None Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles_NuspecProps\project\sample.nuspec.props" />
+    <None Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles_NuspecProps\project\sample.nuspec" />
+    <None Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles_NuspecProps\project\sample.proj" />
+    <None Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles_NuspecProps\Test.targets">
       <SubType>Designer</SubType>
     </None>
-    <None Include="tests\package_ShouldBeCreated\Nuget_Conventions\withNuspecFilesOnly\project\Properties\build.props" />
-    <None Include="tests\package_ShouldBeCreated\Nuget_Conventions\withNuspecFilesOnly\project\sample.nuspec" />
-    <None Include="tests\package_ShouldBeCreated\Nuget_Conventions\withNuspecFilesOnly\project\sample.proj" />
-    <None Include="tests\package_ShouldBeCreated\Nuget_Conventions\withNuspecFilesOnly\Test.targets">
+    <None Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles\project\Properties\build.props" />
+    <None Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles\project\sample.nuspec" />
+    <None Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles\project\sample.proj" />
+    <None Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles\Test.targets">
       <SubType>Designer</SubType>
     </None>
-    <None Include="tests\package_ShouldBeCreated\Nuget_Conventions\withNuspecDependenciesOnly\project\Properties\build.props" />
-    <None Include="tests\package_ShouldBeCreated\Nuget_Conventions\withNuspecDependenciesOnly\project\sample.proj" />
-    <None Include="tests\package_ShouldBeCreated\Nuget_Conventions\withNuspecDependenciesOnly\project\sample.nuspec" />
-    <None Include="tests\package_ShouldBeCreated\Nuget_Conventions\withNuspecDependenciesOnly\Test.targets">
+    <None Include="tests\Nuget\SinglePackePerProject\withNuspecFilesOnly\project\Properties\build.props" />
+    <None Include="tests\Nuget\SinglePackePerProject\withNuspecFilesOnly\project\sample.nuspec" />
+    <None Include="tests\Nuget\SinglePackePerProject\withNuspecFilesOnly\project\sample.proj" />
+    <None Include="tests\Nuget\SinglePackePerProject\withNuspecFilesOnly\Test.targets">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="tests\Nuget\SinglePackePerProject\withNuspecDependenciesOnly\project\Properties\build.props" />
+    <None Include="tests\Nuget\SinglePackePerProject\withNuspecDependenciesOnly\project\sample.proj" />
+    <None Include="tests\Nuget\SinglePackePerProject\withNuspecDependenciesOnly\project\sample.nuspec" />
+    <None Include="tests\Nuget\SinglePackePerProject\withNuspecDependenciesOnly\Test.targets">
       <SubType>Designer</SubType>
     </None>
     <None Include="tests\test.import" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="readme\MSBTest.readme.txt" />
-    <Content Include="tests\package_ShouldBeCreated\MSBNuget_Conventions\withAdditionalFilesOnly\project\additionalFile.txt" />
-    <Content Include="tests\package_ShouldBeCreated\Nuget_Conventions\withNuspecFilesOnly\project\additionalFile.txt" />
+    <Content Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles_NuspecProps\project\additionalFile.txt" />
+    <Content Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles\project\additionalFile.txt" />
+    <Content Include="tests\Nuget\SinglePackePerProject\withNuspecFilesOnly\project\additionalFile.txt" />
   </ItemGroup>
   <Import Project="..\packages\MSBuild.MSBBuildConvention.2.0.0\build\MSBuild.MSBBuildConvention.targets" Condition="Exists('..\packages\MSBuild.MSBBuildConvention.2.0.0\build\MSBuild.MSBBuildConvention.targets')" />
   <Import Project="..\packages\MSBuild.MSBTest.0.0.13-pre02\build\MSBuild.MSBTest.targets" Condition="Exists('..\packages\MSBuild.MSBTest.0.0.13-pre02\build\MSBuild.MSBTest.targets')" />

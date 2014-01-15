@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="MSBNuget.props" />
     <None Include="Legacy.100.targets" />
     <Compile Include="MSBuild.MSBNuget.targets" />
     <None Include="nuget.targets" />

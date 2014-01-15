@@ -10,6 +10,11 @@
       <additionalFiles Include="$(MSBuildThisFileDirectory)\..\..\MSBNuget\MSBuild.MSBNuget.targets">
       <targetFolder>MSBNuget/build</targetFolder>
     </additionalFiles>
+
+    <!-- Conventions -->
+    <additionalFiles Include="$(MSBuildThisFileDirectory)\..\..\MSBNuget\MSBNuget.props">
+      <targetFolder>MSBNuget/content/Properties</targetFolder>
+    </additionalFiles>
   </ItemGroup>
   
 </Project>

@@ -1,0 +1,7 @@
+﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+  <!-- Conventional import of custom settings -->
+  <Import Project="$(MSBuildProjectDirectory)\*.nuspec.props"/>
+  <Import Project="$(MSBuildProjectDirectory)\*\*.nuspec.props"/>
+  
+</Project>

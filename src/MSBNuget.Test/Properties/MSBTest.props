@@ -5,6 +5,4 @@
     <TraceGlobalVars Condition="'$(TraceGlobalVars)'==''">true</TraceGlobalVars>
   </PropertyGroup>
 
-
-  
 </Project>

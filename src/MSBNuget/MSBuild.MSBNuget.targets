@@ -2,6 +2,9 @@
 
   <!-- Import legacy wrapper and warnings first! -->
   <Import Project="Legacy.100.targets" />
+
+  <!-- Import custom build.props from C# Properties folder-->
+  <Import Project="$(MSBuildProjectDirectory)\Properties\MSBNuget.props" Condition="Exists('$(MSBuildProjectDirectory)\Properties\MSBNuget.props')=='true'" />
   
   <Import Project="nuget.targets" />
   

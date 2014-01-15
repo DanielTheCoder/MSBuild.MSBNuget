@@ -63,7 +63,8 @@
 
   <!-- List of *.nuspec files which should be transformed -->
   <ItemGroup>
-    <nuspec Include="$(MSBuildProjectDirectory)\**\*.nuspec"/>
+    <nuspec Include="$(MSBuildProjectDirectory)\**\*.nuspec"
+            Exclude="$(NugetNuspecExcludePattern)"/>
   </ItemGroup>
 
   <!-- Evaluate nuget.exe from NugetPackage dependency -->

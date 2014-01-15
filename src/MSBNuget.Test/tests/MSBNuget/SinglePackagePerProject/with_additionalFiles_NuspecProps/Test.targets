@@ -2,12 +2,11 @@
 
   <Import Project="$(TestsRoot)test.import"/>
 
-
   <Target Name="Assert">
     <unzip zipPath="$(expectedPackage)" extractPath="$(expectedPackageExtractedPath)" />
     <!--<Exec Command="explorer $(ProjectDir)$(expectedPackageExtractedPath)"/>-->
 
     <Error Text="> Assert: Expected file is inside extracted package folder '$(expectedPackage)' !" Condition="Exists('$(expectedPackageExtractedPath)\misc\additionalFile.txt') == 'false'"/>
   </Target>
-
+  
 </Project>
