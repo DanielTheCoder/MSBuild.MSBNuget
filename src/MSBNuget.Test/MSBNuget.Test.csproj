@@ -70,6 +70,7 @@
     <Content Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles\project\additionalFile.txt" />
     <Content Include="tests\Nuget\MultiplePackagesPerProject\withNuspecFile\project\additionalFile.txt" />
     <Content Include="tests\Nuget\SinglePackagePerProject\withNuspecFiles\project\additionalFile.txt" />
+    <Content Include="tests\ToDo.txt" />
   </ItemGroup>
   <Import Project="..\packages\MSBuild.MSBBuildConvention.2.0.0\build\MSBuild.MSBBuildConvention.targets" Condition="Exists('..\packages\MSBuild.MSBBuildConvention.2.0.0\build\MSBuild.MSBBuildConvention.targets')" />
   <Import Project="..\packages\MSBuild.MSBTest.0.0.13-pre02\build\MSBuild.MSBTest.targets" Condition="Exists('..\packages\MSBuild.MSBTest.0.0.13-pre02\build\MSBuild.MSBTest.targets')" />
