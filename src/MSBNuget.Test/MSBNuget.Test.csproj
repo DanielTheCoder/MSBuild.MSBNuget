@@ -22,6 +22,13 @@
     <None Include="src\imports.targets">
       <SubType>Designer</SubType>
     </None>
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\with_additionalFiles\project\Properties\build.props" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\with_additionalFiles\project\sample.proj" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\with_additionalFiles\project\SamplePackage1\SamplePackage1.nuspec" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\with_additionalFiles\project\SamplePackage2\SamplePackage2.nuspec" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\with_additionalFiles\Test.targets">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles_NuspecProps\project\Properties\build.props" />
     <None Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles_NuspecProps\project\sample.nuspec.props" />
     <None Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles_NuspecProps\project\sample.nuspec" />
@@ -66,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="readme\MSBTest.readme.txt" />
+    <Content Include="tests\MSBNuget\MultiplePackagesPerProject\with_additionalFiles\project\additionalFile.txt" />
     <Content Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles_NuspecProps\project\additionalFile.txt" />
     <Content Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles\project\additionalFile.txt" />
     <Content Include="tests\Nuget\MultiplePackagesPerProject\withNuspecFile\project\additionalFile.txt" />
