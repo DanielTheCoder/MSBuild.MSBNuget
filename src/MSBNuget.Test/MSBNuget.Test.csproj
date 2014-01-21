@@ -42,7 +42,6 @@
     <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFiles\Test.targets">
       <SubType>Designer</SubType>
     </None>
-    <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFiles_OutDirSupport\project\Properties\build.props" />
     <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFilesNuspecProps\project\Properties\build.props" />
     <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFilesNuspecProps\project\sample.nuspec.props" />
     <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFilesNuspecProps\project\sample.nuspec" />
