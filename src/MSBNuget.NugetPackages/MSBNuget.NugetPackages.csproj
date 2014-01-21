@@ -4,20 +4,33 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{EC40ACB0-A6B9-4776-9078-B1D72D244787}</ProjectGuid>
+    <ProjectGuid>{4455C566-5F12-40C5-8AA7-A86651E7738D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MSBNuget</RootNamespace>
-    <AssemblyName>MSBNuget</AssemblyName>
+    <RootNamespace>MSBNuget.Nuget</RootNamespace>
+    <AssemblyName>MSBNuget.Nuget</AssemblyName>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="MSBNuget.props" />
-    <None Include="Legacy.100.targets" />
-    <Compile Include="MSBuild.MSBNuget.targets" />
-    <None Include="nuget.targets" />
+    <None Include="Properties\Configurations\default.props" />
+    <None Include="Properties\Configurations\TTV-DS06.props" />
+    <None Include="Properties\Configurations\TTV-DS07.props" />
+    <None Include="MSBNuget\MSBNuget.nuspec.props">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MSBNuget.Legacy\MSBNuget.Legacy.nuspec.props">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MSBNuget\MSBNuget.nuspec" />
+    <None Include="MSBNuget.Legacy\MSBNuget.Legacy.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\build.props" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MSBNuget\build\" />
+    <Folder Include="MSBNuget\content\" />
   </ItemGroup>
   <Import Project="..\packages\MSBuild.MSBBuildConvention.2.0.0\build\MSBuild.MSBBuildConvention.targets" Condition="Exists('..\packages\MSBuild.MSBBuildConvention.2.0.0\build\MSBuild.MSBBuildConvention.targets')" />
 </Project>

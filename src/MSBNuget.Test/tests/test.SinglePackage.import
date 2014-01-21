@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  
+  <PropertyGroup>
+    <TraceTestVars>false</TraceTestVars>
+    <TestIgnored>false</TestIgnored>
+  </PropertyGroup>
+
+  <!-- Import Test Framework References-->
+  <Import Project="$(TestFrameworkImports)"/>
+  <Import Project="$(ExtensionsImports)" Condition="Exists('$(ExtensionsImports)')" />
+  <!--<Import Project="$(SourceImports)" Condition="Exists('$(SourceImports)')"/>-->
+
+  
+  
+  <!-- ********************************************************** -->
+  <!-- from here on: project specific test properties and targets -->
+  <!-- ********************************************************** -->
+
+  <PropertyGroup Label="Internal project specific default properties">
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <expectedPackage Condition="'$(expectedPackage)'==''">project/bin/$(Configuration)/sample.0.0.2-pre.nupkg</expectedPackage>
+    <expectedPackageExtractedPath Condition="'$(expectedPackageExtractedPath)'==''">project/bin/$(Configuration)/sample.0.0.2-pre</expectedPackageExtractedPath>
+    
+    <projectToRun>project/project.proj</projectToRun>
+    <targetToRun>Build</targetToRun>
+  </PropertyGroup>
+  
+  <Target Name="Test">
+    <!--<Error Text="$(ExtensionsImports)"/>-->
+    <MSBuild Projects="$(projectToRun)" Targets="$(targetToRun)" />
+  </Target>
+
+  <Target Name="Assert_PackageExists" BeforeTargets="Assert">
+    <Error Text="> Assert: Expected package not created '$(expectedPackage)' !" Condition="Exists('$(expectedPackage)') == 'false'"/>
+    <Message Text="> Assert: Expected package was created '$(expectedPackage)'." Importance="high" />
+  </Target>
+
+  <Target Name="Clean">
+    <deleteFolder folderPath="project/obj/" />
+    <deleteFolder folderPath="project/bin/" />
+  </Target>
+  
+</Project>

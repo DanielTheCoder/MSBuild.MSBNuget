@@ -17,19 +17,26 @@
   -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
 
+  <PropertyGroup Label="Internal project specific default properties">
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputPath Condition="'$(OutputPath)' == ''">bin\$(Configuration)\</OutputPath>
+  </PropertyGroup>
+  
+  
   <!-- Internal working properties, they are not intended to be changed direclty from caller -->
   <PropertyGroup Label="Internal default property values">
-    <OutputPath Condition="'$(OutputPath)' == ''">bin\</OutputPath>
-    <NugetStage>$(MSBuildProjectDirectory)\obj\$(Configuration)\nugetstage\</NugetStage>
-    <NugetIntermediatePath Condition="'$(NugetIntermediatePath)' == ''">$(OutputPath)$(Configuration)\</NugetIntermediatePath>
+    
+    <NugetIntermediatePath Condition="'$(NugetIntermediatePath)' == ''">$(OutputPath)</NugetIntermediatePath>
     <!-- TFS 2010/2012 support of OutDir overwrite -->
-    <NugetIntermediatePath Condition="'$(OutDir)' != ''">$(OutDir)\NugetPackages\$(Configuration)\</NugetIntermediatePath>
+    <NugetIntermediatePath Condition="'$(OutDir)' != ''">$(OutDir)\$(Configuration)\NugetPackages\</NugetIntermediatePath>
+
+    <NugetStage>$(MSBuildProjectDirectory)\obj\$(Configuration)\nugetstage\</NugetStage>
+    
     <!-- Filter out all folders which are not known by convention -->
     <NugetFilterOnlyConventionWellKnownFolders Condition="'$(NugetFilterOnlyConventionWellKnownFolders)' == ''">true</NugetFilterOnlyConventionWellKnownFolders>
     <!-- Filter to not include *.nuspec files from packages/; obj/; bin/-->
     <NugetNuspecExcludePattern Condition="'$(NugetNuspecExcludePattern)' == ''">$(MSBuildProjectDirectory)\packages\**;$(MSBuildProjectDirectory)\bin\**;$(MSBuildProjectDirectory)\obj\**;</NugetNuspecExcludePattern>
-    <!-- Convention based for Nuget Package Restore -->
-    <BuildDependsOn/>
 
     <NugetBuildTargets>
       NugetCommandLineEval;
@@ -61,11 +68,6 @@
 
   </PropertyGroup>
 
-  <!-- List of *.nuspec files which should be transformed -->
-  <ItemGroup>
-    <nuspec Include="$(MSBuildProjectDirectory)\**\*.nuspec"/>
-  </ItemGroup>
-
   <!-- Evaluate nuget.exe from NugetPackage dependency -->
   <!-- TODO: Bug, we maybe get more than one nuget.exe back, we need to handle this better -->
   <PropertyGroup>
@@ -74,6 +76,10 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <!-- List of *.nuspec files which should be transformed -->
+    <nuspec Include="$(MSBuildProjectDirectory)\**\*.nuspec"
+            Exclude="$(NugetNuspecExcludePattern)"/>
+    
     <nugetExe Include="$(NugetCommandLinePath)"
               Exclude="$(NugetNuspecExcludePattern)"/>
   </ItemGroup>
@@ -177,10 +183,6 @@
     <ItemGroup>
       <!-- staged files-->
       <files Include="$(NugetStage)"/>
-      <!--<files Include="$(NugetStage)\tools\**\*.*"/>
-      <files Include="$(NugetStage)\lib\**\*.*"/>
-      <files Include="$(NugetStage)\content\**\*.*"/>
-      <files Include="$(NugetStage)\build\**\*.*"/>-->
       <!-- intermediate files -->
       <files Include="$(NugetIntermediatePath)" />
 
@@ -219,6 +221,7 @@
     <Exec Command="$(_nugetCommandPack) &quot;%(nuspecStaged.Identity)&quot;" Condition="'%(nuspecStaged.Identity)' != ''"/>
   </Target>
 
+  
   <Target Name="NugetPublishToFeeds">
     <CallTarget Condition="'$(NugetPublishToReleaseFolder)' == 'true'" Targets="NugetPublishToReleaseFolder" />
     <CallTarget Condition="'$(NugetPublishToLocalNugetFeed)' == 'true'" Targets="NugetPublishToLocalFeed" />

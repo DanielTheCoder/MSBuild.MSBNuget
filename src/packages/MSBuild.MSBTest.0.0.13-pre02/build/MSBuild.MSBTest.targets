@@ -1,0 +1,34 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0"  >
+
+  <PropertyGroup Condition="'$(TestrunnerImport)'==''">
+    <!-- nuget path -->
+    <TestrunnerImport Condition="!Exists('$(TestrunnerImport)')">$(MSBuildThisFileDirectory)testFramework\testrunner.targets</TestrunnerImport>
+    <!-- development path -->
+    <TestrunnerImport Condition="!Exists('$(TestrunnerImport)')">$(MSBuildThisFileDirectory)..\testFramework\testrunner.targets</TestrunnerImport>
+  </PropertyGroup>
+
+  <Import Condition="Exists('$(TestrunnerImport)')" Project="$(TestrunnerImport)" />
+  
+  <PropertyGroup>
+    <BuildTargets>
+      CleanTests;
+      $(BuildTargets);
+      RunTests;
+    </BuildTargets>
+    <CleanTargets>
+      $(CleanTargets);
+      CleanTests;
+    </CleanTargets>
+    <RebuildTargets>
+      CleanTests;
+      $(RebuildTargets)
+      RunTests;
+    </RebuildTargets>
+    <PublishTargets>
+      CleanTests;
+      $(PublishTargets);
+      RunTests;
+    </PublishTargets>
+  </PropertyGroup>
+
+</Project>

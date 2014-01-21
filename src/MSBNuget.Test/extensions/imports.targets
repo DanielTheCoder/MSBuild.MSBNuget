@@ -1,0 +1,9 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+  <Import Project="tasks.unzip.targets" />
+  <Import Project="tasks.deleteFolder.targets" />
+  
+</Project>
+
+
+

@@ -1,0 +1,20 @@
+﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+  <ItemGroup Label="MSBNuget">
+    <additionalFiles Include="$(MSBuildThisFileDirectory)\..\..\MSBNuget\nuget.targets">
+      <targetFolder>MSBNuget/build</targetFolder>
+    </additionalFiles>
+    <additionalFiles Include="$(MSBuildThisFileDirectory)\..\..\MSBNuget\Legacy.100.targets">
+      <targetFolder>MSBNuget/build</targetFolder>
+    </additionalFiles>
+      <additionalFiles Include="$(MSBuildThisFileDirectory)\..\..\MSBNuget\MSBuild.MSBNuget.targets">
+      <targetFolder>MSBNuget/build</targetFolder>
+    </additionalFiles>
+
+    <!-- Conventions -->
+    <additionalFiles Include="$(MSBuildThisFileDirectory)\..\..\MSBNuget\MSBNuget.props">
+      <targetFolder>MSBNuget/content/Properties</targetFolder>
+    </additionalFiles>
+  </ItemGroup>
+  
+</Project>

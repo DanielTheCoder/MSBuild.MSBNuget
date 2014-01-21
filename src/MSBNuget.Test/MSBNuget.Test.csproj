@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A50915EA-E1EF-4A15-9046-08976A383F75}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MSBNuget.Test</RootNamespace>
+    <AssemblyName>MSBNuget.Test</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="extensions\tasks.deleteFolder.targets">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="extensions\tasks.unzip.targets">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="extensions\imports.targets" />
+    <None Include="packages.config" />
+    <None Include="Properties\build.props" />
+    <None Include="Properties\MSBTest.props" />
+    <None Include="src\imports.targets">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="tests\MSBNuget\Misc\OutDirSupport\OutDirSupport.md" />
+    <None Include="tests\MSBNuget\Misc\OutDirSupport\withAdditionalFiles_BinaryDependency\project\project.proj" />
+    <None Include="tests\MSBNuget\Misc\OutDirSupport\withAdditionalFiles_BinaryDependency\project\Properties\build.props" />
+    <None Include="tests\MSBNuget\Misc\OutDirSupport\withAdditionalFiles_BinaryDependency\project\sample.nuspec" />
+    <None Include="tests\MSBNuget\Misc\OutDirSupport\withAdditionalFiles_BinaryDependency\Test.targets" />
+    <None Include="tests\MSBNuget\Misc\OutDirSupport\withNuspecDependencies\project\project.proj" />
+    <None Include="tests\MSBNuget\Misc\OutDirSupport\withNuspecDependencies\project\Properties\build.props" />
+    <None Include="tests\MSBNuget\Misc\OutDirSupport\withNuspecDependencies\project\sample.nuspec" />
+    <None Include="tests\MSBNuget\Misc\OutDirSupport\withNuspecDependencies\Test.targets" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\project\Properties\build.props" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\project\project.proj" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\project\SamplePackage1\SamplePackage1.nuspec.props" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\project\SamplePackage1\SamplePackage1.nuspec" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\project\SamplePackage2\SamplePackage2.nuspec.props" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\project\SamplePackage2\SamplePackage2.nuspec" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\Test.targets">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFiles\project\Properties\build.props" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFiles\project\project.proj" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFiles\project\SamplePackage1\SamplePackage1.nuspec" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFiles\project\SamplePackage2\SamplePackage2.nuspec" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFiles\Test.targets">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withFileSystemConventionKnownFolders\project\project.proj" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withFileSystemConventionKnownFolders\project\Properties\build.props" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withFileSystemConventionKnownFolders\project\SamplePackage1\SamplePackage1.nuspec" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withFileSystemConventionKnownFolders\project\SamplePackage2\SamplePackage2.nuspec" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withFileSystemConventionKnownFolders\Test.targets">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFilesNuspecProps\project\Properties\build.props" />
+    <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFilesNuspecProps\project\sample.nuspec.props" />
+    <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFilesNuspecProps\project\sample.nuspec" />
+    <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFilesNuspecProps\project\project.proj" />
+    <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFilesNuspecProps\Test.targets">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFiles\project\Properties\build.props" />
+    <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFiles\project\sample.nuspec" />
+    <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFiles\project\project.proj" />
+    <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFiles\Test.targets">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="tests\Nuget\MultiplePackagesPerProject\withNuspecDependency\project\Properties\build.props" />
+    <None Include="tests\Nuget\MultiplePackagesPerProject\withNuspecDependency\project\SamplePackage2\SamplePackage2.nuspec" />
+    <None Include="tests\Nuget\MultiplePackagesPerProject\withNuspecDependency\project\SamplePackage1\SamplePackage1.nuspec" />
+    <None Include="tests\Nuget\MultiplePackagesPerProject\withNuspecDependency\project\project.proj" />
+    <None Include="tests\Nuget\MultiplePackagesPerProject\withNuspecDependency\Test.targets">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="tests\Nuget\MultiplePackagesPerProject\withNuspecFile\project\Properties\build.props" />
+    <None Include="tests\Nuget\MultiplePackagesPerProject\withNuspecFile\project\project.proj" />
+    <None Include="tests\Nuget\MultiplePackagesPerProject\withNuspecFile\project\SamplePackage1\SamplePackage1.nuspec" />
+    <None Include="tests\Nuget\MultiplePackagesPerProject\withNuspecFile\project\SamplePackage2\SamplePackage2.nuspec" />
+    <None Include="tests\Nuget\MultiplePackagesPerProject\withNuspecFile\Test.targets">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="tests\Nuget\SinglePackagePerProject\withNuspecFiles\project\Properties\build.props" />
+    <None Include="tests\Nuget\SinglePackagePerProject\withNuspecFiles\project\sample.nuspec" />
+    <None Include="tests\Nuget\SinglePackagePerProject\withNuspecFiles\project\project.proj" />
+    <None Include="tests\Nuget\SinglePackagePerProject\withNuspecFiles\Test.targets">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="tests\Nuget\SinglePackagePerProject\withNuspecDependencies\project\Properties\build.props" />
+    <None Include="tests\Nuget\SinglePackagePerProject\withNuspecDependencies\project\project.proj" />
+    <None Include="tests\Nuget\SinglePackagePerProject\withNuspecDependencies\project\sample.nuspec" />
+    <None Include="tests\Nuget\SinglePackagePerProject\withNuspecDependencies\Test.targets">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="tests\test.MultiplePackages.import" />
+    <None Include="tests\test.SinglePackage.import" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="readme\MSBTest.readme.txt" />
+    <Content Include="tests\MSBNuget\Misc\OutDirSupport\withAdditionalFiles_BinaryDependency\project\additionalFile.txt" />
+    <Content Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\project\additionalFile.txt" />
+    <Content Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFiles\project\additionalFile.txt" />
+    <Content Include="tests\MSBNuget\MultiplePackagesPerProject\withFileSystemConventionKnownFolders\project\SamplePackage1\build\build.txt" />
+    <Content Include="tests\MSBNuget\MultiplePackagesPerProject\withFileSystemConventionKnownFolders\project\SamplePackage1\content\content.txt" />
+    <Content Include="tests\MSBNuget\MultiplePackagesPerProject\withFileSystemConventionKnownFolders\project\SamplePackage1\lib\lib.txt" />
+    <Content Include="tests\MSBNuget\MultiplePackagesPerProject\withFileSystemConventionKnownFolders\project\SamplePackage1\tools\tools.txt" />
+    <Content Include="tests\MSBNuget\MultiplePackagesPerProject\withFileSystemConventionKnownFolders\project\SamplePackage2\build\build.txt" />
+    <Content Include="tests\MSBNuget\MultiplePackagesPerProject\withFileSystemConventionKnownFolders\project\SamplePackage2\content\content.txt" />
+    <Content Include="tests\MSBNuget\MultiplePackagesPerProject\withFileSystemConventionKnownFolders\project\SamplePackage2\lib\lib.txt" />
+    <Content Include="tests\MSBNuget\MultiplePackagesPerProject\withFileSystemConventionKnownFolders\project\SamplePackage2\tools\tools.txt" />
+    <Content Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFilesNuspecProps\project\additionalFile.txt" />
+    <Content Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFiles\project\additionalFile.txt" />
+    <Content Include="tests\Nuget\MultiplePackagesPerProject\withNuspecFile\project\additionalFile.txt" />
+    <Content Include="tests\Nuget\SinglePackagePerProject\withNuspecFiles\project\additionalFile.txt" />
+    <Content Include="tests\ToDo.txt" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="..\packages\MSBuild.MSBBuildConvention.2.0.0\build\MSBuild.MSBBuildConvention.targets" Condition="Exists('..\packages\MSBuild.MSBBuildConvention.2.0.0\build\MSBuild.MSBBuildConvention.targets')" />
+  <Import Project="..\packages\MSBuild.MSBTest.0.0.13-pre02\build\MSBuild.MSBTest.targets" Condition="Exists('..\packages\MSBuild.MSBTest.0.0.13-pre02\build\MSBuild.MSBTest.targets')" />
+</Project>

@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSBNuget", "MSBNuget\MSBNuget.csproj", "{EC40ACB0-A6B9-4776-9078-B1D72D244787}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSBNuget.Nuget", "MSBNuget.Nuget\MSBNuget.Nuget.csproj", "{4455C566-5F12-40C5-8AA7-A86651E7738D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSBNuget.NugetPackages", "MSBNuget.NugetPackages\MSBNuget.NugetPackages.csproj", "{4455C566-5F12-40C5-8AA7-A86651E7738D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{55846E57-1E14-48E2-9789-26FB3176F5CE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSBNuget.Test", "Tests\MSBNuget.Test\MSBNuget.Test.csproj", "{A50915EA-E1EF-4A15-9046-08976A383F75}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSBNuget.Test", "MSBNuget.Test\MSBNuget.Test.csproj", "{A50915EA-E1EF-4A15-9046-08976A383F75}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "media", "media", "{C7C1F1E8-1F52-4B1E-A839-3F79DC5EF5A1}"
 	ProjectSection(SolutionItems) = preProject
@@ -48,8 +46,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{A50915EA-E1EF-4A15-9046-08976A383F75} = {55846E57-1E14-48E2-9789-26FB3176F5CE}
 	EndGlobalSection
 EndGlobal

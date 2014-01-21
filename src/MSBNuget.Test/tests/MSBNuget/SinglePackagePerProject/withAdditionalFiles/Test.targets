@@ -1,0 +1,13 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+  <Import Project="$(TestsRoot)test.SinglePackage.import"/>
+  
+
+  <Target Name="Assert">
+    <unzip zipPath="$(expectedPackage)" extractPath="$(expectedPackageExtractedPath)" />
+    <!--<Exec Command="explorer $(ProjectDir)$(expectedPackageExtractedPath)"/>-->
+
+    <Error Text="> Assert: Expected file is inside extracted package folder '$(expectedPackage)' !" Condition="Exists('$(expectedPackageExtractedPath)\misc\additionalFile.txt') == 'false'"/>
+  </Target>
+  
+</Project>

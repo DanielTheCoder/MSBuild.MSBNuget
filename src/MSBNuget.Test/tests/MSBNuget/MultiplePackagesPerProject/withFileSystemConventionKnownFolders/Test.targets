@@ -1,0 +1,20 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+  <Import Project="$(TestsRoot)test.MultiplePackages.import"/>
+
+  <Target Name="Assert">
+    
+    <Error Text="> Assert: Expected file is not inside extracted package folder '$(expectedPackage1ExtractedPath)/build/build.txt' !" Condition="Exists('$(expectedPackage1ExtractedPath)/build/build.txt') == 'false'"/>
+    <Error Text="> Assert: Expected file is not inside extracted package folder '$(expectedPackage1ExtractedPath)/content/content.txt' !" Condition="Exists('$(expectedPackage1ExtractedPath)/content/content.txt') == 'false'"/>
+    <Error Text="> Assert: Expected file is not inside extracted package folder '$(expectedPackage1ExtractedPath)/lib/lib.txt' !" Condition="Exists('$(expectedPackage1ExtractedPath)/lib/lib.txt') == 'false'"/>
+    <Error Text="> Assert: Expected file is not inside extracted package folder '$(expectedPackage1ExtractedPath)/tools/tools.txt' !" Condition="Exists('$(expectedPackage1ExtractedPath)/tools/tools.txt') == 'false'"/>
+
+    <Error Text="> Assert: Expected file is not inside extracted package folder '$(expectedPackage2ExtractedPath)/build/build.txt' !" Condition="Exists('$(expectedPackage2ExtractedPath)/build/build.txt') == 'false'"/>
+    <Error Text="> Assert: Expected file is not inside extracted package folder '$(expectedPackage2ExtractedPath)/content/content.txt' !" Condition="Exists('$(expectedPackage2ExtractedPath)/content/content.txt') == 'false'"/>
+    <Error Text="> Assert: Expected file is not inside extracted package folder '$(expectedPackage2ExtractedPath)/lib/lib.txt' !" Condition="Exists('$(expectedPackage2ExtractedPath)/lib/lib.txt') == 'false'"/>
+    <Error Text="> Assert: Expected file is not inside extracted package folder '$(expectedPackage2ExtractedPath)/tools/tools.txt' !" Condition="Exists('$(expectedPackage2ExtractedPath)/tools/tools.txt') == 'false'"/>
+    
+    <!--<Error Text="> Assert: Expected file is not inside extracted package folder '$(expectedPackage2ExtractedPath)/misc/additionalFile.txt' !" Condition="Exists('$(expectedPackage2ExtractedPath)/misc/additionalFile.txt') == 'false'"/>-->
+  </Target>
+
+</Project>

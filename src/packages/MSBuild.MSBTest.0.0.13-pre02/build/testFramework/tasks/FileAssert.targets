@@ -1,0 +1,44 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0"  >
+
+  <!-- This simple inline task does nothing. -->
+  <UsingTask TaskName="AssertFileContains"
+             TaskFactory="CodeTaskFactory"
+             AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" >
+    <ParameterGroup>
+      <SearchPath       ParameterType="System.String" Required="true" />
+      <SearchFor  ParameterType="System.String" Required="true" />
+      <Message    ParameterType="System.String" Required="false"/>
+      <ShouldNotContain ParameterType="System.Boolean" Required="false" />
+    </ParameterGroup>
+    
+    <Task>
+      <Using Namespace="System"/>
+      <Using Namespace="System.IO"/>
+
+      <Code Type="Fragment" Language="cs">
+<![CDATA[
+Log.LogMessage(MessageImportance.Normal, " >-- AssertFileContains");
+Log.LogMessage(MessageImportance.Normal, "     SearchPath: " + SearchPath, MessageImportance.High);
+Log.LogMessage(MessageImportance.Normal, "     SearchFor:  " + SearchFor, MessageImportance.High);
+
+if(!File.Exists(SearchPath))
+{
+    Log.LogError("The SearchPath File does not exist!{0}Path: '{1}'", Environment.NewLine, SearchPath);
+}
+else
+{
+    string content = File.ReadAllText(SearchPath);
+    if (!content.Contains(SearchFor) && ShouldNotContain == false)
+    {
+        var messageInternal = string.IsNullOrWhiteSpace(Message) ? "File '{0}' does not contain SearchFor '{1}'!" + Environment.NewLine + SearchPath : Message;
+        Log.LogError(messageInternal, Path.GetFileName(SearchPath), SearchFor);
+    }
+}
+]]>
+      </Code>
+    </Task>
+    
+  </UsingTask>
+
+
+</Project>
