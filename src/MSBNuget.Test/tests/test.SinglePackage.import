@@ -19,7 +19,7 @@
     <expectedPackage Condition="'$(expectedPackage)'==''">project/bin/Debug/sample.0.0.2-pre.nupkg</expectedPackage>
     <expectedPackageExtractedPath Condition="'$(expectedPackageExtractedPath)'==''">project/bin/Debug/sample.0.0.2-pre</expectedPackageExtractedPath>
     
-    <projectToRun>project/sample.proj</projectToRun>
+    <projectToRun>project/project.proj</projectToRun>
     <targetToRun>Build</targetToRun>
   </PropertyGroup>
   

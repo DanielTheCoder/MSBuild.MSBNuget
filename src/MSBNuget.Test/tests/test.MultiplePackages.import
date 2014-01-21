@@ -21,7 +21,7 @@
     <expectedPackage1ExtractedPath Condition="'$(expectedPackage1ExtractedPath)'==''">project/bin/Debug/Package1</expectedPackage1ExtractedPath>
     <expectedPackage2ExtractedPath Condition="'$(expectedPackage2ExtractedPath)'==''">project/bin/Debug/Package2</expectedPackage2ExtractedPath>
     
-    <projectToRun>project/sample.proj</projectToRun>
+    <projectToRun>project/project.proj</projectToRun>
     <targetToRun>Build</targetToRun>
   </PropertyGroup>
   
