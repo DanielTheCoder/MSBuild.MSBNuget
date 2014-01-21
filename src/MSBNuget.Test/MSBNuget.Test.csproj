@@ -38,6 +38,13 @@
     <None Include="tests\MSBNuget\MultiplePackagesPerProject\with_additionalFiles\Test.targets">
       <SubType>Designer</SubType>
     </None>
+    <None Include="tests\MSBNuget\OutDirSupport\readme.md" />
+    <None Include="tests\MSBNuget\OutDirSupport\with_additionalFiles\project\project.proj" />
+    <None Include="tests\MSBNuget\OutDirSupport\with_additionalFiles\project\Properties\build.props" />
+    <None Include="tests\MSBNuget\OutDirSupport\with_additionalFiles\project\sample.nuspec" />
+    <None Include="tests\MSBNuget\OutDirSupport\with_additionalFiles\Test.targets">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles_NuspecProps\project\Properties\build.props" />
     <None Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles_NuspecProps\project\sample.nuspec.props" />
     <None Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles_NuspecProps\project\sample.nuspec" />
