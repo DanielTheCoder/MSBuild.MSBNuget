@@ -22,40 +22,40 @@
     <None Include="src\imports.targets">
       <SubType>Designer</SubType>
     </None>
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\with_additionalFiles_NuspecProps\project\Properties\build.props" />
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\with_additionalFiles_NuspecProps\project\project.proj" />
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\with_additionalFiles_NuspecProps\project\SamplePackage1\SamplePackage1.nuspec.props" />
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\with_additionalFiles_NuspecProps\project\SamplePackage1\SamplePackage1.nuspec" />
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\with_additionalFiles_NuspecProps\project\SamplePackage2\SamplePackage2.nuspec.props" />
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\with_additionalFiles_NuspecProps\project\SamplePackage2\SamplePackage2.nuspec" />
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\with_additionalFiles_NuspecProps\Test.targets">
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\project\Properties\build.props" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\project\project.proj" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\project\SamplePackage1\SamplePackage1.nuspec.props" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\project\SamplePackage1\SamplePackage1.nuspec" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\project\SamplePackage2\SamplePackage2.nuspec.props" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\project\SamplePackage2\SamplePackage2.nuspec" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\Test.targets">
       <SubType>Designer</SubType>
     </None>
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\with_additionalFiles\project\Properties\build.props" />
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\with_additionalFiles\project\project.proj" />
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\with_additionalFiles\project\SamplePackage1\SamplePackage1.nuspec" />
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\with_additionalFiles\project\SamplePackage2\SamplePackage2.nuspec" />
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\with_additionalFiles\Test.targets">
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFiles\project\Properties\build.props" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFiles\project\project.proj" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFiles\project\SamplePackage1\SamplePackage1.nuspec" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFiles\project\SamplePackage2\SamplePackage2.nuspec" />
+    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFiles\Test.targets">
       <SubType>Designer</SubType>
     </None>
     <None Include="tests\MSBNuget\OutDirSupport\readme.md" />
-    <None Include="tests\MSBNuget\OutDirSupport\with_additionalFiles\project\project.proj" />
-    <None Include="tests\MSBNuget\OutDirSupport\with_additionalFiles\project\Properties\build.props" />
-    <None Include="tests\MSBNuget\OutDirSupport\with_additionalFiles\project\sample.nuspec" />
-    <None Include="tests\MSBNuget\OutDirSupport\with_additionalFiles\Test.targets">
+    <None Include="tests\MSBNuget\OutDirSupport\withAdditionalFiles\project\project.proj" />
+    <None Include="tests\MSBNuget\OutDirSupport\withAdditionalFiles\project\Properties\build.props" />
+    <None Include="tests\MSBNuget\OutDirSupport\withAdditionalFiles\project\sample.nuspec" />
+    <None Include="tests\MSBNuget\OutDirSupport\withAdditionalFiles\Test.targets">
       <SubType>Designer</SubType>
     </None>
-    <None Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles_NuspecProps\project\Properties\build.props" />
-    <None Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles_NuspecProps\project\sample.nuspec.props" />
-    <None Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles_NuspecProps\project\sample.nuspec" />
-    <None Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles_NuspecProps\project\project.proj" />
-    <None Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles_NuspecProps\Test.targets">
+    <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFilesNuspecProps\project\Properties\build.props" />
+    <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFilesNuspecProps\project\sample.nuspec.props" />
+    <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFilesNuspecProps\project\sample.nuspec" />
+    <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFilesNuspecProps\project\project.proj" />
+    <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFilesNuspecProps\Test.targets">
       <SubType>Designer</SubType>
     </None>
-    <None Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles\project\Properties\build.props" />
-    <None Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles\project\sample.nuspec" />
-    <None Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles\project\project.proj" />
-    <None Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles\Test.targets">
+    <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFiles\project\Properties\build.props" />
+    <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFiles\project\sample.nuspec" />
+    <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFiles\project\project.proj" />
+    <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFiles\Test.targets">
       <SubType>Designer</SubType>
     </None>
     <None Include="tests\Nuget\MultiplePackagesPerProject\withNuspecDependency\project\Properties\build.props" />
@@ -89,10 +89,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="readme\MSBTest.readme.txt" />
-    <Content Include="tests\MSBNuget\MultiplePackagesPerProject\with_additionalFiles_NuspecProps\project\additionalFile.txt" />
-    <Content Include="tests\MSBNuget\MultiplePackagesPerProject\with_additionalFiles\project\additionalFile.txt" />
-    <Content Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles_NuspecProps\project\additionalFile.txt" />
-    <Content Include="tests\MSBNuget\SinglePackagePerProject\with_additionalFiles\project\additionalFile.txt" />
+    <Content Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\project\additionalFile.txt" />
+    <Content Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFiles\project\additionalFile.txt" />
+    <Content Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFilesNuspecProps\project\additionalFile.txt" />
+    <Content Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFiles\project\additionalFile.txt" />
     <Content Include="tests\Nuget\MultiplePackagesPerProject\withNuspecFile\project\additionalFile.txt" />
     <Content Include="tests\Nuget\SinglePackagePerProject\withNuspecFiles\project\additionalFile.txt" />
     <Content Include="tests\ToDo.txt" />
