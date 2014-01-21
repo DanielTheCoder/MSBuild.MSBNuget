@@ -1,0 +1,10 @@
+﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+  <ItemGroup>
+    <additionalFiles Include="$(MSBuildThisFileDirectory)additionalFile.txt">
+      <targetFolder>SamplePackage1/misc</targetFolder>
+    </additionalFiles>
+  </ItemGroup>
+  
+
+</Project>

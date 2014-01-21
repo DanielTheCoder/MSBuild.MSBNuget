@@ -1,0 +1,56 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0"  >
+
+  <Import Project="$(MSBuildThisFileDirectory)testrunner.props" />
+  <Import Project="$(TestFrameworkImports)" />
+  
+  <Target Name="RunTests">
+    <Message Text="&gt;---- RunTests Start-------------------------" Importance="normal" />
+    
+    <CallTarget Targets="CleanTests;_TraceGlobalVars" />
+    
+    <MSBuild Projects="$(MSBuildProjectFile)"
+             Targets="_RunTest"
+             Properties="ProjectDir=%(Tests.RootDir)%(Tests.Directory);TestSettings=$(TestSettings);Test=%(Tests.FullPath)"
+             BuildInParallel="true"/>
+    
+    <Message Text="&gt;---- RunTests End-------------------------" Importance="normal" />
+  </Target>
+
+  <Target Name="CleanTests">
+    <Message Text="&gt;---- CleanTests Start-------------------------" Importance="normal" />
+    
+    <MSBuild Projects="@(Tests)"
+             Targets="_CleanTest;"
+             Properties="ProjectDir=%(Tests.RootDir)%(Tests.Directory);Test=%(Tests.RelativeDir);$(TestSettings)"
+             BuildInParallel="true"/>
+
+    <Message Text="&gt;---- CleanTests End-------------------------" Importance="normal" />
+  </Target>
+
+  <Target Name ="_RunTest">
+
+    <PropertyGroup>
+      <_testName>$(Test.Replace('$(TestsRoot)', ''))</_testName>
+    </PropertyGroup>
+    
+    <Message Text="&gt;------------------------------------------------------------------------------------" Importance="high" />
+    <Message Text="&gt;---- Test: $(_testName) -------------------------" Importance="high" />
+    <Message Text="&gt;---- Path: '$(Test)' ---------" Importance="normal" />
+    <Message Text="&gt;------------------------------------------------------------------------------------" Importance="high" />
+
+    <PropertyGroup>
+      <TestTargets>
+        _CleanTest;
+        _TraceTestVars;
+        _RunTest;
+        _AssertTest;
+      </TestTargets>
+    </PropertyGroup>
+    
+    <MSBuild Projects="$(Test)"
+             Targets="$(TestTargets)"
+             Properties="ProjectDir=$(ProjectDir);$(TestSettings)"
+             BuildInParallel="true"/>
+  </Target>
+  
+</Project>

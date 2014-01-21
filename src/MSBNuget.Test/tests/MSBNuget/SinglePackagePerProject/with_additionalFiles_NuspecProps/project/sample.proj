@@ -1,0 +1,9 @@
+﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+  <Import Project="$(SourceImports)" Condition="Exists('$(SourceImports)')"/>
+
+  <Target Name="temp" BeforeTargets="Build">
+    <!--<Error Text="$(MSBuildProjectDirectory)" />-->
+  </Target>
+  
+ </Project>

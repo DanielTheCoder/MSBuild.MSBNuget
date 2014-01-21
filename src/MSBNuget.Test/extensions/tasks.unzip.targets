@@ -1,0 +1,38 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0"  >
+
+  <!--
+  MSBuild Inline Tasks: http://msdn.microsoft.com/en-us/library/dd722601(v=vs.120).aspx
+  -->
+  
+  <!-- This simple inline task does nothing. -->
+  <UsingTask TaskName="unzip"
+             TaskFactory="CodeTaskFactory"
+             AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" >
+    <ParameterGroup>
+      <zipPath ParameterType="System.String" Required="true" />
+      <extractPath ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Reference Include="System.IO.Compression.FileSystem"/>
+      <Using Namespace="System"/>
+      <Using Namespace="System.IO"/>
+      <Using Namespace="System.IO.Compression" />
+      
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+        if (!File.Exists(zipPath))
+        {
+          //Log.LogError("file not found'" + zipPath + "'");
+          throw new FileNotFoundException("file not found'" + zipPath + "'");
+        }
+        if (!Directory.Exists(extractPath))
+        {
+          Directory.CreateDirectory(extractPath);  
+        }
+        System.IO.Compression.ZipFile.ExtractToDirectory(zipPath, extractPath);
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+</Project>

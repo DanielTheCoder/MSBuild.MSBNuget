@@ -1,0 +1,8 @@
+﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+  
+  <PropertyGroup Label="TestTraceSettings">
+    <TraceAllVars Condition="'$(TraceAllVars)'==''">true</TraceAllVars>
+    <TraceGlobalVars Condition="'$(TraceGlobalVars)'==''">true</TraceGlobalVars>
+  </PropertyGroup>
+
+</Project>

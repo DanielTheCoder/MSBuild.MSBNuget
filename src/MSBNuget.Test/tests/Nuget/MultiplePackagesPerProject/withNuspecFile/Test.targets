@@ -1,0 +1,14 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+  <Import Project="$(TestsRoot)test.MultiplePackages.import"/>
+
+
+  <Target Name="Assert">
+    <unzip zipPath="$(expectedPackage1)" extractPath="$(expectedPackage1ExtractedPath)" />
+    <Error Text="> Assert: Expected file is inside extracted package folder '$(expectedPackage1)' !" Condition="Exists('$(expectedPackage1ExtractedPath)\misc\additionalFile.txt') == 'false'"/>
+
+    <unzip zipPath="$(expectedPackage2)" extractPath="$(expectedPackage2ExtractedPath)" />
+    <Error Text="> Assert: Expected file is inside extracted package folder '$(expectedPackage1)' !" Condition="Exists('$(expectedPackage2ExtractedPath)\misc\additionalFile.txt') == 'false'"/>
+  </Target>
+
+</Project>

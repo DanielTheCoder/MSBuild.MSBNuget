@@ -1,0 +1,71 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0"  >
+  
+  <PropertyGroup Label="Framework defaults">
+    <RootDir>$(MSBuildProjectDirectory)\</RootDir>
+    
+    <TestFrameworkRoot>$(MSBuildThisFileDirectory)</TestFrameworkRoot>
+    <TestFrameworkReferencesRoot>$(TestFrameworkRoot)targets\</TestFrameworkReferencesRoot>
+    <TestFrameworkImports>$(TestFrameworkRoot)imports.targets</TestFrameworkImports>
+
+    <ExtensionsRoot>$(RootDir)extensions\</ExtensionsRoot>
+    <ExtensionsTasks>$(ExtensionsRoot)Tasks\</ExtensionsTasks>
+    <ExtensionsImports>$(ExtensionsRoot)imports.targets</ExtensionsImports>
+
+    <SourceRoot Condition="'$(SourceRoot)'==''">$(RootDir)src\</SourceRoot>
+    <SourceImports Condition="'$(SourceImports)'==''">$(SourceRoot)imports.targets</SourceImports>
+    <TestsRoot  Condition="'$(TestsRoot)'==''">$(RootDir)tests\</TestsRoot>
+
+  </PropertyGroup>
+
+  <!-- Find all tests -->
+  <ItemGroup Label="Testlist">
+    <Tests Include="$(TestsRoot)**\Test.targets" />
+    <Tests Include="$(TestsRoot)**\*.Test.targets" />
+    <Tests Include="$(TestsRoot)**\Test.proj" />
+    <Tests Include="$(TestsRoot)**\*.Test.proj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TestCount>@(Tests->Count())</TestCount>
+    <!--<TestList> %(Tests.Identity) </TestList>
+    <TestListFormatted>$(TestList.Replace(";", Environment.NewLine + " -"))</TestListFormatted>-->
+  </PropertyGroup>
+  
+  <!-- Tracing Settings-->
+  <PropertyGroup Label="TracingSettings">
+    <TraceAllVars Condition="'$(TraceAllVars)' == ''">false</TraceAllVars>
+    <TraceGlobalVars Condition="'$(TraceGlobalVars)'==''">false</TraceGlobalVars>
+    <!--<TraceTestVars Condition="'$(TraceTestVars)'==''">false</TraceTestVars>-->
+  </PropertyGroup>
+
+  <!-- Test Settings -->
+  <PropertyGroup Label="Testsettings">
+    <TestCommonPaths>
+      RootDir=$(RootDir);
+      TestFrameworkRoot=$(TestFrameworkRoot);
+      TestFrameworkReferencesRoot=$(TestFrameworkReferencesRoot);
+      TestFrameworkImports=$(TestFrameworkImports);
+      ExtensionsRoot=$(ExtensionsRoot);
+      ExtensionsTasks=$(ExtensionsTasks);
+      ExtensionsImports=$(ExtensionsImports);
+      SourceRoot=$(SourceRoot);
+      SourceImports=$(SourceImports);
+      TestsRoot=$(TestsRoot);
+    </TestCommonPaths>
+    <TestTraceSettings>
+      TraceAllVars=$(TraceAllVars);
+      TraceGlobalVars=$(TraceGlobalVars);
+    </TestTraceSettings>
+    <TestAdditionalSettings Condition="'$(TestAdditionalSettings)'==''">
+      
+    </TestAdditionalSettings>
+    
+    <TestSettings>
+      $(TestCommonPaths);
+      $(TestTraceSettings);
+      $(TestAdditionalSettings)
+    </TestSettings>
+    <!--<TestSettings>$(TestCommonPaths);</TestSettings>-->
+  </PropertyGroup>
+
+</Project>

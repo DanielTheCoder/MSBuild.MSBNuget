@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/DanielTheCoder/MSBuild.MSBNuget</projectUrl>
     <iconUrl>https://raw.github.com/DanielTheCoder/MSBuild.MSBNuget/master/media/MSBNuget.ico</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Convention based nuget package creator build as msbuild script</description>
+    <description>Convention based nuget package creator build as msbuild script. This package will copy the nuget.targets file to a .build folder inside your project.</description>
     <copyright>Copyright 2013</copyright>
     <tags>NuGet MSBuild Package</tags>
     <releaseNotes>https://raw.github.com/DanielTheCoder/MSBuild.MSBNuget/master/changelog.txt</releaseNotes>

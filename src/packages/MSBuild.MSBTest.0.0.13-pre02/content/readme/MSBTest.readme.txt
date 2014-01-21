@@ -1,0 +1,14 @@
+﻿MSBTest.Readme
+--------------
+
+
+Description:
+--------------
+MSBTest is follwing the conventions of the nuget package MSBuild.MSBuildConventions
+
+
+Manuall Steps (optional)
+--------------
+After installing add the following import to your '<project>/Properties/build.props' file
+  <Import Project="MSBTest.props" />
+
