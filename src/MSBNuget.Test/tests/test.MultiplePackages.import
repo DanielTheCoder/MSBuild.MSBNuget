@@ -33,9 +33,11 @@
   <Target Name="Assert_PackageExists" BeforeTargets="Assert">
     <Error Text="> Assert: Expected package was not created '$(expectedPackage1)' !" Condition="Exists('$(expectedPackage1)') == 'false'"/>
     <Message Text="> Assert: Expected package1 was created '$(expectedPackage1)'." Importance="high" />
-
+    <unzip zipPath="$(expectedPackage1)" extractPath="$(expectedPackage1ExtractedPath)" />
+    
     <Error Text="> Assert: Expected package1 was not created '$(expectedPackage2)' !" Condition="Exists('$(expectedPackage2)') == 'false'"/>
     <Message Text="> Assert: Expected package1 was created '$(expectedPackage2)'." Importance="high" />
+    <unzip zipPath="$(expectedPackage2)" extractPath="$(expectedPackage2ExtractedPath)" />
   </Target>
   
 </Project>
