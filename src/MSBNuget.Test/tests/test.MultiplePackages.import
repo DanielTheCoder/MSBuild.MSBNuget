@@ -18,8 +18,8 @@
   <PropertyGroup>
     <expectedPackage1 Condition="'$(expectedPackage1)'==''">project/bin/Debug/SamplePackage1.0.0.2-pre.nupkg</expectedPackage1>
     <expectedPackage2 Condition="'$(expectedPackage2)'==''">project/bin/Debug/SamplePackage1.0.0.2-pre.nupkg</expectedPackage2>
-    <expectedPackage1ExtractedPath Condition="'$(expectedPackage1ExtractedPath)'==''">project/bin/Debug/SamplePackage1.0.0.2-pre</expectedPackage1ExtractedPath>
-    <expectedPackage2ExtractedPath Condition="'$(expectedPackage2ExtractedPath)'==''">project/bin/Debug/SamplePackage2.0.0.2-pre</expectedPackage2ExtractedPath>
+    <expectedPackage1ExtractedPath Condition="'$(expectedPackage1ExtractedPath)'==''">project/bin/Debug/Package1</expectedPackage1ExtractedPath>
+    <expectedPackage2ExtractedPath Condition="'$(expectedPackage2ExtractedPath)'==''">project/bin/Debug/Package2</expectedPackage2ExtractedPath>
     
     <projectToRun>project/sample.proj</projectToRun>
     <targetToRun>Build</targetToRun>
