@@ -1,0 +1,38 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0"  >
+
+  <!--
+  MSBuild Inline Tasks: http://msdn.microsoft.com/en-us/library/dd722601(v=vs.120).aspx
+  -->
+  
+  <!-- This simple inline task does nothing. -->
+  <UsingTask TaskName="deleteFolder"
+             TaskFactory="CodeTaskFactory"
+             AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" >
+    <ParameterGroup>
+      <folderPath ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System"/>
+      <Using Namespace="System.IO"/>
+      
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+        var innerPath = Path.GetFullPath(folderPath);
+        
+        if (!Directory.Exists(innerPath))
+        {
+          return _Success;
+          //throw new FileNotFoundException("folderpath not found '" + innerPath + "'");
+        }
+        else
+        {
+        Log.LogMessage(MessageImportance.Normal, "Directory deleting'" + innerPath + "'");
+          Directory.Delete(innerPath, true);
+          Log.LogMessage(MessageImportance.Normal, "Directory deleted'" + innerPath + "'");
+        }
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+</Project>

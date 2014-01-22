@@ -12,6 +12,9 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="extensions\tasks.deleteFolder.targets">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="extensions\tasks.unzip.targets">
       <SubType>Designer</SubType>
     </None>
