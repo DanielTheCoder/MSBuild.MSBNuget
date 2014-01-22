@@ -11,15 +11,22 @@
   <Import Project="$(ExtensionsImports)" Condition="Exists('$(ExtensionsImports)')" />
   <!--<Import Project="$(SourceImports)" Condition="Exists('$(SourceImports)')"/>-->
 
+  
+  
   <!-- ********************************************************** -->
   <!-- from here on: project specific test properties and targets -->
   <!-- ********************************************************** -->
 
+  <PropertyGroup Label="Internal project specific default properties">
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+  </PropertyGroup>
+  
   <PropertyGroup>
-    <expectedPackage1 Condition="'$(expectedPackage1)'==''">project/bin/Debug/SamplePackage1.0.0.2-pre.nupkg</expectedPackage1>
-    <expectedPackage2 Condition="'$(expectedPackage2)'==''">project/bin/Debug/SamplePackage1.0.0.2-pre.nupkg</expectedPackage2>
-    <expectedPackage1ExtractedPath Condition="'$(expectedPackage1ExtractedPath)'==''">project/bin/Debug/Package1</expectedPackage1ExtractedPath>
-    <expectedPackage2ExtractedPath Condition="'$(expectedPackage2ExtractedPath)'==''">project/bin/Debug/Package2</expectedPackage2ExtractedPath>
+    <expectedPackage1 Condition="'$(expectedPackage1)'==''">project/bin/$(Configuration)/SamplePackage1.0.0.2-pre.nupkg</expectedPackage1>
+    <expectedPackage2 Condition="'$(expectedPackage2)'==''">project/bin/$(Configuration)/SamplePackage1.0.0.2-pre.nupkg</expectedPackage2>
+    <expectedPackage1ExtractedPath Condition="'$(expectedPackage1ExtractedPath)'==''">project/bin/$(Configuration)/Package1</expectedPackage1ExtractedPath>
+    <expectedPackage2ExtractedPath Condition="'$(expectedPackage2ExtractedPath)'==''">project/bin/$(Configuration)/Package2</expectedPackage2ExtractedPath>
     
     <projectToRun>project/project.proj</projectToRun>
     <targetToRun>Build</targetToRun>
@@ -38,6 +45,11 @@
     <Error Text="> Assert: Expected package1 was not created '$(expectedPackage2)' !" Condition="Exists('$(expectedPackage2)') == 'false'"/>
     <Message Text="> Assert: Expected package1 was created '$(expectedPackage2)'." Importance="high" />
     <unzip zipPath="$(expectedPackage2)" extractPath="$(expectedPackage2ExtractedPath)" />
+  </Target>
+
+  <Target Name="Clean">
+    <deleteFolder folderPath="project/obj/" />
+    <deleteFolder folderPath="project/bin/" />
   </Target>
   
 </Project>
