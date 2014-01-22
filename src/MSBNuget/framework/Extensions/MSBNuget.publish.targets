@@ -1,0 +1,69 @@
+﻿<!--
+  MSBNuget is a collection of MSBuild scripts to support convention based Nuget package creation.
+  Copyright (C) 2013  Daniel Sack
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see [http://www.gnu.org/licenses/].
+  -->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+
+  <Target Name="NugetPublishToFeeds">
+    <CallTarget Condition="'$(NugetPublishToReleaseFolder)' == 'true'" Targets="NugetPublishToReleaseFolder" />
+    <CallTarget Condition="'$(NugetPublishToLocalNugetFeed)' == 'true'" Targets="NugetPublishToLocalFeed" />
+    <CallTarget Condition="'$(NugetPublishToOfficialNugetFeed)' == 'true'" Targets="NugetPublishToOfficialNugetFeed" />
+  </Target>
+
+
+  <Target Name="NugetPublishToReleaseFolder">
+    <ItemGroup>
+      <nupkg Include="$(msb-OutputPath)**\*.nupkg"/>
+    </ItemGroup>
+
+    <MakeDir Directories="$(NugetPublishReleaseFolder)" />
+
+    <Copy SourceFiles="@(nupkg)"
+          DestinationFolder="$(NugetPublishReleaseFolder)%(nupkg.RecursiveDir)"
+          OverwriteReadOnlyFiles="true" ContinueOnError="true"/>
+
+    <Message Text="PublishedTo: $(NugetPublishReleaseFolder)" Importance="high" />
+  </Target>
+
+
+  <Target Name="NugetPublishToLocalFeed">
+    <ItemGroup>
+      <nupkg Include="$(msb-OutputPath)**\*.nupkg"/>
+    </ItemGroup>
+
+    <MakeDir Directories="$(NugetPublishLocalNugetFeedFolder)" />
+
+    <Copy SourceFiles="@(nupkg)"
+          DestinationFolder="$(NugetPublishLocalNugetFeedFolder)%(nupkg.RecursiveDir)"
+          OverwriteReadOnlyFiles="true" ContinueOnError="true"/>
+
+    <Message Text="PublishedTo: $(NugetPublishLocalNugetFeedFolder)" Importance="high" />
+  </Target>
+
+
+  <Target Name="NugetPublishToOfficialNugetFeed">
+    <ItemGroup>
+      <nupkg Include="$(msb-OutputPath)**\*.nupkg"/>
+    </ItemGroup>
+
+    <Exec Command="&quot;@(nugetExe)&quot; push %(nupkg.Identity)" ContinueOnError="true" />
+
+    <Message Text="PublishedTo: http://www.nuget.org/packages/%(nupkg.Identity)/" Importance="high" />
+  </Target>
+
+
+</Project>

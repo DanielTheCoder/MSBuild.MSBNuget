@@ -1,0 +1,28 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+  <PropertyGroup>
+    <Configuration>Debug</Configuration>
+    <OutDir>$(RootDir)obj\tests\OutDirSupport\withNuspecDependencies\</OutDir>
+    <expectedPackage Condition="'$(expectedPackage)'==''">$(OutDir)$(Configuration)\NugetPackages\sample.0.0.2-pre.nupkg</expectedPackage>
+    <expectedPackageExtractedPath>$(OutDir)$(Configuration)\NugetPackages\sample.0.0.2-pre</expectedPackageExtractedPath>
+  </PropertyGroup>
+
+  <Import Project="$(TestsRoot)test.SinglePackage.import"/>
+
+  <Target Name="Test">
+    <MSBuild Projects="$(projectToRun)" Targets="$(targetToRun)" Properties="OutDir=$(OutDir)" />
+  </Target>
+
+  <Target Name="Assert">
+
+    <ItemGroup>
+      <notExpectedFiles Include="project.proj"/>
+      <notExpectedFiles Include="Properties/build.props"/>
+    </ItemGroup>
+
+    <Error Text="> Assert: Not expected file '%(notExpectedFiles.Identity)' is inside extracted package folder '$(expectedPackage)' !"
+           Condition="Exists('$(expectedPackageExtractedPath)/%(notExpectedFiles.Filename)%(Extension)') == 'true'"/>
+
+  </Target>
+
+</Project>

@@ -1,0 +1,41 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+  <PropertyGroup>
+    <Configuration>Debug</Configuration>
+    <OutDir>$(RootDir)obj\tests\OutDirSupport\withAdditionalFilesProj\</OutDir>
+    <expectedPackage>$(OutDir)$(Configuration)\NugetPackages\sample.0.0.2-pre.nupkg</expectedPackage>
+    <expectedPackageExtractedPath>$(OutDir)$(Configuration)\NugetPackages\sample.0.0.2-pre</expectedPackageExtractedPath>
+  </PropertyGroup>
+
+  <Import Project="$(TestsRoot)test.SinglePackage.import"/>
+
+  <Target Name="Test">
+    <!-- Simulate TFS Build copied file to bin/binary folder: TFS2013 Configuration: SingleFolder-->
+    <Copy SourceFiles="project/additionalFile.txt" DestinationFolder="$(OutDir)" />
+
+    <MSBuild Projects="$(projectToRun)" Targets="$(targetToRun)" Properties="OutDir=$(OutDir)" />
+  </Target>
+
+  <Target Name="Assert">
+    <unzip zipPath="$(expectedPackage)" extractPath="$(expectedPackageExtractedPath)" />
+
+    <Error Text="> Assert: Expected file is not inside extracted package folder '$(expectedPackageExtractedPath)\misc\additionalFile.txt' !"
+           Condition="Exists('$(expectedPackageExtractedPath)\misc\additionalFile.txt') == 'false'"/>
+
+    <ItemGroup>
+      <notExpectedFiles Include="project.proj"/>
+      <notExpectedFiles Include="additionalFile.txt"/>
+      <notExpectedFiles Include="Properties/build.props"/>
+    </ItemGroup>
+
+    <Error Text="> Assert: Not expected file '%(notExpectedFiles.Identity)' is inside extracted package folder '$(expectedPackage)' !"
+           Condition="Exists('$(expectedPackageExtractedPath)/%(notExpectedFiles.Filename)%(Extension)') == 'true'"/>
+  </Target>
+
+
+
+  <Target Name="Clean_OutDir" AfterTargets="Clean">
+    <deleteFolder folderPath="$(expectedPackageExtractedPath)" />
+  </Target>
+
+</Project>

@@ -3,7 +3,7 @@
   <!--
   MSBuild Inline Tasks: http://msdn.microsoft.com/en-us/library/dd722601(v=vs.120).aspx
   -->
-  
+
   <!-- This simple inline task does nothing. -->
   <UsingTask TaskName="deleteFolder"
              TaskFactory="CodeTaskFactory"
@@ -14,11 +14,11 @@
     <Task>
       <Using Namespace="System"/>
       <Using Namespace="System.IO"/>
-      
+
       <Code Type="Fragment" Language="cs">
         <![CDATA[
         var innerPath = Path.GetFullPath(folderPath);
-        
+
         if (!Directory.Exists(innerPath))
         {
           return _Success;

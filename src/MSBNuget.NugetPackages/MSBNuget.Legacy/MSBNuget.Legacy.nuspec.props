@@ -1,7 +1,7 @@
 ﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
 
   <ItemGroup Label="MSBNuget.Legacy">
-    <additionalFiles Include="$(MSBuildThisFileDirectory)\..\..\MSBNuget\nuget.targets">
+    <additionalFiles Include="$(MSBuildThisFileDirectory)\..\..\MSBNuget\framework\MSBNuget.targets">
       <targetFolder>MSBNuget.Legacy/content/.build</targetFolder>
     </additionalFiles>
   </ItemGroup>

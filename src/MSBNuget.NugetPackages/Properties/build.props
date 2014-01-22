@@ -17,5 +17,5 @@
   <Import Project="$(MSBuildProjectDirectory)\*\*.nuspec.props"/>
 
   <Import Project="$(MSBuildProjectDirectory)\..\MSBNuget\MSBuild.MSBNuget.targets" />
-  
+
 </Project>

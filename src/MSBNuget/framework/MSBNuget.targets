@@ -1,0 +1,147 @@
+﻿<!--
+  MSBNuget is a collection of MSBuild scripts to support convention based Nuget package creation.
+  Copyright (C) 2013-2015  Daniel Sack
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see [http://www.gnu.org/licenses/].
+  -->
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+  <PropertyGroup>
+    <!-- Expected project properties, if not set define defaults -->
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputPath Condition="'$(OutputPath)' == ''">bin\$(Configuration)\</OutputPath>
+
+
+
+    <msb-NugetStage Condition="'$(msb-NugetStage)'==''">$(MSBuildProjectDirectory)\obj\$(Configuration)\nugetstage\</msb-NugetStage>
+
+    <msb-OutputPath Condition="'$(msb-OutputPath)'==''">$(OutputPath)</msb-OutputPath>
+    <!-- TFS 2010/2012 support of OutDir overwrite -->
+    <msb-OutputPath Condition="'$(OutDir)' != ''">$(OutDir)\$(Configuration)\NugetPackages\</msb-OutputPath>
+
+    <msb-NugetNuspecExcludePattern>
+      $(msb-NugetNuspecExcludePattern);
+      $(MSBuildProjectDirectory)\Properties\**;
+      $(MSBuildProjectDirectory)\packages\**;
+      $(MSBuildProjectDirectory)\bin\**;
+      $(MSBuildProjectDirectory)\obj\**;
+    </msb-NugetNuspecExcludePattern>
+
+    <ValidationDependsOn>
+      $(ValidationDependsOn);
+    </ValidationDependsOn>
+
+    <HarvestNuspecDependsOn>
+      $(HarvestNuspecDependsOn);
+    </HarvestNuspecDependsOn>
+
+    <msb-HarvestFilesDependsOn>
+      $(msb-HarvestFilesDependsOn);
+    </msb-HarvestFilesDependsOn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <msb-nuspec Include="$(MSBuildProjectDirectory)\**\*.nuspec"
+                Exclude="$(msb-NugetNuspecExcludePattern)">
+    </msb-nuspec>
+  </ItemGroup>
+
+
+
+
+
+
+  <!-- helper targets to push generated packages to public (nuget.config) or custom locations (filesystem)-->
+  <!--<Import Project="Extensions\MSBNuget.publish.props" />
+  <Import Project="Extensions\MSBNuget.publish.targets" />-->
+  <Import Project="Harvesting/**/*.targets" />
+  <Import Project="Extensions\MSBNuget.NugetExe.targets" />
+
+
+
+
+  <Target Name="MSBNuget"
+          DependsOnTargets="$(ValidationDependsOn);NugetCommandLineEval;">
+
+    <CallTarget Targets="NugetCopyFilesToStage;NugetCreatePackage" />
+
+  </Target>
+
+  <Target Name="NugetCopyFilesToStage"
+          DependsOnTargets="$(msb-HarvestFilesDependsOn)">
+
+    <ItemGroup>
+      <msb-filesToCopy Include="@(msb-harvestedFiles)" Condition="%(msb-harvestedFiles.Identity) != ''">
+        <sourceFile>%(msb-harvestedFiles.sourceFile)</sourceFile>
+        <targetFile>$(msb-NugetStage)%(msb-harvestedFiles.targetFile)</targetFile>
+        <harvestTyp>%(msb-harvestedFiles.harvestTyp)</harvestTyp>
+      </msb-filesToCopy>
+    </ItemGroup>
+
+    <Message Importance="normal" Text="harvestedFiles"/>
+    <Message Importance="normal" Text=" - %(msb-harvestedFiles.harvestTyp) | $([System.String]::Copy('%(Identity)').Replace('$(MSBuildProjectDirectory)','')) -> %(targetFile)"/>
+
+    <!--<Message Importance="high"
+             Text="File: %(msb-filesToCopy.Filename)%(msb-filesToCopy.Extension)%0D%0A identity: %(msb-filesToCopy.Identity)%0D%0A source: %(msb-filesToCopy.sourceFile)%0D%0A targetFile: %(msb-filesToCopy.targetFile)%0D%0A harvestTyp: %(msb-filesToCopy.harvestTyp)" />-->
+
+    <Copy Condition="%(msb-filesToCopy.destinationFile) != '$(msb-NugetStage)'"
+          SourceFiles="%(msb-filesToCopy.sourceFile)"
+          DestinationFiles="%(msb-filesToCopy.targetFile)"
+          SkipUnchangedFiles='true'
+          OverwriteReadOnlyFiles="true"
+          ContinueOnError="true" />
+
+    <!--<Exec Command="explorer &quot;$(msb-NugetStage)&quot;" ContinueOnError="true" />-->
+    <!--<Error Text="Stop" />-->
+
+    <!--<Message Importance="high"
+             Text="File: %(msb-filesToCopy.Filename)%(msb-filesToCopy.Extension)%0D%0A identity: %(msb-filesToCopy.Identity)%0D%0A source: %(msb-filesToCopy.sourceFile)%0D%0A destination: %(msb-filesToCopy.targetFile)%0D%0A harvestTyp: %(msb-filesToCopy.harvestTyp)" />-->
+  </Target>
+
+  <Target Name="NugetCreatePackage" >
+    <ItemGroup>
+      <nuspecStaged Include="$(msb-NugetStage)**\*.nuspec"/>
+    </ItemGroup>
+
+    <Message Text="Nuget Global Override" Importance="normal"/>
+    <Message Text="--> NugetVersion: $(NugetVersion)" Importance="normal"/>
+    <Message Text="--> NugetMinClientVersion: $(NugetMinClientVersion)" Importance="normal"/>
+    <Message Text="--> NugetCommandPackArguments: $(NugetCommandPackArguments)" Importance="normal"/>
+
+    <Message Text="nuspecs-Count: @(nuspecStaged->Count())" Importance="normal"/>
+    <Message Text="nuspecs: @(nuspecStaged)" Importance="normal"/>
+    <Message Text="  %(nuspecStaged.Identity)" Importance="normal" />
+
+    <MakeDir Directories="$(msb-OutputPath)" />
+
+    <Exec Command="$(msb-NugetExe) &quot;%(nuspecStaged.Identity)&quot;" Condition="'%(nuspecStaged.Identity)' != ''"/>
+  </Target>
+
+  <Target Name="NugetCleanupFolderStructure">
+
+    <ItemGroup>
+      <filesToDelete Include="$(msb-NugetStage)"/>
+      <filesToDelete Include="$(msb-OutputPath)" />
+      <foldersToDelete Include="%(filesToDelete.RelativeDir)" />
+    </ItemGroup>
+
+    <Message Text=">> filesToDelete:   @(filesToDelete)" Importance="low" />
+    <Message Text=">> foldersToDelete: @(foldersToDelete)" Importance="low" />
+
+    <Delete Files="@(filesToDelete)" />
+    <RemoveDir Directories="@(foldersToDelete)" ContinueOnError="true" />
+  </Target>
+
+</Project>

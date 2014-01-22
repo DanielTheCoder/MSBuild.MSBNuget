@@ -7,8 +7,9 @@
     <NuGetToolsPath>$(MSBuildThisFileDirectory)..\..\packages\NuGet.CommandLine.*\tools\</NuGetToolsPath>
   </PropertyGroup>
 
-  <Import Project="$(MSBuildThisFileDirectory)..\..\MSBNuget\MSBNuget.props" />
   <Import Project="$(MSBuildThisFileDirectory)..\..\packages\MSBuild.MSBBuildConvention.*\build\MSBuild.MSBBuildConvention.targets" />
+
+  <Import Project="$(MSBuildThisFileDirectory)..\..\MSBNuget\MSBNuget.props" />
   <Import Project="$(MSBuildThisFileDirectory)..\..\MSBNuget\MSBuild.MSBNuget.targets" />
 
 </Project>

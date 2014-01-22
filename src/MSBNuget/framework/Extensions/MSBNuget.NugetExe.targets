@@ -1,0 +1,66 @@
+﻿<!--
+  MSBNuget is a collection of MSBuild scripts to support convention based Nuget package creation.
+  Copyright (C) 2013-2015  Daniel Sack
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see [http://www.gnu.org/licenses/].
+  -->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+  <!--
+    Use these properties to override default values
+  -->
+  <PropertyGroup>
+    <NugetVersion Condition="'$(NugetVersion)' == ''"></NugetVersion>
+    <NugetMinClientVersion Condition="'$(NugetMinClientVersion)' == ''"></NugetMinClientVersion>
+    <NugetCommandPackArguments Condition="'$(NugetCommandPackArguments)' == ''"></NugetCommandPackArguments>
+  </PropertyGroup>
+
+
+
+  <!-- Evaluate nuget.exe from NugetPackage dependency -->
+  <!-- TODO: Bug, we maybe get more than one nuget.exe back, we need to handle this better -->
+  <PropertyGroup>
+    <NuGetToolsPath Condition="'$(NuGetToolsPath)' == ''">$(MSBuildThisFileDirectory)..\..\NuGet.CommandLine.*\tools\</NuGetToolsPath>
+    <NugetCommandLinePath Condition="'$(NugetCommandLinePath)' == ''">$(NuGetToolsPath)Nuget.exe</NugetCommandLinePath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <nugetExeFiles Include="$(NugetCommandLinePath)" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <_nugetCommandPack>"@(nugetExeFiles)" pack -OutputDirectory &quot;$(msb-OutputPath.TrimEnd('\'))&quot; -NoDefaultExcludes</_nugetCommandPack>
+    <_nugetCommandPack Condition="'$(NugetVersion)' != ''">$(_nugetCommandPack) -Version &quot;$(NugetVersion)&quot;</_nugetCommandPack>
+    <_nugetCommandPack Condition="'$(NugetMinClientVersion)' != ''">$(_nugetCommandPack) -MinClientVersion &quot;$(NugetMinClientVersion)&quot;</_nugetCommandPack>
+    <_nugetCommandPack Condition="'$(NugetCommandPackArguments)' != ''">$(_nugetCommandPack) $(NugetCommandPackArguments) </_nugetCommandPack>
+
+    <!-- Case where nuget.exe is available in path -->
+    <msb-NugetExe>nuget.exe</msb-NugetExe>
+    <msb-NugetExe Condition="Exists('$(msb-NugetExe)') == 'false'">$(_nugetCommandPack)</msb-NugetExe>
+  </PropertyGroup>
+
+
+  <Target Name="NugetCommandLineEval">
+    <Message Text="Nuget Exe" Importance="normal"/>
+    <Message Text="--> NuGetToolsPath: $(NuGetToolsPath)" Importance="normal"/>
+    <Message Text="--> NugetCommandLinePath: $(NugetCommandLinePath)" Importance="normal"/>
+    <Message Text="--> nugetExeFiles: @(nugetExeFiles)" Importance="normal"/>
+    <Message Text="--> msb-NugetExe:  $(msb-NugetExe)" Importance="normal"/>
+    <Message Text="--> _nugetCommandPack:  $(_nugetCommandPack)" Importance="normal"/>
+
+    <Error Text="nuget.exe not found! @(nugetExeFiles)" Condition="'@(nugetExeFiles->Count())' == '0'" />
+    <Error Text="More than one nuget.exe found, we support only one. @(nugetExeFiles)" Condition="'@(nugetExeFiles->Count())' != '1'" />
+  </Target>
+
+</Project>

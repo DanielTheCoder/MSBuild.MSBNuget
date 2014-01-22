@@ -12,12 +12,23 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="framework\Extensions\MSBNuget.NugetExe.targets" />
+    <None Include="framework\Harvesting\filesystemContent.targets" />
+    <None Include="framework\Harvesting\additionalFilesFromItemGroup.targets" />
+    <None Include="framework\Harvesting\nuspec.targets" />
+    <None Include="framework\Harvesting\VisualStudioContentLinkedFiles.targets" />
+    <None Include="framework\Harvesting\VisualStudioContentFiles.targets" />
+    <None Include="framework\Extensions\MSBNuget.publish.props" />
     <None Include="MSBNuget.props" />
-    <None Include="Legacy.100.targets" />
+    <None Include="warnings\MSBNuget.Legacy.100.targets" />
     <Compile Include="MSBuild.MSBNuget.targets" />
-    <None Include="nuget.targets" />
+    <None Include="framework\Extensions\MSBNuget.publish.targets" />
+    <None Include="framework\MSBNuget.targets" />
     <None Include="packages.config" />
     <None Include="Properties\build.props" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="..\packages\MSBuild.MSBBuildConvention.2.0.0\build\MSBuild.MSBBuildConvention.targets" Condition="Exists('..\packages\MSBuild.MSBBuildConvention.2.0.0\build\MSBuild.MSBBuildConvention.targets')" />
+  <!-- added to support omnisharp in Visual Studio Code -->
+  <Target Name="ResolveReferences" />
 </Project>

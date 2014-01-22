@@ -1,0 +1,21 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+  <Import Project="$(TestsRoot)test.SinglePackage.import"/>
+
+  <Target Name="Assert">
+    <unzip zipPath="$(expectedPackage)" extractPath="$(expectedPackageExtractedPath)" />
+
+    <Error Text="> Assert: Expected file is not inside extracted package folder '$(expectedPackage)' !"
+           Condition="Exists('$(expectedPackageExtractedPath)\misc\additionalFile.txt') == 'false'"/>
+
+    <ItemGroup>
+      <notExpectedFiles Include="project.proj"/>
+      <notExpectedFiles Include="sample.nuspec.props"/>
+      <notExpectedFiles Include="Properties/build.props"/>
+    </ItemGroup>
+
+    <Error Text="> Assert: Not expected file '%(notExpectedFiles.Identity)' is inside extracted package folder '$(expectedPackage)' !"
+           Condition="Exists('$(expectedPackageExtractedPath)/%(notExpectedFiles.Filename)%(Extension)') == 'true'"/>
+  </Target>
+
+</Project>

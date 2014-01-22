@@ -33,4 +33,6 @@
     <Folder Include="MSBNuget\content\" />
   </ItemGroup>
   <Import Project="..\packages\MSBuild.MSBBuildConvention.2.0.0\build\MSBuild.MSBBuildConvention.targets" Condition="Exists('..\packages\MSBuild.MSBBuildConvention.2.0.0\build\MSBuild.MSBBuildConvention.targets')" />
+  <!-- added to support omnisharp in Visual Studio Code -->
+  <Target Name="ResolveReferences" />
 </Project>

@@ -1,0 +1,17 @@
+﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+  <ItemGroup>
+    <Content Include="../_linkedFiles/additionalFile.txt">
+      <Link>sample/content/additionalFile.txt</Link>
+    </Content>
+    <Content Include="../_linkedFiles/recursiveContent.txt">
+      <Link>sample/content/recursive/recursiveContent.txt</Link>
+    </Content>
+    <Content Include="../../withContentFiles/project/sample/content/additionalFile.txt">
+      <Link>sample/outside/additionalFile.txt</Link>
+    </Content>
+  </ItemGroup>
+
+  <Import Project="$(SourceImports)" Condition="Exists('$(SourceImports)')"/>
+
+</Project>

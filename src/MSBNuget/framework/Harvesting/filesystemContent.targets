@@ -1,0 +1,59 @@
+﻿<!--
+  MSBNuget is a collection of MSBuild scripts to support convention based Nuget package creation.
+  Copyright (C) 2013-2015  Daniel Sack
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see [http://www.gnu.org/licenses/].
+  -->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+  <PropertyGroup>
+    <!--[ds, 20150401] Items should be injectable from external, proj and nuspec files should not be excluded by default
+      or default excluding should be configurable, eg "FileSystemContentExcludeDefaults=true" is excluding "nuspec, csproj, props"
+    -->
+
+    <msb-HarvestFromFileSystemItemsEnabled Condition="'$(msb-HarvestFromFileSystemItemsEnabled)' == ''">false</msb-HarvestFromFileSystemItemsEnabled>
+    <msb-HarvestFromFileSystemExcludeItems Condition="'$(msb-HarvestFromFileSystemExcludeItems)'==''"></msb-HarvestFromFileSystemExcludeItems>
+
+    <msb-HarvestFilesDependsOn>
+      $(msb-HarvestFilesDependsOn);
+      HarvestAdditionalFilesFromFilesystem;
+    </msb-HarvestFilesDependsOn>
+  </PropertyGroup>
+
+  <Target Name="HarvestAdditionalFilesFromFilesystem" Condition="'$(msb-HarvestFromFileSystemItemsEnabled)' == 'true' ">
+
+    <ItemGroup>
+      <itemsToExclude Include="@(msb-HarvestFromFileSystemExcludeItems)"/>
+      <itemsToExclude Include="%(msb-nuspec.RootDir)%(msb-nuspec.Directory)%(msb-nuspec.Filename)%(msb-nuspec.Extension).props"/>
+      <!--<itemsToExclude Include="%(msb-nuspec.RootDir)%(msb-nuspec.Directory)**\*.proj"/>-->
+      <itemsToExclude Include="%(msb-nuspec.RootDir)%(msb-nuspec.Directory)**\*.csproj"/>
+
+      <msb-filesystemFiles Include="%(msb-nuspec.RootDir)%(msb-nuspec.Directory)**\*.*"
+                           Exclude="$(msb-NugetNuspecExcludePattern);@(itemsToExclude);">
+        <nuspecFilename>%(msb-nuspec.Filename)</nuspecFilename>
+      </msb-filesystemFiles>
+
+      <msb-harvestedFiles Include="@(msb-filesystemFiles)" Condition="@(msb-filesystemFiles) != ''">
+        <sourceFile>%(msb-filesystemFiles.Identity)</sourceFile>
+        <targetFile>%(msb-filesystemFiles.nuspecFilename)\%(msb-filesystemFiles.RecursiveDir)%(msb-filesystemFiles.Filename)%(msb-filesystemFiles.Extension)</targetFile>
+        <harvestTyp>AdditionalFilesFromFilesystem</harvestTyp>
+      </msb-harvestedFiles>
+    </ItemGroup>
+
+    <Message Importance="normal" Text="File" Condition="@(msb-filesystemFiles) != ''"/>
+    <Message Importance="normal" Text=" - %(msb-filesystemFiles.Identity)" Condition="@(msb-filesystemFiles) != ''"/>
+
+  </Target>
+
+</Project>

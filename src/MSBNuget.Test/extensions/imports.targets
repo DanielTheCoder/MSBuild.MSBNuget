@@ -2,8 +2,5 @@
 
   <Import Project="tasks.unzip.targets" />
   <Import Project="tasks.deleteFolder.targets" />
-  
+
 </Project>
-
-
-

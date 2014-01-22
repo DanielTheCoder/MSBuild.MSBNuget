@@ -1,0 +1,50 @@
+﻿<!--
+  MSBNuget is a collection of MSBuild scripts to support convention based Nuget package creation.
+  Copyright (C) 2013-2015  Daniel Sack
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see [http://www.gnu.org/licenses/].
+  -->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+  <PropertyGroup>
+    <msb-HarvestFilesDependsOn>
+      HarvestNuspec;
+      $(msb-HarvestFilesDependsOn);
+    </msb-HarvestFilesDependsOn>
+  </PropertyGroup>
+
+  <Target Name="HarvestNuspec">
+
+    <ItemGroup>
+      <msb-nuspecFiles Include="%(msb-nuspec.Identity)" Condition="@(msb-nuspec) != ''"/>
+
+      <msb-harvestedFiles Include="@(msb-nuspec)">
+        <sourceFile>%(msb-nuspec.Identity)</sourceFile>
+        <targetFile>%(msb-nuspec.RecursiveDir)%(msb-nuspec.Filename)%(msb-nuspec.Extension)</targetFile>
+        <!-- support for projects where nuspec is in root folder of csproj -->
+        <!--<rootFolderPath>$([System.IO.Path]::GetDirectoryName('%(msb-nuspec.Identity)'))</rootFolderPath>-->
+        <!--<rootFolderName>$([System.IO.Path]::GetFileName('%(rootFolderPath)'))</rootFolderName>-->
+        <!--<rootFolderName>$([System.IO.Path]::GetFileName('$([System.IO.Path]::GetDirectoryName('%(msb-nuspec.Identity)'))'))</rootFolderName>-->
+        <targetFile Condition="%(msb-nuspec.Filename) != $([System.IO.Path]::GetFileName('$([System.IO.Path]::GetDirectoryName('%(msb-nuspec.Identity)'))'))">%(msb-nuspec.Filename)/%(msb-nuspec.RecursiveDir)%(msb-nuspec.Filename)%(msb-nuspec.Extension)</targetFile>
+        <harvestTyp>NUSPEC</harvestTyp>
+      </msb-harvestedFiles>
+    </ItemGroup>
+
+    <Message Importance="normal" Text="Files" Condition="@(msb-nuspecFiles) != ''"/>
+    <Message Importance="normal" Text=" - %(msb-nuspecFiles.Identity)" Condition="@(msb-nuspecFiles) != ''"/>
+    <!--<Message Importance="normal" Text=" - %(msb-harvestedFiles.rootFolderName) (%(msb-harvestedFiles.targetFile))" Condition="@(msb-nuspecFiles) != ''"/>-->
+
+  </Target>
+
+</Project>

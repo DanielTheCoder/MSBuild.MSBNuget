@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
-  
+
   <PropertyGroup>
     <TraceTestVars>false</TraceTestVars>
     <TestIgnored>false</TestIgnored>
@@ -11,8 +11,8 @@
   <Import Project="$(ExtensionsImports)" Condition="Exists('$(ExtensionsImports)')" />
   <!--<Import Project="$(SourceImports)" Condition="Exists('$(SourceImports)')"/>-->
 
-  
-  
+
+
   <!-- ********************************************************** -->
   <!-- from here on: project specific test properties and targets -->
   <!-- ********************************************************** -->
@@ -21,17 +21,17 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
   </PropertyGroup>
-  
+
   <PropertyGroup>
     <expectedPackage1 Condition="'$(expectedPackage1)'==''">project/bin/$(Configuration)/SamplePackage1.0.0.2-pre.nupkg</expectedPackage1>
     <expectedPackage2 Condition="'$(expectedPackage2)'==''">project/bin/$(Configuration)/SamplePackage1.0.0.2-pre.nupkg</expectedPackage2>
     <expectedPackage1ExtractedPath Condition="'$(expectedPackage1ExtractedPath)'==''">project/bin/$(Configuration)/Package1</expectedPackage1ExtractedPath>
     <expectedPackage2ExtractedPath Condition="'$(expectedPackage2ExtractedPath)'==''">project/bin/$(Configuration)/Package2</expectedPackage2ExtractedPath>
-    
+
     <projectToRun>project/project.proj</projectToRun>
     <targetToRun>Build</targetToRun>
   </PropertyGroup>
-  
+
   <Target Name="Test">
     <!--<Error Text="$(ExtensionsImports)"/>-->
     <MSBuild Projects="$(projectToRun)" Targets="$(targetToRun)" />
@@ -41,7 +41,7 @@
     <Error Text="> Assert: Expected package was not created '$(expectedPackage1)' !" Condition="Exists('$(expectedPackage1)') == 'false'"/>
     <Message Text="> Assert: Expected package1 was created '$(expectedPackage1)'." Importance="high" />
     <unzip zipPath="$(expectedPackage1)" extractPath="$(expectedPackage1ExtractedPath)" />
-    
+
     <Error Text="> Assert: Expected package1 was not created '$(expectedPackage2)' !" Condition="Exists('$(expectedPackage2)') == 'false'"/>
     <Message Text="> Assert: Expected package1 was created '$(expectedPackage2)'." Importance="high" />
     <unzip zipPath="$(expectedPackage2)" extractPath="$(expectedPackage2ExtractedPath)" />
@@ -51,5 +51,5 @@
     <deleteFolder folderPath="project/obj/" />
     <deleteFolder folderPath="project/bin/" />
   </Target>
-  
+
 </Project>

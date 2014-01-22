@@ -3,5 +3,5 @@
   <!-- Convention based import of nuspec Folders-->
   <!--<Import Project="$(MSBuildProjectDirectory)\*.nuspec.props"/>-->
   <Import Project="$(MSBuildProjectDirectory)\**\*.nuspec.props"/>
-  
+
 </Project>

@@ -1,31 +1,56 @@
-﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+﻿<!--
+  MSBNuget is a collection of MSBuild scripts to support convention based Nuget package creation.
+  Copyright (C) 2013  Daniel Sack
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see [http://www.gnu.org/licenses/].
+  -->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
 
   <!-- Import legacy wrapper and warnings first! -->
-  <Import Project="Legacy.100.targets" />
+  <Import Project="warnings\MSBNuget.Legacy.100.targets" />
 
   <!-- Import custom global build.props from C# Properties folder-->
   <Import Project="$(MSBuildProjectDirectory)\Properties\MSBNuget.props" Condition="Exists('$(MSBuildProjectDirectory)\Properties\MSBNuget.props')=='true'" />
-  
-  
-  <Import Project="nuget.targets" />
-  
+  <Import Project="framework\MSBNuget.targets" />
+
+
+  <!-- add MSBuild.MSBBuildConvention build chain-->
   <PropertyGroup>
     <BuildTargets>
       $(BuildTargets);
-      NugetBuild;
+      Legacy_100_Warnings;
+      MSBNuget;
     </BuildTargets>
     <CleanTargets>
       $(CleanTargets);
-      NugetClean;
+      NugetCleanupFolderStructure;
     </CleanTargets>
     <RebuildTargets>
       $(RebuildTargets);
-      NugetRebuild;
+      NugetCleanupFolderStructure;
+      MSBNuget;
     </RebuildTargets>
     <PublishTargets>
       $(PublishTargets);
       NugetPublish;
     </PublishTargets>
   </PropertyGroup>
+
+
+  <Target Name="NugetPublish">
+    <CallTarget Targets="Build"/>
+    <CallTarget Condition="'$(NugetPublishDisabled)'=='false'" Targets="NugetPublishToFeeds"/>
+  </Target>
 
 </Project>

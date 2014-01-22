@@ -3,7 +3,7 @@
   <!--
   MSBuild Inline Tasks: http://msdn.microsoft.com/en-us/library/dd722601(v=vs.120).aspx
   -->
-  
+
   <!-- This simple inline task does nothing. -->
   <UsingTask TaskName="unzip"
              TaskFactory="CodeTaskFactory"
@@ -17,7 +17,7 @@
       <Using Namespace="System"/>
       <Using Namespace="System.IO"/>
       <Using Namespace="System.IO.Compression" />
-      
+
       <Code Type="Fragment" Language="cs">
         <![CDATA[
         if (!File.Exists(zipPath))
@@ -27,7 +27,7 @@
         }
         if (!Directory.Exists(extractPath))
         {
-          Directory.CreateDirectory(extractPath);  
+          Directory.CreateDirectory(extractPath);
         }
         System.IO.Compression.ZipFile.ExtractToDirectory(zipPath, extractPath);
         ]]>

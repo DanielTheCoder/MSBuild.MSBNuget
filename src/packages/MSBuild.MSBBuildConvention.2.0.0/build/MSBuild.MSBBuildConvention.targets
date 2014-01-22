@@ -17,14 +17,14 @@
   -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
   <!-- Wrapper .targets file which collects all the imports which are needed for this nuget package -->
-  
+
   <!-- Migration warnings for v1.0.0 based projects -->
   <Import Project="Legacy.100.targets" />
 
   <!-- Import custom build.props from C# Properties folder-->
   <Import Project="$(MSBuildProjectDirectory)\Properties\build.props" />
-  
+
   <!-- Import conventional targets file -->
   <Import Project="build.targets" />
-  
+
 </Project>

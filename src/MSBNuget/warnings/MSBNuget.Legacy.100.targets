@@ -1,0 +1,26 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+  <PropertyGroup>
+    <!-- 1.0.3 -pre8 -->
+    <NugetPublishLocalNugetFeedFolder Condition="'$(NugkgPublishLocalNugetFeedFolder)'!=''">$(NugkgPublishLocalNugetFeedFolder)</NugetPublishLocalNugetFeedFolder>
+    <NugetPublishReleaseFolder Condition="'$(NugkgPublishReleaseFolder)'!=''">$(NugkgPublishReleaseFolder)</NugetPublishReleaseFolder>
+  </PropertyGroup>
+
+  <Target Name="Legacy_100_Warnings">
+    <!-- 1.0.1 -pre -->
+    <Warning Condition="$(NugkgReleaseFolder) != ''" Text="Property 'NugkgReleaseFolder' osolete, renamed to 'NugkgPublishReleaseFolder'!"/>
+    <Warning Condition="$(NugkgPublishFolder) != ''" Text="Property 'NugkgPublishFolder' osolete, renamed to 'NugkgPublishLocalNugetFeedFolder'!"/>
+
+    <!-- 1.0.2 -pre -->
+    <Warning Condition="$(PublishDisabled) != ''" Text="Property 'PublishDisabled' osolete, renamed to 'NugetPublishDisabled'!"/>
+    <Warning Condition="$(PublishToReleaseFolder) != ''" Text="Property 'PublishToReleaseFolder' osolete, renamed to 'NugetPublishToReleaseFolder'!"/>
+    <Warning Condition="$(PublishToLocalNugetFeed) != ''" Text="Property 'PublishToLocalNugetFeed' osolete, renamed to 'NugetPublishToLocalNugetFeed'!"/>
+    <Warning Condition="$(PublishToOfficialNugetFeed) != ''" Text="Property 'PublishToOfficialNugetFeed' osolete, renamed to 'NugetPublishToOfficialNugetFeed'!"/>
+
+    <!-- 1.0.3 -pre8 -->
+    <Warning Condition="$(NugkgPublishLocalNugetFeedFolder) != ''" Text="Property 'NugkgPublishLocalNugetFeedFolder' osolete, renamed to 'NugetPublishLocalNugetFeedFolder'!"/>
+    <Warning Condition="$(NugkgPublishReleaseFolder) != ''" Text="Property 'NugkgPublishReleaseFolder' osolete, renamed to 'NugetPublishReleaseFolder'!"/>
+
+  </Target>
+
+</Project>
