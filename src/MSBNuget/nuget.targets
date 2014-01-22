@@ -17,12 +17,19 @@
   -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
 
+  <PropertyGroup Label="Internal project specific default properties">
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputPath Condition="'$(OutputPath)' == ''">bin\$(Configuration)\</OutputPath>
+  </PropertyGroup>
+  
+  
   <!-- Internal working properties, they are not intended to be changed direclty from caller -->
   <PropertyGroup Label="Internal default property values">
-    <OutputPath Condition="'$(OutputPath)' == ''">bin\</OutputPath>
-    <NugetIntermediatePath Condition="'$(NugetIntermediatePath)' == ''">$(OutputPath)$(Configuration)\</NugetIntermediatePath>
+    
+    <NugetIntermediatePath Condition="'$(NugetIntermediatePath)' == ''">$(OutputPath)</NugetIntermediatePath>
     <!-- TFS 2010/2012 support of OutDir overwrite -->
-    <NugetIntermediatePath Condition="'$(OutDir)' != ''">$(OutDir)\NugetPackages\$(Configuration)\</NugetIntermediatePath>
+    <NugetIntermediatePath Condition="'$(OutDir)' != ''">$(OutDir)\$(Configuration)\NugetPackages\</NugetIntermediatePath>
 
     <NugetStage>$(MSBuildProjectDirectory)\obj\$(Configuration)\nugetstage\</NugetStage>
     
