@@ -26,9 +26,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="tests\MSBNuget\Misc\OutDirSupport\OutDirSupport.md" />
-    <None Include="tests\MSBNuget\Misc\OutDirSupport\withAdditionalFiles\project\project.proj" />
-    <None Include="tests\MSBNuget\Misc\OutDirSupport\withAdditionalFiles\project\sample.nuspec" />
-    <None Include="tests\MSBNuget\Misc\OutDirSupport\withAdditionalFiles\Test.targets" />
+    <None Include="tests\MSBNuget\Misc\OutDirSupport\withNuspecDependencies\project\project.proj" />
+    <None Include="tests\MSBNuget\Misc\OutDirSupport\withNuspecDependencies\project\sample.nuspec" />
+    <None Include="tests\MSBNuget\Misc\OutDirSupport\withNuspecDependencies\Test.targets" />
     <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\project\Properties\build.props" />
     <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\project\project.proj" />
     <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\project\SamplePackage1\SamplePackage1.nuspec.props" />
