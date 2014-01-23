@@ -2,7 +2,7 @@
 <package >
   <metadata minClientVersion="2.7.2">
     <id>MSBuild.MSBNuget.Legacy</id>
-    <version>1.1.0</version>
+    <version>1.1.2-pre01</version>
     <title>Nuget convention based MSBuild Packager (Legacy)</title>
     <authors>Daniel Sack</authors>
     <owners>Daniel Sack</owners>

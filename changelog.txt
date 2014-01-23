@@ -1,4 +1,4 @@
-1.1.1 -pre2 2014/01/15
+1.1.2-pre01 2014/01/23
 Fixed issues:
  + don't import *.nuspec files from obj/, bin/ and packages/
 Changes:
@@ -7,7 +7,7 @@ Other:
  + added tests for various features
  + internal changes and restructuring
 
-1.1.1 -pre1 2013/11/27
+1.1.1 -pre01 2013/11/27
 Fixed issues:
  + don't import nuget.exe files from obj/, bin/ and packages/
 
