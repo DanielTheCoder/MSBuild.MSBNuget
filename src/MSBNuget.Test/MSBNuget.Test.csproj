@@ -34,40 +34,40 @@
     <None Include="tests\MSBNuget\Misc\OutDirSupport\withNuspecDependencies\project\Properties\build.props" />
     <None Include="tests\MSBNuget\Misc\OutDirSupport\withNuspecDependencies\project\sample.nuspec" />
     <None Include="tests\MSBNuget\Misc\OutDirSupport\withNuspecDependencies\Test.targets" />
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\project\Properties\build.props" />
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\project\project.proj" />
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\project\SamplePackage1\SamplePackage1.nuspec.props" />
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\project\SamplePackage1\SamplePackage1.nuspec" />
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\project\SamplePackage2\SamplePackage2.nuspec.props" />
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\project\SamplePackage2\SamplePackage2.nuspec" />
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\Test.targets">
+    <None Include="tests\MSBNuget\MultiplePackages\withAdditionalFilesProps\project\Properties\build.props" />
+    <None Include="tests\MSBNuget\MultiplePackages\withAdditionalFilesProps\project\project.proj" />
+    <None Include="tests\MSBNuget\MultiplePackages\withAdditionalFilesProps\project\SamplePackage1\SamplePackage1.nuspec.props" />
+    <None Include="tests\MSBNuget\MultiplePackages\withAdditionalFilesProps\project\SamplePackage1\SamplePackage1.nuspec" />
+    <None Include="tests\MSBNuget\MultiplePackages\withAdditionalFilesProps\project\SamplePackage2\SamplePackage2.nuspec.props" />
+    <None Include="tests\MSBNuget\MultiplePackages\withAdditionalFilesProps\project\SamplePackage2\SamplePackage2.nuspec" />
+    <None Include="tests\MSBNuget\MultiplePackages\withAdditionalFilesProps\Test.targets">
       <SubType>Designer</SubType>
     </None>
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFiles\project\Properties\build.props" />
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFiles\project\project.proj" />
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFiles\project\SamplePackage1\SamplePackage1.nuspec" />
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFiles\project\SamplePackage2\SamplePackage2.nuspec" />
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFiles\Test.targets">
+    <None Include="tests\MSBNuget\MultiplePackages\withAdditionalFiles\project\Properties\build.props" />
+    <None Include="tests\MSBNuget\MultiplePackages\withAdditionalFiles\project\project.proj" />
+    <None Include="tests\MSBNuget\MultiplePackages\withAdditionalFiles\project\SamplePackage1\SamplePackage1.nuspec" />
+    <None Include="tests\MSBNuget\MultiplePackages\withAdditionalFiles\project\SamplePackage2\SamplePackage2.nuspec" />
+    <None Include="tests\MSBNuget\MultiplePackages\withAdditionalFiles\Test.targets">
       <SubType>Designer</SubType>
     </None>
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withFileSystemConventionKnownFolders\project\project.proj" />
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withFileSystemConventionKnownFolders\project\Properties\build.props" />
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withFileSystemConventionKnownFolders\project\SamplePackage1\SamplePackage1.nuspec" />
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withFileSystemConventionKnownFolders\project\SamplePackage2\SamplePackage2.nuspec" />
-    <None Include="tests\MSBNuget\MultiplePackagesPerProject\withFileSystemConventionKnownFolders\Test.targets">
+    <None Include="tests\MSBNuget\MultiplePackages\withFileSystemConventionKnownFolders\project\project.proj" />
+    <None Include="tests\MSBNuget\MultiplePackages\withFileSystemConventionKnownFolders\project\Properties\build.props" />
+    <None Include="tests\MSBNuget\MultiplePackages\withFileSystemConventionKnownFolders\project\SamplePackage1\SamplePackage1.nuspec" />
+    <None Include="tests\MSBNuget\MultiplePackages\withFileSystemConventionKnownFolders\project\SamplePackage2\SamplePackage2.nuspec" />
+    <None Include="tests\MSBNuget\MultiplePackages\withFileSystemConventionKnownFolders\Test.targets">
       <SubType>Designer</SubType>
     </None>
-    <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFilesNuspecProps\project\Properties\build.props" />
-    <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFilesNuspecProps\project\sample.nuspec.props" />
-    <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFilesNuspecProps\project\sample.nuspec" />
-    <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFilesNuspecProps\project\project.proj" />
-    <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFilesNuspecProps\Test.targets">
+    <None Include="tests\MSBNuget\SinglePackage\withAdditionalFilesProps\project\Properties\build.props" />
+    <None Include="tests\MSBNuget\SinglePackage\withAdditionalFilesProps\project\sample.nuspec.props" />
+    <None Include="tests\MSBNuget\SinglePackage\withAdditionalFilesProps\project\sample.nuspec" />
+    <None Include="tests\MSBNuget\SinglePackage\withAdditionalFilesProps\project\project.proj" />
+    <None Include="tests\MSBNuget\SinglePackage\withAdditionalFilesProps\Test.targets">
       <SubType>Designer</SubType>
     </None>
-    <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFiles\project\Properties\build.props" />
-    <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFiles\project\sample.nuspec" />
-    <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFiles\project\project.proj" />
-    <None Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFiles\Test.targets">
+    <None Include="tests\MSBNuget\SinglePackage\withAdditionalFiles\project\Properties\build.props" />
+    <None Include="tests\MSBNuget\SinglePackage\withAdditionalFiles\project\sample.nuspec" />
+    <None Include="tests\MSBNuget\SinglePackage\withAdditionalFiles\project\project.proj" />
+    <None Include="tests\MSBNuget\SinglePackage\withAdditionalFiles\Test.targets">
       <SubType>Designer</SubType>
     </None>
     <None Include="tests\Nuget\MultiplePackagesPerProject\withNuspecDependency\project\Properties\build.props" />
@@ -102,18 +102,18 @@
   <ItemGroup>
     <Content Include="readme\MSBTest.readme.txt" />
     <Content Include="tests\MSBNuget\Misc\OutDirSupport\withAdditionalFiles_BinaryDependency\project\additionalFile.txt" />
-    <Content Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\project\additionalFile.txt" />
-    <Content Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFiles\project\additionalFile.txt" />
-    <Content Include="tests\MSBNuget\MultiplePackagesPerProject\withFileSystemConventionKnownFolders\project\SamplePackage1\build\build.txt" />
-    <Content Include="tests\MSBNuget\MultiplePackagesPerProject\withFileSystemConventionKnownFolders\project\SamplePackage1\content\content.txt" />
-    <Content Include="tests\MSBNuget\MultiplePackagesPerProject\withFileSystemConventionKnownFolders\project\SamplePackage1\lib\lib.txt" />
-    <Content Include="tests\MSBNuget\MultiplePackagesPerProject\withFileSystemConventionKnownFolders\project\SamplePackage1\tools\tools.txt" />
-    <Content Include="tests\MSBNuget\MultiplePackagesPerProject\withFileSystemConventionKnownFolders\project\SamplePackage2\build\build.txt" />
-    <Content Include="tests\MSBNuget\MultiplePackagesPerProject\withFileSystemConventionKnownFolders\project\SamplePackage2\content\content.txt" />
-    <Content Include="tests\MSBNuget\MultiplePackagesPerProject\withFileSystemConventionKnownFolders\project\SamplePackage2\lib\lib.txt" />
-    <Content Include="tests\MSBNuget\MultiplePackagesPerProject\withFileSystemConventionKnownFolders\project\SamplePackage2\tools\tools.txt" />
-    <Content Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFilesNuspecProps\project\additionalFile.txt" />
-    <Content Include="tests\MSBNuget\SinglePackagePerProject\withAdditionalFiles\project\additionalFile.txt" />
+    <Content Include="tests\MSBNuget\MultiplePackages\withAdditionalFilesProps\project\additionalFile.txt" />
+    <Content Include="tests\MSBNuget\MultiplePackages\withAdditionalFiles\project\additionalFile.txt" />
+    <Content Include="tests\MSBNuget\MultiplePackages\withFileSystemConventionKnownFolders\project\SamplePackage1\build\build.txt" />
+    <Content Include="tests\MSBNuget\MultiplePackages\withFileSystemConventionKnownFolders\project\SamplePackage1\content\content.txt" />
+    <Content Include="tests\MSBNuget\MultiplePackages\withFileSystemConventionKnownFolders\project\SamplePackage1\lib\lib.txt" />
+    <Content Include="tests\MSBNuget\MultiplePackages\withFileSystemConventionKnownFolders\project\SamplePackage1\tools\tools.txt" />
+    <Content Include="tests\MSBNuget\MultiplePackages\withFileSystemConventionKnownFolders\project\SamplePackage2\build\build.txt" />
+    <Content Include="tests\MSBNuget\MultiplePackages\withFileSystemConventionKnownFolders\project\SamplePackage2\content\content.txt" />
+    <Content Include="tests\MSBNuget\MultiplePackages\withFileSystemConventionKnownFolders\project\SamplePackage2\lib\lib.txt" />
+    <Content Include="tests\MSBNuget\MultiplePackages\withFileSystemConventionKnownFolders\project\SamplePackage2\tools\tools.txt" />
+    <Content Include="tests\MSBNuget\SinglePackage\withAdditionalFilesProps\project\additionalFile.txt" />
+    <Content Include="tests\MSBNuget\SinglePackage\withAdditionalFiles\project\additionalFile.txt" />
     <Content Include="tests\Nuget\MultiplePackagesPerProject\withNuspecFile\project\additionalFile.txt" />
     <Content Include="tests\Nuget\SinglePackagePerProject\withNuspecFiles\project\additionalFile.txt" />
     <Content Include="tests\ToDo.txt" />
