@@ -1,3 +1,7 @@
+1.1.2-pre02 2014/01/23
+Fixed issues:
+ + double import of *.nuspec.props removed
+
 1.1.2-pre01 2014/01/23
 Fixed issues:
  + don't import *.nuspec files from obj/, bin/ and packages/
