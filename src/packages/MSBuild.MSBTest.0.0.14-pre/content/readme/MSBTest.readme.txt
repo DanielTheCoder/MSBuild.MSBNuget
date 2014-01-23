@@ -9,6 +9,6 @@ MSBTest is follwing the conventions of the nuget package MSBuild.MSBuildConventi
 
 Manuall Steps (optional)
 --------------
-After installing add the following import to your '<project>/Properties/build.props' file
-  <Import Project="MSBTest.props" />
+After installing add the following import to your '<project>/.build/build.props' file
+  <Import Project="$(MSBuildProjectDirectory)\build\MSBTest.props" />
 

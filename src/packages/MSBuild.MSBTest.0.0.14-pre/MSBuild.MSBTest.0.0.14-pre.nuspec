@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
   <metadata>
     <id>MSBuild.MSBTest</id>
-    <version>0.0.13-pre02</version>
+    <version>0.0.14-pre</version>
     <title>MSBuild Test Framework</title>
     <authors>Daniel Sack</authors>
     <owners>Daniel Sack</owners>
