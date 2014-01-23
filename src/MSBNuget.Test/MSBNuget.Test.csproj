@@ -26,7 +26,12 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="tests\MSBNuget\Misc\OutDirSupport\OutDirSupport.md" />
+    <None Include="tests\MSBNuget\Misc\OutDirSupport\withAdditionalFiles\project\project.proj" />
+    <None Include="tests\MSBNuget\Misc\OutDirSupport\withAdditionalFiles\project\Properties\build.props" />
+    <None Include="tests\MSBNuget\Misc\OutDirSupport\withAdditionalFiles\project\sample.nuspec" />
+    <None Include="tests\MSBNuget\Misc\OutDirSupport\withAdditionalFiles\Test.targets" />
     <None Include="tests\MSBNuget\Misc\OutDirSupport\withNuspecDependencies\project\project.proj" />
+    <None Include="tests\MSBNuget\Misc\OutDirSupport\withNuspecDependencies\project\Properties\build.props" />
     <None Include="tests\MSBNuget\Misc\OutDirSupport\withNuspecDependencies\project\sample.nuspec" />
     <None Include="tests\MSBNuget\Misc\OutDirSupport\withNuspecDependencies\Test.targets" />
     <None Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\project\Properties\build.props" />
@@ -96,6 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="readme\MSBTest.readme.txt" />
+    <Content Include="tests\MSBNuget\Misc\OutDirSupport\withAdditionalFiles\project\additionalFile.txt" />
     <Content Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFilesNuspecProps\project\additionalFile.txt" />
     <Content Include="tests\MSBNuget\MultiplePackagesPerProject\withAdditionalFiles\project\additionalFile.txt" />
     <Content Include="tests\MSBNuget\MultiplePackagesPerProject\withFileSystemConventionKnownFolders\project\SamplePackage1\build\build.txt" />
