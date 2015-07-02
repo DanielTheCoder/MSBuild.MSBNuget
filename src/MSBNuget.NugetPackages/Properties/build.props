@@ -17,10 +17,10 @@
     http://www.appveyor.com/docs/environment-variables
   -->
   <PropertyGroup>
-    <APPVEYOR_BUILD_VERSION Condition="$(APPVEYOR_BUILD_VERSION) == ''">0.0.1-beta</APPVEYOR_BUILD_VERSION>
-    <APPVEYOR_REPO_COMMIT Condition="$(APPVEYOR_REPO_COMMIT) == ''">SH1</APPVEYOR_REPO_COMMIT>
+    <!-- local default -->
+    <APPVEYOR_BUILD_NUMBER Condition="$(APPVEYOR_BUILD_NUMBER) == ''">-local</APPVEYOR_BUILD_NUMBER>
 
-    <NugetVersion>$(APPVEYOR_BUILD_VERSION)-$(APPVEYOR_REPO_COMMIT)</NugetVersion>
+    <NugetVersion>2.0.0-pre$(APPVEYOR_BUILD_NUMBER)</NugetVersion>
   </PropertyGroup>
 
   <!-- Conventional import of custom settings -->
