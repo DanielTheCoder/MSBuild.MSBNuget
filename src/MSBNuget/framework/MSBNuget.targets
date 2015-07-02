@@ -116,7 +116,7 @@
     </ItemGroup>
 
     <Message Text="Nuget Global Override" Importance="normal"/>
-    <Message Text="--> NugetVersion: $(NugetVersion)" Importance="normal"/>
+    <Message Text="--> NugetPackageVersion: $(NugetPackageVersion)" Importance="normal"/>
     <Message Text="--> NugetMinClientVersion: $(NugetMinClientVersion)" Importance="normal"/>
     <Message Text="--> NugetCommandPackArguments: $(NugetCommandPackArguments)" Importance="normal"/>
 

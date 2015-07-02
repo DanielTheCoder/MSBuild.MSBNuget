@@ -1,0 +1,24 @@
+version: build.{build}-{branch}
+
+os: Default Azure
+
+environment:
+  MSBNugetVersion: 2.0.0
+  NugetPackageVersion: $(MSBNugetVersion)-ci$(APPVEYOR_BUILD_NUMBER)
+
+cache: src\packages -> **\packages.config
+
+nuget:
+  project_feed: true
+  disable_publish_on_pr: true
+
+before_build:
+- nuget restore src\MSBNuget.sln
+
+build:
+  project: src\MSBNuget.sln
+  verbosity: minimal
+
+artifacts:
+- path: src\MSBNuget.NugetPackages\bin\Debug\*.*
+  name: MSBuild.MSBNuget

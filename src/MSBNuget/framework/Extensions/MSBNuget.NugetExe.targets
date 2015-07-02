@@ -21,7 +21,7 @@
     Use these properties to override default values
   -->
   <PropertyGroup>
-    <NugetVersion Condition="'$(NugetVersion)' == ''"></NugetVersion>
+    <NugetPackageVersion Condition="'$(NugetPackageVersion)' == ''"></NugetPackageVersion>
     <NugetMinClientVersion Condition="'$(NugetMinClientVersion)' == ''"></NugetMinClientVersion>
     <NugetCommandPackArguments Condition="'$(NugetCommandPackArguments)' == ''"></NugetCommandPackArguments>
   </PropertyGroup>
@@ -41,7 +41,7 @@
 
   <PropertyGroup>
     <_nugetCommandPack>"@(nugetExeFiles)" pack -OutputDirectory &quot;$(msb-OutputPath.TrimEnd('\'))&quot; -NoDefaultExcludes</_nugetCommandPack>
-    <_nugetCommandPack Condition="'$(NugetVersion)' != ''">$(_nugetCommandPack) -Version &quot;$(NugetVersion)&quot;</_nugetCommandPack>
+    <_nugetCommandPack Condition="'$(NugetPackageVersion)' != ''">$(_nugetCommandPack) -Version &quot;$(NugetPackageVersion)&quot;</_nugetCommandPack>
     <_nugetCommandPack Condition="'$(NugetMinClientVersion)' != ''">$(_nugetCommandPack) -MinClientVersion &quot;$(NugetMinClientVersion)&quot;</_nugetCommandPack>
     <_nugetCommandPack Condition="'$(NugetCommandPackArguments)' != ''">$(_nugetCommandPack) $(NugetCommandPackArguments) </_nugetCommandPack>
 
