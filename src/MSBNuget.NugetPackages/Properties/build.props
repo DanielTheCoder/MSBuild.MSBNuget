@@ -12,6 +12,17 @@
     <NugetFilterOnlyConventionWellKnownFolders>false</NugetFilterOnlyConventionWellKnownFolders>
   </PropertyGroup>
 
+  <!--
+    appveyor integration
+    http://www.appveyor.com/docs/environment-variables
+  -->
+  <PropertyGroup>
+    <APPVEYOR_BUILD_VERSION Condition="$(APPVEYOR_BUILD_VERSION) == ''">0.0.1-beta</APPVEYOR_BUILD_VERSION>
+    <APPVEYOR_REPO_COMMIT Condition="$(APPVEYOR_REPO_COMMIT) == ''">SH1</APPVEYOR_REPO_COMMIT>
+
+    <NugetVersion>$(APPVEYOR_BUILD_VERSION)-$(APPVEYOR_REPO_COMMIT)</NugetVersion>
+  </PropertyGroup>
+
   <!-- Conventional import of custom settings -->
   <Import Project="$(_nugetPackagesCustomConfigurationImportPath)" Condition="Exists('$(_nugetPackagesCustomConfigurationImportPath)')=='true'"/>
   <Import Project="$(MSBuildProjectDirectory)\*\*.nuspec.props"/>
