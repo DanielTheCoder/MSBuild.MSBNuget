@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0"?>
 <package >
 
-  <metadata minClientVersion="2.7.2">
+  <metadata minClientVersion="2.8.5">
     <id>MSBuild.MSBNuget</id>
     <version>2.0.0-pre01</version>
     <title>Nuget convention based MSBuild Packager</title>
@@ -18,7 +18,7 @@
 
     <dependencies>
       <dependency id="MSBuild.MSBBuildConvention" />
-      <dependency id="NuGet.CommandLine" version="2.7.3" />
+      <dependency id="NuGet.CommandLine" version="2.8.5" />
     </dependencies>
 
   </metadata>
