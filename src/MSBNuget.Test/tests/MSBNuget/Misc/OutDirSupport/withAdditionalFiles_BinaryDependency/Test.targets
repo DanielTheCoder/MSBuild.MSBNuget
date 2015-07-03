@@ -3,8 +3,8 @@
   <PropertyGroup>
     <OutDir>$(RootDir)obj\tests\OutDirSupport\</OutDir>
 
-    <testPackageVersion Condition="'$(testPackageVersion)' == ''">1.0.0.2-pre</testPackageVersion>
-    <testPackageVersion Condition="'$(testPackageVersion)' != ''">$(NugetVersion)</testPackageVersion>
+    <testPackageVersion Condition="'$(testPackageVersion)' == ''">0.0.2-pre</testPackageVersion>
+    <testPackageVersion Condition="'$(NugetVersion)' != ''">$(NugetVersion)</testPackageVersion>
 
     <expectedPackage Condition="'$(expectedPackage)'==''">$(OutDir)$(Configuration)\NugetPackages\sample.$(testPackageVersion).nupkg</expectedPackage>
   </PropertyGroup>
