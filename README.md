@@ -9,6 +9,11 @@ Easily create NuGet packages with this collection of MSBuild targets.
 It uses the method described here: http://docs.nuget.org/docs/creating-packages/creating-and-publishing-a-package#From_a_convention_based_working_directory
   
 
+Nuget Package Feed
+-------------------
+https://ci.appveyor.com/nuget/msbuild-msbnuget
+  
+
 HOW TO USE
 ------------
 
