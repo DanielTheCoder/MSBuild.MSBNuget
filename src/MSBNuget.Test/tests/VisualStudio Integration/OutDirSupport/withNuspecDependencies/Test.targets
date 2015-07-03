@@ -3,8 +3,12 @@
   <PropertyGroup>
     <Configuration>Debug</Configuration>
     <OutDir>$(RootDir)obj\tests\OutDirSupport\withNuspecDependencies\</OutDir>
-    <expectedPackage Condition="'$(expectedPackage)'==''">$(OutDir)$(Configuration)\NugetPackages\sample.0.0.2-pre.nupkg</expectedPackage>
-    <expectedPackageExtractedPath>$(OutDir)$(Configuration)\NugetPackages\sample.0.0.2-pre</expectedPackageExtractedPath>
+
+    <testPackageVersion Condition="'$(testPackageVersion)' == ''">0.0.2-pre</testPackageVersion>
+    <testPackageVersion Condition="'$(NugetPackageVersion)' != ''">$(NugetPackageVersion)</testPackageVersion>
+
+    <expectedPackage Condition="'$(expectedPackage)'==''">$(OutDir)$(Configuration)\NugetPackages\sample.$(testPackageVersion).nupkg</expectedPackage>
+    <expectedPackageExtractedPath>$(OutDir)$(Configuration)\NugetPackages\sample.$(testPackageVersion)</expectedPackageExtractedPath>
   </PropertyGroup>
 
   <Import Project="$(TestsRoot)test.SinglePackage.import"/>
