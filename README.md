@@ -1,7 +1,7 @@
 MSBuild.MSBNuget
 =================
 
-|master|v2|latest|
+|master|feature/v20|latest|
 |:-:|:-:|:-:|
 |[![Build status](https://ci.appveyor.com/api/projects/status/ej734224ri3aavru/branch/master?svg=true)](https://ci.appveyor.com/project/DanielTheCoder/msbuild-msbnuget/branch/master)|[![Build status](https://ci.appveyor.com/api/projects/status/ej734224ri3aavru/branch/feature/v20?svg=true)](https://ci.appveyor.com/projects/DanielTheCoder/msbuild-msbnuget/branch/feature/v20)|[![Build status](https://ci.appveyor.com/api/projects/status/ej734224ri3aavru?svg=true)](https://ci.appveyor.com/project/DanielTheCoder/msbuild-msbnuget)|
 
