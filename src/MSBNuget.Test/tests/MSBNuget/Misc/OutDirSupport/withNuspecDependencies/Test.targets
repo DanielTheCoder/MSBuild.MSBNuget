@@ -3,15 +3,19 @@
   <!-- OutDir Test-->
   <PropertyGroup>
     <OutDir>$(RootDir)obj\tests\OutDirSupport\</OutDir>
-    <expectedPackage Condition="'$(expectedPackage)'==''">$(OutDir)$(Configuration)\NugetPackages\sample.0.0.2-pre.nupkg</expectedPackage>
+
+    <testPackageVersion Condition="'$(testPackageVersion)' == ''">1.0.0.2-pre</testPackageVersion>
+    <testPackageVersion Condition="'$(testPackageVersion)' != ''">$(NugetVersion)</testPackageVersion>
+
+    <expectedPackage Condition="'$(expectedPackage)'==''">$(OutDir)$(Configuration)\NugetPackages\sample.$(testPackageVersion).nupkg</expectedPackage>
   </PropertyGroup>
-  
+
   <Import Project="$(TestsRoot)test.SinglePackage.import"/>
 
   <Target Name="Test">
     <MSBuild Projects="$(projectToRun)" Targets="$(targetToRun)" Properties="OutDir=$(OutDir)" />
   </Target>
-  
+
   <Target Name="Assert"/>
-  
+
 </Project>

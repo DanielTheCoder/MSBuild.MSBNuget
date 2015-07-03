@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
-  
+
   <PropertyGroup>
     <TraceTestVars>false</TraceTestVars>
     <TestIgnored>false</TestIgnored>
@@ -11,8 +11,8 @@
   <Import Project="$(ExtensionsImports)" Condition="Exists('$(ExtensionsImports)')" />
   <!--<Import Project="$(SourceImports)" Condition="Exists('$(SourceImports)')"/>-->
 
-  
-  
+
+
   <!-- ********************************************************** -->
   <!-- from here on: project specific test properties and targets -->
   <!-- ********************************************************** -->
@@ -21,15 +21,18 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
   </PropertyGroup>
-  
+
   <PropertyGroup>
-    <expectedPackage Condition="'$(expectedPackage)'==''">project/bin/$(Configuration)/sample.0.0.2-pre.nupkg</expectedPackage>
-    <expectedPackageExtractedPath Condition="'$(expectedPackageExtractedPath)'==''">project/bin/$(Configuration)/sample.0.0.2-pre</expectedPackageExtractedPath>
-    
+    <testPackageVersion Condition="'$(testPackageVersion)' == ''">1.0.0.2-pre</testPackageVersion>
+    <testPackageVersion Condition="'$(testPackageVersion)' != ''">$(NugetVersion)</testPackageVersion>
+
+    <expectedPackage Condition="'$(expectedPackage)'==''">project/bin/$(Configuration)/sample.$(testPackageVersion).nupkg</expectedPackage>
+    <expectedPackageExtractedPath Condition="'$(expectedPackageExtractedPath)'==''">project/bin/$(Configuration)/sample.$(testPackageVersion)</expectedPackageExtractedPath>
+
     <projectToRun>project/project.proj</projectToRun>
     <targetToRun>Build</targetToRun>
   </PropertyGroup>
-  
+
   <Target Name="Test">
     <!--<Error Text="$(ExtensionsImports)"/>-->
     <MSBuild Projects="$(projectToRun)" Targets="$(targetToRun)" />
@@ -44,5 +47,5 @@
     <deleteFolder folderPath="project/obj/" />
     <deleteFolder folderPath="project/bin/" />
   </Target>
-  
+
 </Project>
