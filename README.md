@@ -1,7 +1,9 @@
 MSBuild.MSBNuget
 =================
 
-[![Build status](https://ci.appveyor.com/api/projects/status/ej734224ri3aavru?svg=true)](https://ci.appveyor.com/project/DanielTheCoder/msbuild-msbnuget)
+|master|v2|latest|
+|:-:|:-:|:-:|
+|[![Build status](https://ci.appveyor.com/api/projects/status/ej734224ri3aavru/branch/master?svg=true)](https://ci.appveyor.com/project/DanielTheCoder/msbuild-msbnuget/branch/master)||[![Build status](https://ci.appveyor.com/api/projects/status/ej734224ri3aavru/branch/feature/v20?svg=true)](https://ci.appveyor.com/project/DanielTheCoder/msbuild-msbnuget/branch/feature/v20)|[![Build status](https://ci.appveyor.com/api/projects/status/ej734224ri3aavru?svg=true)](https://ci.appveyor.com/project/DanielTheCoder/msbuild-msbnuget)|
 
 Easily create NuGet packages with this collection of MSBuild targets.
 It uses the method described here: http://docs.nuget.org/docs/creating-packages/creating-and-publishing-a-package#From_a_convention_based_working_directory
