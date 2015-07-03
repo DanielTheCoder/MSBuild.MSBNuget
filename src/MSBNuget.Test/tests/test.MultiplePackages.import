@@ -23,8 +23,8 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <testPackageVersion Condition="'$(testPackageVersion)' == ''">1.0.0.2-pre</testPackageVersion>
-    <testPackageVersion Condition="'$(testPackageVersion)' != ''">$(NugetPackageVersion)</testPackageVersion>
+    <testPackageVersion Condition="'$(testPackageVersion)' == ''">0.0.2-pre</testPackageVersion>
+    <testPackageVersion Condition="'$(NugetPackageVersion)' != ''">$(NugetPackageVersion)</testPackageVersion>
 
     <expectedPackage1 Condition="'$(expectedPackage1)'==''">project/bin/$(Configuration)/SamplePackage1.$(testPackageVersion).nupkg</expectedPackage1>
     <expectedPackage2 Condition="'$(expectedPackage2)'==''">project/bin/$(Configuration)/SamplePackage2.$(testPackageVersion).nupkg</expectedPackage2>

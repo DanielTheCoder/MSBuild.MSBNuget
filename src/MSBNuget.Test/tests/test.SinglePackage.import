@@ -26,8 +26,8 @@
   <!-- defautl test conventions  -->
   <!-- ********************************************************** -->
   <PropertyGroup>
-    <testPackageVersion Condition="'$(testPackageVersion)' == ''">1.0.0.2-pre</testPackageVersion>
-    <testPackageVersion Condition="'$(testPackageVersion)' != ''">$(NugetPackageVersion)</testPackageVersion>
+    <testPackageVersion Condition="'$(testPackageVersion)' == ''">0.0.2-pre</testPackageVersion>
+    <testPackageVersion Condition="'$(NugetPackageVersion)' != ''">$(NugetPackageVersion)</testPackageVersion>
 
     <expectedPackage Condition="'$(expectedPackage)'==''">project/bin/$(Configuration)/sample.$(testPackageVersion).nupkg</expectedPackage>
     <expectedPackageExtractedPath Condition="'$(expectedPackageExtractedPath)'==''">project/bin/$(Configuration)/sample.$(testPackageVersion)</expectedPackageExtractedPath>
