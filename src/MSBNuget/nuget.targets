@@ -84,12 +84,6 @@
               Exclude="$(NugetNuspecExcludePattern)"/>
   </ItemGroup>
   
-  <PropertyGroup>
-    <_nugetCommandPack>"@(nugetExe)" pack -OutputDirectory &quot;$(NugetIntermediatePath.TrimEnd('\'))&quot; -NoDefaultExcludes</_nugetCommandPack>
-    <_nugetCommandPack Condition="'$(NugetVersion)' != ''">$(_nugetCommandPack) -Version &quot;$(NugetVersion)&quot;</_nugetCommandPack>
-    <_nugetCommandPack Condition="'$(NugetMinClientVersion)' != ''">$(_nugetCommandPack) -MinClientVersion &quot;$(NugetMinClientVersion)&quot;</_nugetCommandPack>
-    <_nugetCommandPack Condition="'$(NugetCommandPackArguments)' != ''">$(_nugetCommandPack) $(NugetCommandPackArguments) </_nugetCommandPack>
-  </PropertyGroup>
   
 
 
@@ -203,6 +197,13 @@
   </Target>
 
   <Target Name="NugetCreatePackage" >
+    <PropertyGroup>
+      <_nugetCommandPack>"@(nugetExe)" pack -OutputDirectory &quot;$(NugetIntermediatePath.TrimEnd('\'))&quot; -NoDefaultExcludes</_nugetCommandPack>
+      <_nugetCommandPack Condition="'$(NugetVersion)' != ''">$(_nugetCommandPack) -Version &quot;$(NugetVersion)&quot;</_nugetCommandPack>
+      <_nugetCommandPack Condition="'$(NugetMinClientVersion)' != ''">$(_nugetCommandPack) -MinClientVersion &quot;$(NugetMinClientVersion)&quot;</_nugetCommandPack>
+      <_nugetCommandPack Condition="'$(NugetCommandPackArguments)' != ''">$(_nugetCommandPack) $(NugetCommandPackArguments) </_nugetCommandPack>
+    </PropertyGroup>
+	
     <ItemGroup>
       <nuspecStaged Include="$(NugetStage)%(nuspec.Filename)\*.nuspec"/>
     </ItemGroup>
