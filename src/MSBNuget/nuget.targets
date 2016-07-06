@@ -219,7 +219,7 @@
 
     <MakeDir Directories="$(NugetIntermediatePath)" />
 
-    <Exec Command="$(_nugetCommandPack) &quot;%(nuspecStaged.Identity)&quot;" Condition="'%(nuspecStaged.Identity)' != ''"/>
+    <Exec Command="$(_nugetCommandPack) &quot;%(nuspecStaged.Identity)&quot; -Symbols" Condition="'%(nuspecStaged.Identity)' != ''"/>
   </Target>
 
   
