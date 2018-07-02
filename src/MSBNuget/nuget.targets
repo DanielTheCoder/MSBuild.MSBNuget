@@ -1,4 +1,4 @@
-﻿<!--
+<!--
   MSBNuget is a collection of MSBuild scripts to support convention based Nuget package creation.
   Copyright (C) 2013  Daniel Sack
 
@@ -76,9 +76,7 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <!-- List of *.nuspec files which should be transformed -->
-    <nuspec Include="$(MSBuildProjectDirectory)\**\*.nuspec"
-            Exclude="$(NugetNuspecExcludePattern)"/>
+    
     
     <nugetExe Include="$(NugetCommandLinePath)"
               Exclude="$(NugetNuspecExcludePattern)"/>
@@ -117,10 +115,22 @@
 
 
   <Target Name="NugetCreatePackages">
+    <ItemGroup>
+      <!-- List of *.nuspec files which should be transformed -->
+      <nuspec Include="$(MSBuildProjectDirectory)\**\*.nuspec"
+              Exclude="$(NugetNuspecExcludePattern)"/>
+    </ItemGroup>
+
+  
     <CallTarget Targets="$(NugetBuildTargets)" />
   </Target>
 
   <Target Name="NugetCreateFolderStructure">
+    <ItemGroup>
+      <!-- List of *.nuspec files which should be transformed -->
+      <nuspec Include="$(MSBuildProjectDirectory)\**\*.nuspec"
+              Exclude="$(NugetNuspecExcludePattern)"/>
+    </ItemGroup>
     <!-- Ensure nuget Folder structure exists -->
     <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\lib" Condition="'$(NugetFilterOnlyConventionWellKnownFolders)' == 'true'" />
     <MakeDir Directories="$(NugetStage)%(nuspec.Filename)\tools" Condition="'$(NugetFilterOnlyConventionWellKnownFolders)' == 'true'"/>
